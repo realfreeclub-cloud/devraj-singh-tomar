@@ -46,11 +46,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: none; /* Hide default cursor */
 }
 
-a, button {
-  cursor: none;
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none; /* Hide default cursor */
+  }
+
+  a, button {
+    cursor: none;
+  }
 }
 
 /* Custom Scrollbar */
@@ -105,4 +110,10 @@ a, button {
   width: 60px;
   height: 60px;
   background-color: rgba(255, 180, 0, 0.2);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot, .cursor-outline, .cursor-hover {
+    display: none !important;
+  }
 }

@@ -53,7 +53,11 @@ const jsonLd = {
   url: "https://devrajsinghtomar.com",
   jobTitle: "IT Professional & Entrepreneur",
   description: "IT Project Manager and Strategic Partner in several tech ventures.",
-  sameAs: ["https://linkedin.com/in/devrajsinghtomar", "https://instagram.com/devrajsinghtomar"],
+  sameAs: [
+    "https://www.linkedin.com/in/devraj-singh-tomar-it/",
+    "https://www.instagram.com/devraj_singh_tomar__/",
+    "https://www.facebook.com/DevrajSinghT0mar"
+  ],
 };
 
 export default function RootLayout({

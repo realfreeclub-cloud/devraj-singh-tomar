@@ -19,6 +19,11 @@ export default function CustomCursor() {
   useEffect(() => {
     if (!isMounted) return;
 
+    // Do not run on mobile/touch devices
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      return;
+    }
+
     const updatePosition = (e: MouseEvent | TouchEvent) => {
       let clientX, clientY;
       if (e instanceof MouseEvent) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, Linkedin, Instagram, Facebook } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -76,11 +76,14 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-bold mb-6 text-title">Socials</h3>
               <div className="flex items-center gap-4">
-                <Link href="https://linkedin.com" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-primary hover:text-white transition-colors text-foreground cursor-none" target="_blank">
-                  LinkedIn
+                <Link href="https://www.linkedin.com/in/devraj-singh-tomar-it/" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#0077b5] hover:text-white transition-colors text-foreground cursor-none" target="_blank" aria-label="LinkedIn">
+                  <Linkedin size={24} />
                 </Link>
-                <Link href="https://instagram.com" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-primary hover:text-white transition-colors text-foreground cursor-none" target="_blank">
-                  Instagram
+                <Link href="https://www.instagram.com/devraj_singh_tomar__/" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#E1306C] hover:text-white transition-colors text-foreground cursor-none" target="_blank" aria-label="Instagram">
+                  <Instagram size={24} />
+                </Link>
+                <Link href="https://www.facebook.com/DevrajSinghT0mar" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#1877F2] hover:text-white transition-colors text-foreground cursor-none" target="_blank" aria-label="Facebook">
+                  <Facebook size={24} />
                 </Link>
               </div>
             </div>
