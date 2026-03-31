@@ -43,7 +43,7 @@ export default function Contact() {
         </p>
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-          
+
           {/* Left Column - Contact Info */}
           <div className="lg:w-1/3 flex flex-col gap-10">
             <div>
@@ -51,7 +51,7 @@ export default function Contact() {
                 <MessageSquare className="text-primary" size={24} />
                 Contact Info
               </h3>
-              
+
               <div className="flex flex-col gap-6">
                 <a href="mailto:hello@devrajsinghtomar.com" className="flex items-start gap-4 text-foreground hover:text-primary transition-colors cursor-none group">
                   <div className="w-12 h-12 bg-layer border border-layer-border rounded-xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
@@ -62,14 +62,14 @@ export default function Contact() {
                     <p className="opacity-80">hello@devrajsinghtomar.com</p>
                   </div>
                 </a>
-                
+
                 <a href="tel:+919876543210" className="flex items-start gap-4 text-foreground hover:text-primary transition-colors cursor-none group">
                   <div className="w-12 h-12 bg-layer border border-layer-border rounded-xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                     <Phone size={20} />
                   </div>
                   <div>
                     <h4 className="text-title font-medium mb-1">Phone</h4>
-                    <p className="opacity-80">+91 98765 43210</p>
+                    <p className="opacity-80">+91 9140946121</p>
                   </div>
                 </a>
 
@@ -112,8 +112,8 @@ export default function Contact() {
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
                     <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Your Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -123,8 +123,8 @@ export default function Contact() {
                   </div>
                   <div className="flex-1">
                     <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Email Address</label>
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -136,7 +136,7 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Message</label>
-                  <textarea 
+                  <textarea
                     rows={6}
                     required
                     value={formData.message}
@@ -146,8 +146,8 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isSubmitting}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary/90 transition-all disabled:opacity-70 mt-4 md:w-max shadow-[0_0_20px_rgba(79,70,229,0.2)] cursor-none"
                 >

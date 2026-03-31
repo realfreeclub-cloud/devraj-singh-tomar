@@ -24,8 +24,8 @@ export default function Ventures() {
       desc: "Providing technology solutions and IT services.",
     },
     {
-      title: "Career Avsar",
-      desc: "Focused on career guidance and opportunities.",
+      title: "M/S Career Avsar",
+      desc: "Providing technology solutions and Printing services.",
     },
     {
       title: "Lotus Loop Media Solution",
@@ -51,7 +51,7 @@ export default function Ventures() {
   return (
     <div className="pt-32 pb-16 min-h-screen px-6 lg:px-16 container-custom mx-auto max-w-6xl">
       <motion.div initial="hidden" animate="show" variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } } as Variants}>
-        
+
         {/* Roles Section */}
         <motion.div variants={itemVars} className="mb-20">
           <h2 className="text-3xl font-bold mb-8 text-center md:text-left text-title">
@@ -83,7 +83,7 @@ export default function Ventures() {
                 className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-layer border border-layer-border p-8 hover:border-primary/50 transition-colors"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[60px] group-hover:bg-primary/20 transition-colors"></div>
-                
+
                 <div className="relative z-10 mb-8">
                   <h2 className="text-2xl font-bold mb-4 text-title">{venture.title}</h2>
                   <p className="text-foreground leading-relaxed opacity-80">{venture.desc}</p>
