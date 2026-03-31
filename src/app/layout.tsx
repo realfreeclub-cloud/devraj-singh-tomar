@@ -44,6 +44,9 @@ export const metadata: Metadata = {
     creator: "@devrajsinghtomar",
     images: ["/og-image.jpg"],
   },
+  verification: {
+    google: "2TejsEGEIMCMujPsmIig8u9EJprgmvEj4HnyOWxrfL8",
+  },
 };
 
 const jsonLd = {
