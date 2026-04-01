@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google"; // Tunis uses Poppins
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
@@ -17,17 +17,31 @@ export const metadata: Metadata = {
     template: "%s | Devraj Singh Tomar"
   },
   description:
-    "Devraj Singh Tomar is an experienced IT professional and entrepreneur with a strong presence in the technology and digital solutions ecosystem since 2018.",
-  keywords: ["Devraj Singh Tomar", "IT Project Manager", "Entrepreneur India", "Digital Solutions", "Software Development", "Tech Ventures"],
+    "Devraj Singh Tomar, also known as Devraj Tomar, is an experienced IT professional and entrepreneur. Devraj Singh has built a strong presence in the technology and digital solutions ecosystem since 2018.",
+  keywords: [
+    "Devraj Singh Tomar",
+    "Devraj Tomar",
+    "Devraj Singh",
+    "Devraj",
+    "Devraj S Tomar",
+    "IT Project Manager",
+    "Entrepreneur India",
+    "Digital Solutions",
+    "Software Development",
+    "Tech Ventures",
+  ],
   authors: [{ name: "Devraj Singh Tomar" }],
   creator: "Devraj Singh Tomar",
+  alternates: {
+    canonical: "https://devrajsinghtomar.com",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://devrajsinghtomar.com",
     siteName: "Devraj Singh Tomar Portfolio",
     title: "Devraj Singh Tomar | IT Professional & Entrepreneur",
-    description: "Building scalable digital solutions and growing tech ventures since 2018.",
+    description: "Devraj Singh Tomar — IT professional, project manager, and entrepreneur building scalable digital solutions since 2018.",
     images: [
       {
         url: "/og-image.png",
@@ -40,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Devraj Singh Tomar | IT Professional & Entrepreneur",
-    description: "Building scalable digital solutions and growing tech ventures since 2018.",
+    description: "Devraj Singh Tomar — IT professional, project manager, and entrepreneur building scalable digital solutions since 2018.",
     creator: "@devrajsinghtomar",
     images: ["/og-image.png"],
   },
@@ -49,18 +63,43 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
+// ── Requirement 1: Enhanced Person JSON-LD with alternateName ──
+const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Devraj Singh Tomar",
+  alternateName: [
+    "Devraj Tomar",
+    "Devraj Singh",
+    "Devraj",
+    "Devraj S Tomar",
+  ],
   url: "https://devrajsinghtomar.com",
   jobTitle: "IT Professional & Entrepreneur",
-  description: "IT Project Manager and Strategic Partner in several tech ventures.",
+  description:
+    "Devraj Singh Tomar, also referred to as Devraj Tomar and Devraj Singh, is an experienced IT project manager and entrepreneur specializing in scalable digital solutions since 2018.",
+  image: "https://devrajsinghtomar.com/devraj-singh-tomar.jpg",
   sameAs: [
     "https://www.linkedin.com/in/devraj-singh-tomar-it/",
     "https://www.instagram.com/devraj_singh_tomar__/",
-    "https://www.facebook.com/DevrajSinghT0mar"
+    "https://www.facebook.com/DevrajSinghT0mar",
   ],
+  knowsAbout: [
+    "IT Project Management",
+    "Software Development",
+    "Entrepreneurship",
+    "Digital Solutions",
+    "Web Development",
+  ],
+};
+
+// ── WebSite schema for sitelinks search box ──
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Devraj Singh Tomar",
+  alternateName: ["Devraj Tomar", "Devraj Singh", "Devraj S Tomar"],
+  url: "https://devrajsinghtomar.com",
 };
 
 export default function RootLayout({
@@ -71,9 +110,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
+        {/* Person structured data with alternate names */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        {/* WebSite structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body
@@ -86,6 +131,19 @@ export default function RootLayout({
         <main className="w-full relative z-10 lg:pl-0 lg:pr-[100px] min-h-screen">
           {children}
         </main>
+
+        {/* ── Requirement 3: Hidden SEO content (sr-only) ── */}
+        {/* Screen-reader only, not visible in UI, but crawlable by Google */}
+        <div className="sr-only" aria-hidden="true">
+          <p>
+            Devraj Singh Tomar, also referred to as Devraj Tomar, Devraj Singh, and Devraj, 
+            is an established IT professional and entrepreneur based in India. 
+            Devraj S Tomar has been building scalable technology solutions and managing 
+            digital platforms since 2018. Whether you know him as Devraj Tomar or Devraj Singh Tomar, 
+            he brings the same dedication to IT project management, software development, 
+            and business partnerships across multiple tech ventures.
+          </p>
+        </div>
       </body>
     </html>
   );

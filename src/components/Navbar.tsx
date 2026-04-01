@@ -37,7 +37,7 @@ export default function Navbar() {
         {/* Dark mode logo (light/gradient variant) */}
         <Image
           src="/logo-dark.png"
-          alt="Devraj Singh Tomar"
+          alt="Devraj Singh Tomar IT Professional"
           width={200}
           height={80}
           className={`h-10 lg:h-14 w-auto object-contain transition-opacity duration-500 ${
@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* Light mode logo (dark variant) */}
         <Image
           src="/logo-light.png"
-          alt="Devraj Singh Tomar"
+          alt="Devraj Singh Tomar IT Professional"
           width={200}
           height={80}
           className={`h-10 lg:h-14 w-auto object-contain transition-opacity duration-500 ${

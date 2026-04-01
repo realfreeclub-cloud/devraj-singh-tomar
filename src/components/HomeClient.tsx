@@ -45,17 +45,19 @@ export default function Home() {
           <div className="relative w-64 h-64 lg:w-full lg:max-w-[460px] lg:h-[calc(100vh-80px)] lg:max-h-[640px] shadow-[0_0_30px_rgba(0,0,0,0.6)] lg:rounded-3xl rounded-full overflow-hidden border-4 border-layer-border lg:border-none">
             {/* Desktop Image */}
             <Image
-              src="/profile.jpg"
-              alt="Devraj Singh Tomar"
+              src="/devraj-singh-tomar.jpg"
+              alt="Devraj Singh Tomar IT Professional"
               fill
+              sizes="(max-width: 1024px) 0vw, 460px"
               className="hidden lg:block object-cover"
               priority
             />
             {/* Mobile Image */}
             <Image
-              src="/profile-mobile.jpg"
-              alt="Devraj Singh Tomar"
+              src="/devraj-singh-tomar-mobile.jpg"
+              alt="Devraj Singh Tomar Entrepreneur"
               fill
+              sizes="(max-width: 1024px) 256px, 0vw"
               className="block lg:hidden object-cover"
               priority
             />
