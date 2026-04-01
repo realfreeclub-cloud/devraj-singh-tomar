@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Home, User, Briefcase, Mail, MessageSquare, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -27,6 +28,36 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Logo - Top Left */}
+      <Link
+        href="/"
+        className="fixed top-4 left-4 lg:top-5 lg:left-6 z-50 transition-opacity duration-300 hover:opacity-80"
+        aria-label="Home"
+      >
+        {/* Dark mode logo (light/gradient variant) */}
+        <Image
+          src="/logo-dark.png"
+          alt="Devraj Singh Tomar"
+          width={160}
+          height={60}
+          className={`h-12 w-auto object-contain transition-opacity duration-500 ${
+            isDarkMode ? "block" : "hidden"
+          }`}
+          priority
+        />
+        {/* Light mode logo (dark variant) */}
+        <Image
+          src="/logo-light.png"
+          alt="Devraj Singh Tomar"
+          width={160}
+          height={60}
+          className={`h-12 w-auto object-contain transition-opacity duration-500 ${
+            !isDarkMode ? "block" : "hidden"
+          }`}
+          priority
+        />
+      </Link>
+
       {/* Theme Toggle - Top Right */}
       <div className="fixed top-5 right-5 z-50 lg:right-5">
         <button
