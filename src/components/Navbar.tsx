@@ -38,9 +38,9 @@ export default function Navbar() {
         <Image
           src="/logo-dark.png"
           alt="Devraj Singh Tomar"
-          width={160}
-          height={60}
-          className={`h-12 w-auto object-contain transition-opacity duration-500 ${
+          width={200}
+          height={80}
+          className={`h-10 lg:h-14 w-auto object-contain transition-opacity duration-500 ${
             isDarkMode ? "block" : "hidden"
           }`}
           priority
@@ -49,9 +49,9 @@ export default function Navbar() {
         <Image
           src="/logo-light.png"
           alt="Devraj Singh Tomar"
-          width={160}
-          height={60}
-          className={`h-12 w-auto object-contain transition-opacity duration-500 ${
+          width={200}
+          height={80}
+          className={`h-10 lg:h-14 w-auto object-contain transition-opacity duration-500 ${
             !isDarkMode ? "block" : "hidden"
           }`}
           priority
