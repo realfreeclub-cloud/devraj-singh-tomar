@@ -63,7 +63,7 @@ export default function Contact() {
                   </div>
                 </a>
 
-                <a href="tel:+919876543210" className="flex items-start gap-4 text-foreground hover:text-primary transition-colors cursor-none group">
+                <a href="tel:+919140946121" className="flex items-start gap-4 text-foreground hover:text-primary transition-colors cursor-none group">
                   <div className="w-12 h-12 bg-layer border border-layer-border rounded-xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                     <Phone size={20} />
                   </div>
@@ -88,13 +88,13 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-bold mb-6 text-title">Socials</h3>
               <div className="flex items-center gap-4">
-                <Link href="https://www.linkedin.com/in/devraj-singh-tomar-it/" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#0077b5] hover:text-white transition-colors text-foreground cursor-none" target="_blank" aria-label="LinkedIn">
+                <Link href="https://www.linkedin.com/in/devraj-singh-tomar-it/" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#0077b5] hover:text-white transition-colors text-foreground cursor-none" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <LinkedinIcon size={24} />
                 </Link>
-                <Link href="https://www.instagram.com/devraj_singh_tomar__/" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#E1306C] hover:text-white transition-colors text-foreground cursor-none" target="_blank" aria-label="Instagram">
+                <Link href="https://www.instagram.com/devraj_singh_tomar__/" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#E1306C] hover:text-white transition-colors text-foreground cursor-none" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <InstagramIcon size={24} />
                 </Link>
-                <Link href="https://www.facebook.com/DevrajSinghT0mar" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#1877F2] hover:text-white transition-colors text-foreground cursor-none" target="_blank" aria-label="Facebook">
+                <Link href="https://www.facebook.com/DevrajSinghT0mar" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#1877F2] hover:text-white transition-colors text-foreground cursor-none" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <FacebookIcon size={24} />
                 </Link>
               </div>

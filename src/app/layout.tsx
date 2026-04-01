@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     description: "Building scalable digital solutions and growing tech ventures since 2018.",
     images: [
       {
-        url: "/og-image.jpg", // User should add this image to public/ later
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Devraj Singh Tomar Portfolio",
+        alt: "Devraj Singh Tomar — IT Professional & Entrepreneur",
       },
     ],
   },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Devraj Singh Tomar | IT Professional & Entrepreneur",
     description: "Building scalable digital solutions and growing tech ventures since 2018.",
     creator: "@devrajsinghtomar",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   verification: {
     google: "2TejsEGEIMCMujPsmIig8u9EJprgmvEj4HnyOWxrfL8",
