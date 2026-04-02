@@ -73,14 +73,14 @@ export default function Home() {
         >
           <motion.div variants={itemVars} className="flex flex-col lg:flex-row items-center gap-6 mb-4 justify-center lg:justify-start">
             <span className="hidden lg:block w-10 h-[4px] bg-primary rounded-full shrink-0"></span>
-            <h2 className="text-3xl md:text-5xl font-bold text-primary tracking-tight uppercase">
+            <h1 className="text-3xl md:text-5xl font-bold text-primary tracking-tight uppercase">
               I&apos;M DEVRAJ SINGH TOMAR.
-            </h2>
+            </h1>
           </motion.div>
 
-          <motion.h1 variants={itemVars} className="text-4xl md:text-6xl font-extrabold text-title uppercase tracking-wider mb-6">
+          <motion.h2 variants={itemVars} className="text-4xl md:text-6xl font-extrabold text-title uppercase tracking-wider mb-6">
             IT PROFESSIONAL
-          </motion.h1>
+          </motion.h2>
 
           <motion.p variants={itemVars} className="text-base md:text-lg text-foreground leading-8 mb-8 max-w-2xl mx-auto lg:mx-0">
             Devraj Singh Tomar is an experienced IT professional, project manager, and entrepreneur with a strong track record of building and managing digital platforms. With hands-on experience since 2018, he specializes in transforming ideas into scalable technology solutions.
