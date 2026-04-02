@@ -13,7 +13,7 @@ export default function Blog() {
           Latest <span className="text-primary">Thoughts</span>
         </h1>
         <p className="text-foreground text-lg mb-16 max-w-2xl opacity-80">
-          Insights on product development, team management, and leading dynamic tech ventures.
+          Insights on AI, web development, UI/UX design, education technology, and mentoring the next generation of tech professionals.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
