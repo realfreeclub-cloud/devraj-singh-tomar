@@ -76,15 +76,15 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
         {/* Author Card */}
         <div className="bg-layer border border-layer-border rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-2xl shrink-0">
-            A
+            D
           </div>
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold text-title mb-1">
-              Mr. Asif (Akky)
+              Devraj Singh Tomar
             </h3>
             <p className="text-foreground opacity-70 text-sm leading-relaxed">
-              Tutor, Developer, AI Engineer & UI/UX Designer. Founder of Tecxon
-              Technology with 8 years of IT experience.
+              IT Professional & Entrepreneur building scalable digital solutions
+              and growing tech ventures since 2018.
             </p>
           </div>
         </div>
