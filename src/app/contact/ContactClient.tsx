@@ -79,7 +79,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="text-title font-medium mb-1">Location</h4>
-                    <p className="opacity-80">India</p>
+                    <p className="opacity-80">chokhani square, 309, Sector 18, Noida, Uttar Pradesh 201301</p>
                   </div>
                 </div>
               </div>

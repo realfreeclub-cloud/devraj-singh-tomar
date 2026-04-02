@@ -79,6 +79,14 @@ const personJsonLd = {
   description:
     "Devraj Singh Tomar, also referred to as Devraj Tomar and Devraj Singh, is an experienced IT project manager and entrepreneur specializing in scalable digital solutions since 2018.",
   image: "https://devrajsinghtomar.com/devraj-singh-tomar.jpg",
+  address: {
+    "@type": "PostalAddress",
+    "streetAddress": "chokhani square, 309, Sector 18",
+    "addressLocality": "Noida",
+    "addressRegion": "Uttar Pradesh",
+    "postalCode": "201301",
+    "addressCountry": "IN"
+  },
   sameAs: [
     "https://www.linkedin.com/in/devraj-singh-tomar-it/",
     "https://www.instagram.com/devraj_singh_tomar__/",
