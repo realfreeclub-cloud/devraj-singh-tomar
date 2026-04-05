@@ -9,8 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: baseUrl,
       lastModified: '2026-04-04',
-      changeFrequency: 'monthly',
-      priority: 1,
+      changeFrequency: 'weekly',
+      priority: 1.0,
       images: [
         `${baseUrl}/devraj-singh-tomar.jpg`,
         `${baseUrl}/devraj-singh-tomar-mobile.jpg`,
@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/about`,
       lastModified: '2026-04-04',
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.7,
       images: [`${baseUrl}/devraj-singh-tomar.jpg`],
     },
     {
@@ -39,8 +39,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/contact`,
       lastModified: '2026-04-04',
-      changeFrequency: 'monthly',
-      priority: 0.8,
+      changeFrequency: 'yearly',
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/hire`,
@@ -51,14 +51,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/case-studies`,
       lastModified: new Date().toISOString().split('T')[0],
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/services`,
       lastModified: new Date().toISOString().split('T')[0],
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 0.8,
     },
   ]
 

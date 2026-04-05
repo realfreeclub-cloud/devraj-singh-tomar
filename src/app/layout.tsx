@@ -13,43 +13,27 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL("https://devrajsinghtomar.com"),
   title: {
-    default: "Devraj Singh Tomar | IT Project Manager India",
+    default: "Devraj Singh Tomar | Web Developer & IT Manager India",
     template: "%s | Devraj Singh Tomar"
   },
-  description:
-    "Devraj Singh Tomar is an IT Project Manager, Next.js Developer, and Entrepreneur in India, helping ventures build scalable digital solutions since 2018.",
-  keywords: [
-    "Devraj Singh Tomar",
-    "IT Project Manager India",
-    "Next.js Developer India",
-    "Entrepreneur India",
-    "Digital Solutions",
-    "Software Development",
-  ],
+  description: "Devraj Singh Tomar is an elite Next.js Web Developer, Social Media Manager, and IT Project Manager in India scaling digital platforms.",
+  keywords: ["Freelance Web Developer India", "Social Media Manager India", "Next.js Developer India", "IT Project Head"],
   authors: [{ name: "Devraj Singh Tomar" }],
   creator: "Devraj Singh Tomar",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
     url: "https://devrajsinghtomar.com",
-    siteName: "Devraj Singh Tomar Portfolio",
-    title: "Devraj Singh Tomar | IT Professional & Entrepreneur",
-    description: "Devraj Singh Tomar — IT professional, project manager, and entrepreneur building scalable digital solutions since 2018.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Devraj Singh Tomar — IT Professional & Entrepreneur",
-      },
-    ],
+    siteName: "Devraj Singh Tomar Operations",
+    title: "Devraj Singh Tomar | Web Developer & IT Manager India",
+    description: "Elite Next.js Web Developer and Social Media Manager scaling operational capacity for 50+ global brands.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Devraj Singh Tomar | IT Professional & Entrepreneur",
-    description: "Devraj Singh Tomar — IT professional, project manager, and entrepreneur building scalable digital solutions since 2018.",
     creator: "@devrajsinghtomar",
-    images: ["/og-image.png"],
+    title: "Devraj Singh Tomar | Web Developer",
+    description: "Elite Next.js Web Developer scaling operational capacity globally."
   },
   verification: {
     google: "2TejsEGEIMCMujPsmIig8u9EJprgmvEj4HnyOWxrfL8",

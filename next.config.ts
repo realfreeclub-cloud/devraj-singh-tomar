@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
   images: {
     formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 1080, 1200, 1920],
   },
 
   // ── Requirement 4: 301 redirects for name variation URLs ──
