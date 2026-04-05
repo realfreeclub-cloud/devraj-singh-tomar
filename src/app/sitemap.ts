@@ -54,6 +54,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/services`,
+      lastModified: new Date().toISOString().split('T')[0],
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
   ]
 
   // Blog post routes (auto-generated from data)
