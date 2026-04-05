@@ -83,19 +83,57 @@ export default function CaseStudiesClient() {
     // --- OTHER PROJECTS ---
     { cat: "Startups", name: "Job Wale", url: "job-wale.com", tech: ["Dynamic Routes", "SEO"], desc: "Job portal mapping." },
     { cat: "Startups", name: "Manav Seva Trust", url: "manavsevatrust.online", tech: ["NGO CMS", "Tailwind"], desc: "Charity foundation platform." },
-    { cat: "Startups", name: "Invitation King", url: "invitationking.com", tech: ["React", "Animations"], desc: "Digital invitation maker." },
+    { cat: "Startups", name: "Invitation King", url: "invitation.org.in", tech: ["React", "Animations"], desc: "Digital invitation maker." },
     { cat: "Startups", name: "Sprene", url: "sprene.com", tech: ["Web Dev", "UI/UX"], desc: "SaaS layout." },
     { cat: "Startups", name: "TXN Learning", url: "txnlearning.com", tech: ["EdTech", "CMS"], desc: "Learning management routing." },
-    { cat: "Startups", name: "LCE Computer", url: "lcecomputer.com", tech: ["Next.js", "Local SEO"], desc: "Computer hardware catalog." },
+    { cat: "Startups", name: "LCE Computer", url: "lcecomputer.in", tech: ["Next.js", "Local SEO"], desc: "Computer hardware catalog." },
     { cat: "Startups", name: "MRM Al Quran", url: "mrmalquran.com", tech: ["Static Payload", "A11y"], desc: "Religious ed platform." }
   ];
 
   // SOCIAL MEDIA MANAGEMENT CLIENTS
   const socialProjects = [
-    { name: "Suresh Dental Center", industry: "Healthcare Hub", platforms: ["facebook", "instagram", "google"], type: "Content & Local SEO Growth", stats: "+12k Local Reach" },
-    { name: "Urban Edge Furnishers", industry: "Retail Logistics", platforms: ["facebook", "instagram", "x"], type: "Aggressive Sales Conversion", stats: "400% ROI Lift" },
-    { name: "Legal Core Consulting", industry: "B2B Consultation", platforms: ["x", "google"], type: "Authority Broadcasting & 3-Pack SEO", stats: "Dominating Map Pack" },
-    { name: "Genesis Academics", industry: "Education Trust", platforms: ["facebook", "instagram", "google"], type: "Enrollment Drive Content", stats: "5k+ Student Inquiries" }
+    { name: "International Delhi Public School", industry: "Education", platforms: ["facebook", "instagram"], type: "Enrollment Drop & Reach", stats: "Targeted Audience" },
+    { name: "Academy for Competitive Exams", industry: "Education", platforms: ["facebook", "instagram"], type: "Lead Generation", stats: "Locality Domination" },
+    { name: "Gurukul The School of Professionals", industry: "Education", platforms: ["facebook", "instagram"], type: "Brand Authority", stats: "Enrollment Surge" },
+    { name: "Sanskar Global School Barabanki", industry: "Education", platforms: ["facebook", "instagram"], type: "Community Building", stats: "High Engagement" },
+    { name: "New Path Academy Education", industry: "Education", platforms: ["facebook", "google"], type: "Student Intake", stats: "Local Search Pack" },
+    { name: "Sanskar Global School Sakrauli", industry: "Education", platforms: ["facebook", "instagram"], type: "Awareness & Content", stats: "Massive Footfall" },
+    { name: "Anjana Group of Institutions", industry: "Education Trust", platforms: ["facebook", "instagram", "google"], type: "Omnichannel Growth", stats: "Regional Authority" },
+    { name: "Indian Inter College Pratapgarh", industry: "Education", platforms: ["facebook"], type: "Digital Communications", stats: "Public Trust" },
+    { name: "Awadh Public School", industry: "Education", platforms: ["facebook", "instagram"], type: "Content Pipeline", stats: "Parent Engagement" },
+    { name: "Model Public School", industry: "Education", platforms: ["facebook"], type: "Event Coverage", stats: "Community Scaling" },
+    { name: "Sanskar Global School Pratapgarh", industry: "Education", platforms: ["facebook", "instagram"], type: "Brand Campaigns", stats: "Consistent Reach" },
+    { name: "Sanskar Global School Gauriganj", industry: "Education", platforms: ["facebook", "instagram"], type: "Social Blueprinting", stats: "High Impressions" },
+    { name: "B.S.S Academy", industry: "Education", platforms: ["facebook", "google"], type: "Admissions Scaling", stats: "Conversion Lift" },
+    { name: "GOVT. Global School", industry: "Education", platforms: ["facebook"], type: "Public Broadcasting", stats: "Local Dominance" },
+    { name: "S.S Public School Pratapgarh", industry: "Education", platforms: ["facebook"], type: "Student Intake", stats: "Consistent Reach" },
+
+    { name: "Vasudha Eye & General Clinic", industry: "Healthcare", platforms: ["facebook", "google"], type: "Patient Intake Schema", stats: "5-Star Scaling" },
+    { name: "Dr. Vivek Shukla Homoeopath", industry: "Healthcare", platforms: ["facebook", "google"], type: "Local Trust Building", stats: "+12k Local Reach" },
+    { name: "Life Care Hospital Pratapgarh", industry: "Healthcare", platforms: ["facebook", "google", "instagram"], type: "Medical Brand Authority", stats: "3-Pack Maps" },
+    { name: "Aastha Charitable Blood Bank", industry: "Healthcare", platforms: ["facebook", "x"], type: "Community Support", stats: "Public Trust" },
+    { name: "Dev Pragya Homoeopathy", industry: "Healthcare", platforms: ["facebook", "google"], type: "Clinical Reach", stats: "Dominant Intake" },
+
+    { name: "Rajendra Kumar Maurya", industry: "Personal Branding", platforms: ["x", "facebook"], type: "Public Figure Authority", stats: "Viral Syndication" },
+    { name: "Vipin Singh", industry: "Personal Branding", platforms: ["instagram", "facebook"], type: "Audience Architect", stats: "High Engagement" },
+    { name: "Navdeep Singh Arshiya", industry: "Personal Branding", platforms: ["instagram"], type: "Organic Profile Scaling", stats: "Follower Growth" },
+    { name: "Laxmi", industry: "Personal Branding", platforms: ["instagram"], type: "Influencer Pipeline", stats: "Content Virality" },
+    { name: "Rajesh Tiwari", industry: "Personal Branding", platforms: ["facebook", "x"], type: "Message Broadcasting", stats: "Social Trust" },
+    { name: "Tushar Nagpal & Associates", industry: "Legal/Consultation", platforms: ["x", "google"], type: "B2B Authority Architecture", stats: "Premium Leads" },
+
+    { name: "Happy Home Furniture", industry: "Retail", platforms: ["facebook", "instagram"], type: "Sales Conversion", stats: "Massive Catalog Hits" },
+    { name: "Shree Ram Sweets", industry: "Food & Beverage", platforms: ["instagram", "google"], type: "Visual Marketing", stats: "High Store Walk-ins" },
+    { name: "Kshirod Food Products", industry: "FMCG", platforms: ["facebook", "instagram"], type: "Product Brand Scaling", stats: "Regional Reach" },
+    { name: "Kshirod Mithai Bhandar", industry: "Food & Retail", platforms: ["instagram", "google"], type: "Festive Campaigns", stats: "3x Sales ROI" },
+    { name: "Tandori Factory Restaurant", industry: "Hospitality", platforms: ["facebook", "instagram", "google"], type: "Local Reservations", stats: "Fully Booked Tables" },
+    { name: "Lotus Loop Media Solutions", industry: "B2B Agency", platforms: ["facebook", "instagram", "x"], type: "Client Magnet SEO", stats: "Industry Authority" },
+    { name: "Career Avsar", industry: "EdTech Service", platforms: ["facebook", "instagram"], type: "Job & Course Traffic", stats: "Lead Generation" },
+    { name: "Highway Garden Infrastructure", industry: "Hospitality", platforms: ["facebook", "instagram", "google"], type: "Premium Booking Trust", stats: "Schedule Domination" },
+    { name: "Navrang Industries India", industry: "Corporate", platforms: ["facebook", "x"], type: "B2B Lead Funnels", stats: "Corporate Trust" },
+    { name: "Delhi-UP Property Hub", industry: "Real Estate", platforms: ["facebook", "instagram", "google"], type: "Property Prospecting", stats: "High-Ticket Closures" },
+    { name: "Pratapgarh Inter Pradesh", industry: "Business Region", platforms: ["facebook"], type: "Area Authority", stats: "Local Dominance" },
+    { name: "Naman News Corporation", industry: "Media & News", platforms: ["facebook", "x", "google"], type: "Real-Time Broadcast", stats: "Massive Distribution" },
+    { name: "Future Securitization & Financial", industry: "Finance Setup", platforms: ["x", "google"], type: "Credibility Mapping", stats: "B2B Impressions" }
   ];
 
   // FEATURED COMBINED CASE STUDIES
