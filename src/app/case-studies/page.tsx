@@ -2,16 +2,16 @@ import { Metadata } from 'next';
 import CaseStudiesClient from '@/components/CaseStudiesClient';
 
 export const metadata: Metadata = {
-  title: '50+ Real Web Projects | Freelance Web Developer India',
+  title: 'Portfolio | Web Developer & Social Media Manager India',
   description:
-    'Explore a massive portfolio of 50+ real client web development projects across India. Featuring top-tier Next.js architecture, education portals, and SEO case studies.',
+    'Explore 50+ premium projects encompassing elite Next.js Web Development, Technical SEO, and comprehensive Social Media Management across India.',
   keywords: [
     'Freelance Web Developer India',
+    'Social Media Manager India',
     'Next.js Developer India',
+    'Google Business Profile Expert',
     'Website Developer for Schools India',
-    'SEO Expert India',
-    'IT Project Head',
-    'Next.js Portfolio India',
+    'SEO Expert India'
   ],
   alternates: {
     canonical: '/case-studies',
@@ -24,34 +24,26 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Do you primarily work exclusively as a Website Developer for Schools India based, or take global cases?",
+      "name": "Why hire a dual expert for Web Development and Social Media Management?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "While I dominate the Indian institutional, business, and educational digital landscape, my exact Next.js React codebase architecture is deployed globally. Code scales borders without friction."
+        "text": "By unifying your technical website architecture with your social branding (Facebook, Instagram, Google Business), you create a frictionless lead funnel. As a Next.js Developer India and Social Media Manager India, I control both the traffic source and the conversion endpoint."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is hiring a Freelance Web Developer in India better than hiring an agency?",
+      "name": "How does Google Business Profile management impact local SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Agencies pass your project down to junior developers while charging massive administrative overhead fees. By hiring an independent IT Project Head, you get senior-tier technical architecture entirely focused on results."
+        "text": "Google Business Profile Expert optimization directly dictates your rank in the Google Maps 3-Pack. We sync your local citations, map coordinates, and review velocity natively with your website's localized JSON-LD schema."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the fastest way to get my website ranking using an SEO Expert India?",
+      "name": "Are your Next.js applications fully optimized for SEO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The fastest path to organic traffic is eliminating technical debt. By fixing massive Javascript payloads, repairing broken dynamic routes, and injecting perfect JSON-LD structured data into your Next.js application, Google algorithms immediately reward your site."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you manage the websites after deployment?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely. Through strategic partnerships and retainers, I continuously monitor Core Web Vitals, implement security hot-fixes, and aggressively iterate design structures based on active user heat-mapping."
+        "text": "Yes. As a Freelance Web Developer in India, I heavily utilize Server-Side Rendering (SSR) and dynamic metadata injection so algorithms instantly parse and rank your platforms."
       }
     }
   ]
