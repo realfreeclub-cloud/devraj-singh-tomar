@@ -46,20 +46,24 @@ export default function Home() {
             {/* Desktop Image */}
             <Image
               src="/devraj-singh-tomar.jpg"
-              alt="Devraj Singh Tomar IT Professional"
+              alt="Devraj Singh Tomar - IT Professional and Entrepreneur"
+              title="Devraj Singh Tomar - IT Professional and Entrepreneur"
               fill
               sizes="(max-width: 1024px) 0vw, 460px"
               className="hidden lg:block object-cover"
               priority
+              unoptimized
             />
             {/* Mobile Image */}
             <Image
               src="/devraj-singh-tomar-mobile.jpg"
-              alt="Devraj Singh Tomar Entrepreneur"
+              alt="Devraj Singh Tomar - IT Professional Profile Photo"
+              title="Devraj Singh Tomar Photo"
               fill
               sizes="(max-width: 1024px) 256px, 0vw"
               className="block lg:hidden object-cover"
               priority
+              unoptimized
             />
           </div>
         </motion.div>

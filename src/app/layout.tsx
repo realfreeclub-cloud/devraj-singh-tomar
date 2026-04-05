@@ -110,6 +110,35 @@ const websiteJsonLd = {
   url: "https://devrajsinghtomar.com",
 };
 
+// ── ImageObject schema for Google Image Search indexing ──
+const imageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  contentUrl: "https://devrajsinghtomar.com/devraj-singh-tomar.jpg",
+  url: "https://devrajsinghtomar.com/devraj-singh-tomar.jpg",
+  name: "Devraj Singh Tomar - IT Professional and Entrepreneur",
+  description:
+    "Photo of Devraj Singh Tomar, also known as Devraj Tomar, an experienced IT professional, project manager, and entrepreneur based in India.",
+  caption: "Devraj Singh Tomar — IT Professional & Entrepreneur since 2018",
+  creator: {
+    "@type": "Person",
+    name: "Devraj Singh Tomar",
+  },
+  copyrightHolder: {
+    "@type": "Person",
+    name: "Devraj Singh Tomar",
+  },
+  width: 1200,
+  height: 1600,
+  encodingFormat: "image/jpeg",
+  representativeOfPage: true,
+  about: {
+    "@type": "Person",
+    name: "Devraj Singh Tomar",
+    url: "https://devrajsinghtomar.com",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -128,6 +157,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
+        {/* ImageObject structured data for Google Image Search */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(imageJsonLd) }}
+        />
       </head>
       <body
         className={`${poppins.className} bg-background text-foreground antialiased min-h-screen relative overflow-x-hidden`}
@@ -142,7 +176,7 @@ export default function RootLayout({
 
         {/* ── Requirement 3: Hidden SEO content (sr-only) ── */}
         {/* Screen-reader only, not visible in UI, but crawlable by Google */}
-        <div className="sr-only" aria-hidden="true">
+        <div className="sr-only">
           <p>
             Devraj Singh Tomar, also referred to as Devraj Tomar, Devraj Singh, and Devraj, 
             is an established IT professional and entrepreneur based in India. 

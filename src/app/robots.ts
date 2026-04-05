@@ -6,6 +6,9 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://devrajsinghtomar.com/sitemap.xml',
+    sitemap: [
+      'https://devrajsinghtomar.com/sitemap.xml',
+      'https://devrajsinghtomar.com/image-sitemap.xml',
+    ],
   }
 }

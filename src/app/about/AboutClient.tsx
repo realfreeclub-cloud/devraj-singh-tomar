@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle2, Server } from "lucide-react";
-
 
 export default function About() {
   const fadeIn = {
@@ -26,6 +26,27 @@ export default function About() {
         </h1>
         
         <div className="bg-layer border border-layer-border rounded-3xl p-8 md:p-12 mb-16 shadow-lg shadow-primary/5">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            {/* Profile Image */}
+            <figure className="shrink-0 mx-auto md:mx-0">
+              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg">
+                <Image
+                  src="/devraj-singh-tomar.jpg"
+                  alt="Devraj Singh Tomar - IT Professional and Entrepreneur"
+                  title="Devraj Singh Tomar"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 192px, 224px"
+                  unoptimized
+                />
+              </div>
+              <figcaption className="text-sm text-foreground/60 text-center mt-3 font-medium">
+                Devraj Singh Tomar
+              </figcaption>
+            </figure>
+
+            {/* Bio Text */}
+            <div>
           <p className="text-foreground text-lg leading-relaxed mb-6">
             Devraj Singh Tomar is an experienced IT professional and entrepreneur with a strong presence in the technology and digital solutions ecosystem. Since starting his journey in 2018, he has consistently worked across multiple domains including software development, project management, and business partnerships.
           </p>
@@ -35,6 +56,8 @@ export default function About() {
           <p className="text-foreground text-lg leading-relaxed mb-0">
             His expertise lies in bridging the gap between technical development and business strategy. Over the years, he has worked on diverse projects ranging from web platforms to digital services, helping businesses improve efficiency and user experience.
           </p>
+            </div>
+          </div>
         </div>
 
         <h2 className="text-3xl font-bold mb-8 text-title">Professional Journey</h2>
