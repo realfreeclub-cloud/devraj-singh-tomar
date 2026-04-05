@@ -67,9 +67,10 @@ const personJsonLd = {
   sameAs: [
     "https://www.linkedin.com/in/devraj-singh-tomar-it/",
     "https://www.instagram.com/devraj_singh_tomar__/",
-    "https://www.facebook.com/DevrajSinghT0mar",
+    "https://www.facebook.com/DevrajSinghTomarIT",
     "https://dev.to/devraj_singh_tomar",
     "https://medium.com/@devrajsinghtomar",
+    "https://github.com/devrajsingh-tomar",
   ],
   knowsAbout: [
     "IT Project Management",
