@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactCompiler: true,
   output: "standalone",
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
 
   // ── Requirement 4: 301 redirects for name variation URLs ──
   // These pass SEO signals to the canonical homepage

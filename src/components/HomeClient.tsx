@@ -52,7 +52,6 @@ export default function Home() {
               sizes="(max-width: 1024px) 0vw, 460px"
               className="hidden lg:block object-cover"
               priority
-              unoptimized
             />
             {/* Mobile Image */}
             <Image
@@ -63,7 +62,6 @@ export default function Home() {
               sizes="(max-width: 1024px) 256px, 0vw"
               className="block lg:hidden object-cover"
               priority
-              unoptimized
             />
           </div>
         </motion.div>

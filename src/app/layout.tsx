@@ -13,28 +13,21 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL("https://devrajsinghtomar.com"),
   title: {
-    default: "Devraj Singh Tomar | IT Professional & Entrepreneur",
+    default: "Devraj Singh Tomar | IT Project Manager India",
     template: "%s | Devraj Singh Tomar"
   },
   description:
-    "Devraj Singh Tomar, also known as Devraj Tomar, is an experienced IT professional and entrepreneur. Devraj Singh has built a strong presence in the technology and digital solutions ecosystem since 2018.",
+    "Devraj Singh Tomar is an IT Project Manager, Next.js Developer, and Entrepreneur in India, helping ventures build scalable digital solutions since 2018.",
   keywords: [
     "Devraj Singh Tomar",
-    "Devraj Tomar",
-    "Devraj Singh",
-    "Devraj",
-    "Devraj S Tomar",
-    "IT Project Manager",
+    "IT Project Manager India",
+    "Next.js Developer India",
     "Entrepreneur India",
     "Digital Solutions",
     "Software Development",
-    "Tech Ventures",
   ],
   authors: [{ name: "Devraj Singh Tomar" }],
   creator: "Devraj Singh Tomar",
-  alternates: {
-    canonical: "https://devrajsinghtomar.com",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
