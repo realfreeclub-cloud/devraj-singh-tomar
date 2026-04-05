@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, User, Briefcase, Mail, MessageSquare, Sun, Moon, Rocket } from "lucide-react";
+import { Home, User, Briefcase, Mail, MessageSquare, Sun, Moon, Rocket, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
@@ -22,6 +22,7 @@ export default function Navbar() {
     { label: "Home", href: "/", icon: Home },
     { label: "About", href: "/about", icon: User },
     { label: "Ventures", href: "/ventures", icon: Briefcase },
+    { label: "Case Studies", href: "/case-studies", icon: FileText },
     { label: "Hire Me", href: "/hire", icon: Rocket },
     { label: "Blog", href: "/blog", icon: MessageSquare }, // Chat bubble logic
     { label: "Contact", href: "/contact", icon: Mail },
