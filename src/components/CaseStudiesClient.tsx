@@ -28,14 +28,66 @@ export default function CaseStudiesClient() {
 
   // WEB DEVELOPMENT PROJECTS
   const webProjects = [
-    { cat: "Education", name: "National Genius Institute", url: "ngit.org.in", tech: ["Next.js", "Custom CMS", "SEO"], desc: "High-traffic student enrollment portal mapped across 3 separate domains." },
-    { cat: "Education", name: "Career Avsar", url: "careeravsar.org", tech: ["React", "JSON-LD", "SSG"], desc: "Scalable educational routing hub optimized for rural loading networks." },
-    { cat: "Business & Services", name: "The Home Shifting", url: "thehomeshifting.com", tech: ["Next.js", "Tailwind CSS", "Maps API"], desc: "National logistics dashboard crushing local bounce rates via AVIF pipelines." },
-    { cat: "Business & Services", name: "Happy Home Furniture", url: "happyhomefurniture.online", tech: ["Headless CMS", "ISR Edge", "SEO"], desc: "Heavy image-based storefront resolving painful LCP delays to boost ATC natively." },
-    { cat: "Healthcare", name: "Vasudha Eye Clinic", url: "vasudhaeyegeneralclinic.com", tech: ["a11y Audited", "Medical Schema"], desc: "Premium accessible interface for elder demographics requiring instant bookings." },
-    { cat: "Legal / Personal Brands", name: "CLC Chambers", url: "clcchambers.com", tech: ["React Sever", "Framer Motion", "CSP"], desc: "Impenetrable, un-hackable legal facade engineered strictly for elite aesthetics." },
-    { cat: "Legal / Personal Brands", name: "Tushar Nagpal", url: "tusharnagpal.com", tech: ["Next.js Port", "Micro-animations"], desc: "High-end personal branding hub locking 100/100 Lighthouse metrics completely." },
-    { cat: "Media & Platforms", name: "Gyan Mitra News", url: "gyanmitra news", tech: ["Edge Data", "Automated XML"], desc: "Heavy article ingestion engine pinging massive static generation arrays." }
+    // --- EDUCATION & INSTITUTES ---
+    { cat: "Education", name: "Anjana Polytechnic", url: "anjanapolytechnic.com", tech: ["Next.js", "CMS", "SEO"], desc: "High-performance institutional portal." },
+    { cat: "Education", name: "ASMC Kaushambi", url: "asmckaushambi.in", tech: ["React", "SSG"], desc: "Educational routing hub for admissions." },
+    { cat: "Education", name: "Sanskar Global School", url: "sanskarglobalschoolsakrauli.com", tech: ["Next.js", "Tailwind"], desc: "Modern school platform with dynamic routing." },
+    { cat: "Education", name: "Career Avsar", url: "careeravsar.org", tech: ["React", "JSON-LD"], desc: "Scalable educational routing hub optimized for rural networks." },
+    { cat: "Education", name: "BN Singh PG College", url: "bnsinghpgcollege.com", tech: ["Web Dev", "SEO"], desc: "College admissions and information portal." },
+    { cat: "Education", name: "Amethi Public School", url: "amethipublicschool.com", tech: ["CMS", "UI/UX"], desc: "Public school digital infrastructure." },
+    { cat: "Education", name: "BSS Academy", url: "bssacademy.com", tech: ["React", "Performance"], desc: "Academy landing architecture." },
+    { cat: "Education", name: "VS Memorial School", url: "vsmemorialschool.com", tech: ["CMS", "Frontend"], desc: "Memorial school showcase platform." },
+    { cat: "Education", name: "St. Xavier's Public School", url: "stxpbh.com", tech: ["Next.js", "Vercel"], desc: "Premium public school digital presence." },
+    { cat: "Education", name: "Anjana Pharmacy", url: "anjanapharmacy.com", tech: ["Web Dev", "Local SEO"], desc: "Pharmacy educational portal." },
+    { cat: "Education", name: "National Genius Institute", url: "nationalgeniusinstitute.in", tech: ["Next.js", "Custom CMS"], desc: "High-traffic student enrollment portal." },
+    { cat: "Education", name: "NGIT", url: "ngit.org.in", tech: ["React", "SEO"], desc: "Institute operations mapping." },
+    { cat: "Education", name: "NGIT Courses", url: "ngitcourses.com", tech: ["Dynamic Routing", "CMS"], desc: "Course delivery and syllabus platform." },
+    { cat: "Education", name: "Anjana College", url: "anjanacollege.com", tech: ["Web Dev", "SSG"], desc: "College digital hub." },
+    { cat: "Education", name: "Indian Inter College", url: "indianintercollege.com", tech: ["React", "A11y"], desc: "Inter-college communication platform." },
+    { cat: "Education", name: "National Computer Allahabad", url: "nationalcomputerallahabad.com", tech: ["Local SEO", "CMS"], desc: "Computer training institute." },
+    { cat: "Education", name: "ASNM C Sultanpur", url: "asnmcsultanpur.in", tech: ["Web Dev", "Performance"], desc: "Institutional framework." },
+    { cat: "Education", name: "DSLP ASMC Pratapgarh", url: "dslpasmcpratapgarh.org", tech: ["SSG", "Tailwind"], desc: "Educational infrastructure." },
+    { cat: "Education", name: "ASMC Kushinagar", url: "asmckushinagar.in", tech: ["Next.js", "SEO"], desc: "Local institute routing." },
+    { cat: "Education", name: "ASMC Pilibhit", url: "asmcpilibhit.com", tech: ["Web Dev", "Fast LCP"], desc: "Educational operations platform." },
+    { cat: "Education", name: "ASMC Lakhimpur Kheri", url: "asmclakhimpurkheri.in", tech: ["CMS", "Frontend"], desc: "Institute presentation UI." },
+    { cat: "Education", name: "ASMC Kanpur Dehat", url: "asmckanpurdehat.in", tech: ["React", "Analytics"], desc: "Analytics driven student site." },
+    { cat: "Education", name: "CIS Gauriganj", url: "cisgauriganj.org", tech: ["Web Dev", "SEO"], desc: "School communication portal." },
+
+    // --- BUSINESS & SERVICES ---
+    { cat: "Business & Services", name: "The Home Shifting", url: "thehomeshifting.com", tech: ["Next.js", "Maps API"], desc: "National logistics dashboard crushing local bounce rates." },
+    { cat: "Business & Services", name: "Navpath", url: "navpath.in", tech: ["React", "SEO"], desc: "Corporate business routing." },
+    { cat: "Business & Services", name: "Happy Home Furniture", url: "happyhomefurniture.online", tech: ["Headless CMS", "ISR Edge"], desc: "Heavy image-based storefront resolving painful LCP delays." },
+    { cat: "Business & Services", name: "Heaven Garden", url: "heavengarden.in", tech: ["Next.js", "SSG"], desc: "Event and hospitality landing architecture." },
+    { cat: "Business & Services", name: "Hotel Sneh", url: "hotelsneh.in", tech: ["Web Dev", "Local SEO"], desc: "Hotel booking and room showcase." },
+    { cat: "Business & Services", name: "Shree Ram Sweets", url: "shreeramsweets.com", tech: ["CMS", "Frontend"], desc: "Storefront and catalog UI." },
+    { cat: "Business & Services", name: "Lotus Loop", url: "lotusloop.in", tech: ["React", "Tailwind"], desc: "Corporate services matrix." },
+    { cat: "Business & Services", name: "Refurhub", url: "refurhub.com", tech: ["eCommerce", "Next.js"], desc: "Refurbished product marketplace." },
+    { cat: "Business & Services", name: "Advance Toolbox", url: "advancetoolbox.com", tech: ["Web Dev", "SEO"], desc: "Industrial tools corporate facade." },
+    { cat: "Business & Services", name: "Raghav Corporate", url: "raghavcorporateservices.com", tech: ["CMS", "Performance"], desc: "Corporate consulting agency." },
+
+    // --- HEALTHCARE ---
+    { cat: "Healthcare", name: "Vasudha Eye Clinic", url: "vasudhaeyegeneralclinic.com", tech: ["a11y Audited", "Schema"], desc: "Premium accessible interface requiring instant bookings." },
+
+    // --- LEGAL / PROFESSIONAL ---
+    { cat: "Legal", name: "CLC Chambers", url: "clcchambers.com", tech: ["React Sever", "CSP"], desc: "Impenetrable, un-hackable legal facade." },
+
+    // --- PERSONAL BRANDS ---
+    { cat: "Personal Brands", name: "Tushar Nagpal", url: "tusharnagpal.com", tech: ["Next.js Port", "Micro-animations"], desc: "High-end personal branding hub." },
+    { cat: "Personal Brands", name: "Javed Siddiquee", url: "javedsiddiqueeofficial.com", tech: ["SEO", "CMS"], desc: "Public figure authority hub." },
+    { cat: "Personal Brands", name: "Rajendra Kumar", url: "rajendrakumarmaurya.in", tech: ["React", "Fast LCP"], desc: "Personal authority facade." },
+
+    // --- MEDIA / NEWS ---
+    { cat: "Media & News", name: "Gyan Mitra News", url: "gyanmitranews.com", tech: ["Edge Data", "XML"], desc: "Heavy article ingestion engine." },
+    { cat: "Media & News", name: "Abhivyakti News", url: "abhivyaktinews.com", tech: ["Next.js", "SSG"], desc: "High traffic digital publication." },
+
+    // --- OTHER PROJECTS ---
+    { cat: "Startups", name: "Job Wale", url: "job-wale.com", tech: ["Dynamic Routes", "SEO"], desc: "Job portal mapping." },
+    { cat: "Startups", name: "Manav Seva Trust", url: "manavsevatrust.online", tech: ["NGO CMS", "Tailwind"], desc: "Charity foundation platform." },
+    { cat: "Startups", name: "Invitation King", url: "invitationking.com", tech: ["React", "Animations"], desc: "Digital invitation maker." },
+    { cat: "Startups", name: "Sprene", url: "sprene.com", tech: ["Web Dev", "UI/UX"], desc: "SaaS layout." },
+    { cat: "Startups", name: "TXN Learning", url: "txnlearning.com", tech: ["EdTech", "CMS"], desc: "Learning management routing." },
+    { cat: "Startups", name: "LCE Computer", url: "lcecomputer.com", tech: ["Next.js", "Local SEO"], desc: "Computer hardware catalog." },
+    { cat: "Startups", name: "MRM Al Quran", url: "mrmalquran.com", tech: ["Static Payload", "A11y"], desc: "Religious ed platform." }
   ];
 
   // SOCIAL MEDIA MANAGEMENT CLIENTS
@@ -170,9 +222,9 @@ export default function CaseStudiesClient() {
                           ))}
                         </div>
                         
-                        <Link href="/contact" className="inline-flex items-center gap-2 text-title font-bold uppercase tracking-widest text-sm group-hover:text-primary transition-colors">
-                           View Case Study <ArrowUpRight size={16} />
-                        </Link>
+                        <a href={`https://${proj.url}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-title font-bold uppercase tracking-widest text-sm group-hover:text-primary transition-colors mt-auto pt-4">
+                           Visit Website <ArrowUpRight size={16} />
+                        </a>
                      </div>
                    ))}
                 </motion.div>
