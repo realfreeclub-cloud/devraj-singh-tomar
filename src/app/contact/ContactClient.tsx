@@ -17,6 +17,18 @@ const FacebookIcon = ({ size = 24 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
 );
 
+const MediumIcon = ({ size = 24 }: { size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+  </svg>
+);
+
+const DevToIcon = ({ size = 24 }: { size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 448 512" fill="currentColor">
+    <path d="M120.12 208.29c-3.88-2.9-7.77-4.35-11.65-4.35H91.03v104.47h17.45c3.88 0 7.77-1.45 11.65-4.35 3.88-2.9 5.82-7.25 5.82-13.06v-69.65c-.01-5.8-1.96-10.16-5.83-13.06zM404.1 32H43.9C19.7 32 0 51.7 0 75.9v360.2C0 460.3 19.7 480 43.9 480h360.2c24.2 0 43.9-19.7 43.9-43.9V75.9c0-24.2-19.7-43.9-43.9-43.9zM154.2 291.19c0 18.81-11.61 47.31-48.36 47.25h-46.4V172.98h47.38c35.44 0 47.36 28.46 47.37 47.28l.01 70.93zm100.68-88.66H201.6v38.42h32.57v29.57H201.6v38.41h53.29v29.57h-62.18c-11.16.29-20.44-8.53-20.72-19.69V192.73c-.27-11.15 8.56-20.41 19.71-20.69h63.19l-.01 29.56zm103.64 115.29c-13.2 30.87-36.22 11.46-36.22 11.46s-1.74-7.38-3.1-15.04c-1.36-7.66-8.7-22.13-35.34-31.59l8.6-28.92c19.34 3.39 28.65 14.79 32.77 25.34-2.58-15.53-15.76-32.96-30.82-36.9l8.28-29.02c46.33 13.9 45.47 51 45.47 51s1.37 19.26-10.37 53.67M264.96 172h31.57l35.15 97.5h.58l32.97-97.5h31.57v166.4h-28.09v-88.6l-29.56 88.6h-14.5l-28.09-88.6v88.6h-31.6l-.01-166.4z"/>
+  </svg>
+);
+
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -87,7 +99,7 @@ export default function Contact() {
 
             <div>
               <h3 className="text-xl font-bold mb-6 text-title">Socials</h3>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <Link href="https://www.linkedin.com/in/devraj-singh-tomar-it/" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#0077b5] hover:text-white transition-colors text-foreground cursor-none" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <LinkedinIcon size={24} />
                 </Link>
@@ -96,6 +108,12 @@ export default function Contact() {
                 </Link>
                 <Link href="https://www.facebook.com/DevrajSinghT0mar" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#1877F2] hover:text-white transition-colors text-foreground cursor-none" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <FacebookIcon size={24} />
+                </Link>
+                <Link href="https://dev.to/devraj_singh_tomar" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#000000] hover:text-white transition-colors text-foreground cursor-none" target="_blank" rel="noopener noreferrer" aria-label="Dev.to">
+                  <DevToIcon size={24} />
+                </Link>
+                <Link href="https://medium.com/@devrajsinghtomar" className="p-4 bg-layer border border-layer-border rounded-xl hover:bg-[#000000] hover:text-white transition-colors text-foreground cursor-none" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+                  <MediumIcon size={24} />
                 </Link>
               </div>
             </div>

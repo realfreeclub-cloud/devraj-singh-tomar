@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | Devraj Singh Tomar"
   },
   description: "Devraj Singh Tomar is an elite Next.js Web Developer, Social Media Manager, and IT Project Manager in India scaling digital platforms.",
-  keywords: ["Freelance Web Developer India", "Social Media Manager India", "Next.js Developer India", "IT Project Head"],
+  keywords: ["Devraj Singh Tomar", "Freelance Web Developer India", "Social Media Manager India", "Next.js Developer India", "IT Project Head"],
   authors: [{ name: "Devraj Singh Tomar" }],
   creator: "Devraj Singh Tomar",
   openGraph: {
@@ -68,6 +68,8 @@ const personJsonLd = {
     "https://www.linkedin.com/in/devraj-singh-tomar-it/",
     "https://www.instagram.com/devraj_singh_tomar__/",
     "https://www.facebook.com/DevrajSinghT0mar",
+    "https://dev.to/devraj_singh_tomar",
+    "https://medium.com/@devrajsinghtomar",
   ],
   knowsAbout: [
     "IT Project Management",

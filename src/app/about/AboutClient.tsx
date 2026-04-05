@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle2, Server } from "lucide-react";
 
@@ -27,23 +26,7 @@ export default function About() {
         
         <div className="bg-layer border border-layer-border rounded-3xl p-8 md:p-12 mb-16 shadow-lg shadow-primary/5">
           <div className="flex flex-col md:flex-row gap-8 items-start">
-            {/* Profile Image */}
-            <figure className="shrink-0 mx-auto md:mx-0">
-              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg">
-                <Image
-                  src="/devraj-singh-tomar.jpg"
-                  alt="Devraj Singh Tomar - IT Professional and Entrepreneur"
-                  title="Devraj Singh Tomar"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 192px, 224px"
-                  unoptimized
-                />
-              </div>
-              <figcaption className="text-sm text-foreground/60 text-center mt-3 font-medium">
-                Devraj Singh Tomar
-              </figcaption>
-            </figure>
+
 
             {/* Bio Text */}
             <div>
