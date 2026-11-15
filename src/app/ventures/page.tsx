@@ -4,15 +4,13 @@ import VenturesClient from "./VenturesClient";
 export const metadata: Metadata = {
   title: "My Ventures",
   description:
-    "Explore the technology-driven ventures founded and scaled by Devraj Singh Tomar, including Tecxontechnology, Career Avsar, TXN Learning, and more.",
+    "Explore the technology-driven ventures founded and scaled by Devraj Singh Tomar, including Tecxontechnology, Career Avsar, and Lotus Loop Media Solution.",
   keywords: [
     "Devraj Singh Tomar Ventures",
     "Devraj Tomar",
     "Tecxontechnology",
     "Career Avsar",
-    "TXN Learning",
-    "Divyajap",
-    "Lotus Loop Media",
+    "Lotus Loop Media Solution",
     "Tech Ventures India",
   ],
   alternates: {

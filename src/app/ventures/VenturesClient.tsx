@@ -22,22 +22,17 @@ export default function Ventures() {
     {
       title: "Tecxontechnology",
       desc: "Providing technology solutions and IT services.",
+      link: "https://tecxontech.com/",
     },
     {
       title: "M/S Career Avsar",
       desc: "Providing technology solutions and Printing services.",
+      link: "https://careeravsar.com/",
     },
     {
       title: "Lotus Loop Media Solution",
       desc: "Delivering media and digital services.",
-    },
-    {
-      title: "TXN Learning",
-      desc: "Bridging the skill gap between students and industry.",
-    },
-    {
-      title: "Divyajap",
-      desc: "A digital platform focused on spiritual and mantra-based solutions.",
+      link: "https://lotusloop.in/",
     },
   ];
 
@@ -68,9 +63,10 @@ export default function Ventures() {
 
                 <div className="relative z-10">
                   <Link
-                    href="#"
+                    href={venture.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-layer-border text-title text-sm font-semibold hover:bg-primary hover:text-white transition-all w-max border border-transparent"
-                    onClick={(e) => e.preventDefault()}
                   >
                     View Details <ArrowUpRight size={18} />
                   </Link>

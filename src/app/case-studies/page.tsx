@@ -4,7 +4,7 @@ import CaseStudiesClient from '@/components/CaseStudiesClient';
 export const metadata: Metadata = {
   title: 'Portfolio | Web Developer & Social Media Manager India',
   description:
-    'Explore 50+ premium projects encompassing elite Next.js Web Development, Technical SEO, and comprehensive Social Media Management across India.',
+    'Explore 60+ premium projects encompassing elite Next.js Web Development, Technical SEO, and comprehensive Social Media Management across India.',
   keywords: [
     'Freelance Web Developer India',
     'Social Media Manager India',

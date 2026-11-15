@@ -32,7 +32,12 @@ export default function CaseStudiesClient() {
     { cat: "Education", name: "Anjana Polytechnic", url: "anjanapolytechnic.com", tech: ["Next.js", "CMS", "SEO"], desc: "High-performance institutional portal." },
     { cat: "Education", name: "ASMC Kaushambi", url: "asmckaushambi.in", tech: ["React", "SSG"], desc: "Educational routing hub for admissions." },
     { cat: "Education", name: "Sanskar Global School", url: "sanskarglobalschoolsakrauli.com", tech: ["Next.js", "Tailwind"], desc: "Modern school platform with dynamic routing." },
-    { cat: "Education", name: "Career Avsar", url: "careeravsar.org", tech: ["React", "JSON-LD"], desc: "Scalable educational routing hub optimized for rural networks." },
+    { cat: "Education", name: "IDPS Pratapgarh", url: "idpspratapgarh.com", tech: ["Next.js", "School CMS", "Performance"], desc: "Official digital school platform for International Delhi Public School (IDPS) Pratapgarh." },
+    { cat: "Education", name: "NGIT Edu", url: "ngitedu.com", tech: ["EdTech Portal", "Typing Software", "O Level / CCC"], desc: "National Genius Institute portal for online typing tests, steno shorthand software, and IT certification courses." },
+    { cat: "Education", name: "NGI Study Zone", url: "ngistudyzone.com", tech: ["React", "LMS", "Coaching Portal"], desc: "Digital study platform and interactive student coaching portal for National Genius Institute." },
+    { cat: "Education", name: "Judicial Study Centre", url: "judicialstudycentre.in", tech: ["Next.js", "Legal EdTech", "SEO"], desc: "India's premier Judiciary & PCS-J examination preparation institute portal and learning hub in Prayagraj." },
+    { cat: "Education", name: "Agnihotri Classes", url: "agnihotriclasses.in", tech: ["React", "Civil Services", "Fast LCP"], desc: "Premier IAS & UPPCS civil services coaching portal and preparation academy in Prayagraj." },
+    { cat: "Education", name: "VGSBVM Law College", url: "baghellawcollege.in", tech: ["Law College Portal", "Affiliation CMS", "SEO"], desc: "Vansh Gopal Singh Baghel Vidhi Mahavidyalaya law college portal in Sakrauli, affiliated with Rajju Bhaiya University." },
     { cat: "Education", name: "BN Singh PG College", url: "bnsinghpgcollege.com", tech: ["Web Dev", "SEO"], desc: "College admissions and information portal." },
     { cat: "Education", name: "Amethi Public School", url: "amethipublicschool.com", tech: ["CMS", "UI/UX"], desc: "Public school digital infrastructure." },
     { cat: "Education", name: "BSS Academy", url: "bssacademy.com", tech: ["React", "Performance"], desc: "Academy landing architecture." },
@@ -41,19 +46,19 @@ export default function CaseStudiesClient() {
     { cat: "Education", name: "Anjana Pharmacy", url: "anjanapharmacy.com", tech: ["Web Dev", "Local SEO"], desc: "Pharmacy educational portal." },
     { cat: "Education", name: "National Genius Institute", url: "nationalgeniusinstitute.in", tech: ["Next.js", "Custom CMS"], desc: "High-traffic student enrollment portal." },
     { cat: "Education", name: "NGIT", url: "ngit.org.in", tech: ["React", "SEO"], desc: "Institute operations mapping." },
-    { cat: "Education", name: "NGIT Courses", url: "ngitcourses.com", tech: ["Dynamic Routing", "CMS"], desc: "Course delivery and syllabus platform." },
     { cat: "Education", name: "Anjana College", url: "anjanacollege.com", tech: ["Web Dev", "SSG"], desc: "College digital hub." },
     { cat: "Education", name: "Indian Inter College", url: "indianintercollege.com", tech: ["React", "A11y"], desc: "Inter-college communication platform." },
-    { cat: "Education", name: "National Computer Allahabad", url: "nationalcomputerallahabad.com", tech: ["Local SEO", "CMS"], desc: "Computer training institute." },
     { cat: "Education", name: "ASNM C Sultanpur", url: "asnmcsultanpur.in", tech: ["Web Dev", "Performance"], desc: "Institutional framework." },
     { cat: "Education", name: "DSLP ASMC Pratapgarh", url: "dslpasmcpratapgarh.org", tech: ["SSG", "Tailwind"], desc: "Educational infrastructure." },
     { cat: "Education", name: "ASMC Kushinagar", url: "asmckushinagar.in", tech: ["Next.js", "SEO"], desc: "Local institute routing." },
     { cat: "Education", name: "ASMC Pilibhit", url: "asmcpilibhit.com", tech: ["Web Dev", "Fast LCP"], desc: "Educational operations platform." },
     { cat: "Education", name: "ASMC Lakhimpur Kheri", url: "asmclakhimpurkheri.in", tech: ["CMS", "Frontend"], desc: "Institute presentation UI." },
-    { cat: "Education", name: "ASMC Kanpur Dehat", url: "asmckanpurdehat.in", tech: ["React", "Analytics"], desc: "Analytics driven student site." },
     { cat: "Education", name: "CIS Gauriganj", url: "cisgauriganj.org", tech: ["Web Dev", "SEO"], desc: "School communication portal." },
 
     // --- BUSINESS & SERVICES ---
+    { cat: "Business & Services", name: "National Computer Allahabad", url: "nationalcomputerallahabad.com", tech: ["Custom Software", "Web Dev", "Local SEO"], desc: "Premier IT studio, enterprise software engineering & hardware diagnostics hub in Prayagraj." },
+    { cat: "Business & Services", name: "Limra Green Earth Solutions", url: "limragreenearthsolutions.in", tech: ["Eco Packaging", "WhatsApp Commerce", "SEO"], desc: "Certified compostable bio poly bags and sustainable packaging corporate catalog with direct ordering." },
+    { cat: "Business & Services", name: "Naushad & Umar Brick Field", url: "naushadumarbrickfield.com", tech: ["Industrial Catalog", "Local SEO", "Lead Gen"], desc: "Commercial red clay bricks manufacturing & building supplies enterprise in Prayagraj (Mark 5551)." },
     { cat: "Business & Services", name: "The Home Shifting", url: "thehomeshifting.com", tech: ["Next.js", "Maps API"], desc: "National logistics dashboard crushing local bounce rates." },
     { cat: "Business & Services", name: "Navpath", url: "navpath.in", tech: ["React", "SEO"], desc: "Corporate business routing." },
     { cat: "Business & Services", name: "Happy Home Furniture", url: "happyhomefurniture.online", tech: ["Headless CMS", "ISR Edge"], desc: "Heavy image-based storefront resolving painful LCP delays." },
@@ -66,14 +71,16 @@ export default function CaseStudiesClient() {
     { cat: "Business & Services", name: "Raghav Corporate", url: "raghavcorporateservices.com", tech: ["CMS", "Performance"], desc: "Corporate consulting agency." },
 
     // --- HEALTHCARE ---
+    { cat: "Healthcare", name: "MAZ Dialysis Center", url: "mazdialysiscenter.com", tech: ["Next.js", "Healthcare Web", "Local SEO"], desc: "Digital presence and patient portal for the 3rd largest dialysis center in India, located in Pratapgarh." },
+    { cat: "Healthcare", name: "Dr. Aarti Seth Clinic", url: "draartiseth.com", tech: ["Medical Schema", "Doctor Portfolio", "Local SEO"], desc: "Official medical practice and infertility specialist consultation portal for Dr. Aarti Seth (MBBS, DGO) in Sultanpur." },
     { cat: "Healthcare", name: "Vasudha Eye Clinic", url: "vasudhaeyegeneralclinic.com", tech: ["a11y Audited", "Schema"], desc: "Premium accessible interface requiring instant bookings." },
 
     // --- LEGAL / PROFESSIONAL ---
+    { cat: "Legal", name: "T&S Lex Ink Legal", url: "lexinklegal.in", tech: ["Next.js", "Corporate Law", "SEO"], desc: "Full-service New Delhi law firm portal specializing in civil litigation, criminal defence & corporate advisory." },
     { cat: "Legal", name: "CLC Chambers", url: "clcchambers.com", tech: ["React Sever", "CSP"], desc: "Impenetrable, un-hackable legal facade." },
 
     // --- PERSONAL BRANDS ---
     { cat: "Personal Brands", name: "Tushar Nagpal", url: "tusharnagpal.com", tech: ["Next.js Port", "Micro-animations"], desc: "High-end personal branding hub." },
-    { cat: "Personal Brands", name: "Javed Siddiquee", url: "javedsiddiqueeofficial.com", tech: ["SEO", "CMS"], desc: "Public figure authority hub." },
     { cat: "Personal Brands", name: "Rajendra Kumar", url: "rajendrakumarmaurya.in", tech: ["React", "Fast LCP"], desc: "Personal authority facade." },
 
     // --- MEDIA / NEWS ---
@@ -81,7 +88,7 @@ export default function CaseStudiesClient() {
     { cat: "Media & News", name: "Abhivyakti News", url: "abhivyaktinews.com", tech: ["Next.js", "SSG"], desc: "High traffic digital publication." },
 
     // --- OTHER PROJECTS ---
-    { cat: "Startups", name: "Job Wale", url: "job-wale.com", tech: ["Dynamic Routes", "SEO"], desc: "Job portal mapping." },
+    { cat: "Startups", name: "Career Avsar Recruitment", url: "careeravsar.in", tech: ["Job Portal", "Recruitment Engine", "React"], desc: "Premier educator recruitment and teacher placement platform connecting accredited schools across UP." },
     { cat: "Startups", name: "Manav Seva Trust", url: "manavsevatrust.online", tech: ["NGO CMS", "Tailwind"], desc: "Charity foundation platform." },
     { cat: "Startups", name: "Invitation King", url: "invitation.org.in", tech: ["React", "Animations"], desc: "Digital invitation maker." },
     { cat: "Startups", name: "Sprene", url: "sprene.com", tech: ["Web Dev", "UI/UX"], desc: "SaaS layout." },
@@ -133,7 +140,14 @@ export default function CaseStudiesClient() {
     { name: "Delhi-UP Property Hub", industry: "Real Estate", platforms: ["facebook", "instagram", "google"], type: "Property Prospecting", stats: "High-Ticket Closures" },
     { name: "Pratapgarh Inter Pradesh", industry: "Business Region", platforms: ["facebook"], type: "Area Authority", stats: "Local Dominance" },
     { name: "Naman News Corporation", industry: "Media & News", platforms: ["facebook", "x", "google"], type: "Real-Time Broadcast", stats: "Massive Distribution" },
-    { name: "Future Securitization & Financial", industry: "Finance Setup", platforms: ["x", "google"], type: "Credibility Mapping", stats: "B2B Impressions" }
+    { name: "Future Securitization & Financial", industry: "Finance Setup", platforms: ["x", "google"], type: "Credibility Mapping", stats: "B2B Impressions" },
+    { name: "MAZ Dialysis Center", industry: "Healthcare", platforms: ["facebook", "google"], type: "Regional Healthcare Awareness", stats: "High Patient Footfall" },
+    { name: "Judicial Study Centre", industry: "Education", platforms: ["facebook", "instagram", "google"], type: "Aspirant Enrollment Funnel", stats: "High Inquiries" },
+    { name: "Dr. Aarti Seth Clinic", industry: "Healthcare", platforms: ["facebook", "google"], type: "Local Clinical Authority", stats: "5-Star Scaling" },
+    { name: "Limra Green Earth Solutions", industry: "Eco Packaging", platforms: ["facebook", "instagram"], type: "B2B WhatsApp Leads", stats: "High Engagement" },
+    { name: "Naushad & Umar Brick Field", industry: "Manufacturing", platforms: ["facebook", "google"], type: "B2B Contractor Outreach", stats: "Local Dominance" },
+    { name: "VGSBVM Law College", industry: "Legal Education", platforms: ["facebook", "google"], type: "Admissions & Authority", stats: "Regional Reach" },
+    { name: "Agnihotri Classes", industry: "Civil Services", platforms: ["facebook", "instagram", "google"], type: "Aspirant Reach & Enrollment", stats: "High Engagement" }
   ];
 
   // FEATURED COMBINED CASE STUDIES
@@ -183,7 +197,7 @@ export default function CaseStudiesClient() {
           </motion.div>
           
           <motion.h1 variants={itemVars} className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-title uppercase tracking-tight mb-8">
-            <span className="opacity-40">50+ Projects Across</span><br/>
+            <span className="opacity-40">60+ Projects Across</span><br/>
             Web Development &amp; <span className="text-primary">Social Media</span>
           </motion.h1>
           
@@ -281,7 +295,7 @@ export default function CaseStudiesClient() {
                    {/* Social Stats Board */}
                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
                      <div className="bg-primary/10 border border-primary/20 rounded-3xl p-8 text-center">
-                       <h4 className="text-4xl font-black text-title mb-2">40+</h4>
+                       <h4 className="text-4xl font-black text-title mb-2">45+</h4>
                        <span className="text-sm tracking-widest uppercase font-bold text-primary">Clients Mapped</span>
                      </div>
                      <div className="bg-secondary/20 border border-layer-border rounded-3xl p-8 text-center flex flex-col items-center justify-center gap-4">
@@ -374,7 +388,7 @@ export default function CaseStudiesClient() {
         <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
            <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
               <Target size={32} className="text-primary mb-4" />
-              <h4 className="text-3xl font-black text-title mb-1">50+</h4>
+              <h4 className="text-3xl font-black text-title mb-1">60+</h4>
               <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">Global Projects</span>
            </div>
            <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">

@@ -29,9 +29,9 @@ export default function About() {
   ];
 
   const achievements = [
-    { title: "Managed and delivered 50+ diverse digital projects", icon: <Award className="text-primary w-6 h-6" /> },
+    { title: "Managed and delivered 60+ diverse digital projects", icon: <Award className="text-primary w-6 h-6" /> },
     { title: "Partnered and executed digital solutions for 7 Government Medical Colleges", icon: <Rocket className="text-secondary w-6 h-6" /> },
-    { title: "Handled comprehensive IT infrastructure for 30+ clients across industries", icon: <Server className="text-emerald-500 w-6 h-6" /> },
+    { title: "Handled comprehensive IT infrastructure for 40+ clients across industries", icon: <Server className="text-emerald-500 w-6 h-6" /> },
     { title: "Co-founded impactful digital agencies like Route 2 Shine and Lotus Loop Media", icon: <Target className="text-blue-500 w-6 h-6" /> },
   ];
 
@@ -134,7 +134,7 @@ export default function About() {
               At career Avsar, Devraj took total command of critical digital pillars: comprehensive Website Development prioritizing high performance, holistic SEO Optimization engineered to dominate search rankings, and targeted Social Media Management intended to drastically scale online visibility. 
             </p>
             <p>
-              His execution at M/S Career Avsar yielded monumental achievements. He meticulously directed the web development and digital structuring for <strong>7 distinct Government Medical Colleges</strong>, a task demanding unparalleled security protocols, accessibility standards, and robust architectural planning. Furthermore, he successfully handled over <strong>30+ robust client projects</strong>, ranging from dynamic corporate identities to scaling operational portals, establishing a rock-solid track record of trust and delivery.
+              His execution at M/S Career Avsar yielded monumental achievements. He meticulously directed the web development and digital structuring for <strong>7 distinct Government Medical Colleges</strong>, a task demanding unparalleled security protocols, accessibility standards, and robust architectural planning. Furthermore, he successfully handled over <strong>40+ robust client projects</strong>, ranging from dynamic corporate identities to scaling operational portals, establishing a rock-solid track record of trust and delivery.
             </p>
             <p className="font-semibold text-primary mt-6">
               Empowered by this massive operational success, in September 2025, Devraj embarked on a new flagship venture by co-founding &quot;Lotus Loop Media Solution&quot; in Noida, joining forces with Tushar Nagpal.
