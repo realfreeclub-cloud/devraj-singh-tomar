@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
+import WebMCPInitializer from "@/components/WebMCPInitializer";
 
 const poppins = Poppins({ 
   weight: ['400', '500', '600', '700', '800'],
@@ -56,6 +57,8 @@ const personJsonLd = {
   ],
   url: "https://devrajsinghtomar.com",
   jobTitle: "IT Professional & Entrepreneur",
+  email: "hello@devrajsinghtomar.com",
+  telephone: "+91-9140946121",
   description:
     "Devraj Singh Tomar, also referred to as Devraj Tomar and Devraj Singh, is an experienced IT project manager and entrepreneur specializing in scalable digital solutions since 2018.",
   image: "https://devrajsinghtomar.com/devraj-singh-tomar.jpg",
@@ -81,6 +84,64 @@ const personJsonLd = {
     "Entrepreneurship",
     "Digital Solutions",
     "Web Development",
+  ],
+};
+
+// ── Organization / LocalBusiness schema for AI agent & local trust ──
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+  "@id": "https://devrajsinghtomar.com/#organization",
+  name: "Devraj Singh Tomar Operations",
+  alternateName: [
+    "Devraj Singh Tomar",
+    "Devraj Tomar IT Consultancy",
+    "Lotus Loop Media Solution",
+    "Tecxontechnology",
+  ],
+  url: "https://devrajsinghtomar.com",
+  logo: "https://devrajsinghtomar.com/logo-dark.png",
+  image: "https://devrajsinghtomar.com/devraj-singh-tomar.jpg",
+  description:
+    "Devraj Singh Tomar is an elite Next.js Web Developer, IT Project Manager, and digital technology consultancy in India delivering scalable enterprise solutions.",
+  email: "hello@devrajsinghtomar.com",
+  telephone: "+91-9140946121",
+  priceRange: "$$",
+  founder: {
+    "@type": "Person",
+    name: "Devraj Singh Tomar",
+    url: "https://devrajsinghtomar.com",
+  },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "chokhani square, 309, Sector 18",
+    addressLocality: "Noida",
+    addressRegion: "Uttar Pradesh",
+    postalCode: "201301",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "28.5708",
+    longitude: "77.3271",
+  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-9140946121",
+      contactType: "customer service",
+      email: "hello@devrajsinghtomar.com",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi"],
+    },
+  ],
+  sameAs: [
+    "https://www.linkedin.com/in/devraj-singh-tomar-it/",
+    "https://www.instagram.com/devraj_singh_tomar__/",
+    "https://www.facebook.com/DevrajSinghTomarIT",
+    "https://dev.to/devraj_singh_tomar",
+    "https://medium.com/@devrajsinghtomar",
+    "https://github.com/devrajsingh-tomar",
   ],
 };
 
@@ -145,11 +206,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(imageJsonLd) }}
         />
+        {/* Organization / LocalBusiness structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </head>
       <body
         className={`${poppins.className} bg-background text-foreground antialiased min-h-screen relative overflow-x-hidden`}
         suppressHydrationWarning
       >
+        <WebMCPInitializer />
         <CustomCursor />
         <Navbar />
         
@@ -157,8 +224,8 @@ export default function RootLayout({
           {children}
         </main>
 
-        {/* ── Requirement 3: Hidden SEO content (sr-only) ── */}
-        {/* Screen-reader only, not visible in UI, but crawlable by Google */}
+        {/* ── Requirement 3: Hidden SEO content (sr-only) & Machine-readable contact details ── */}
+        {/* Screen-reader only, not visible in UI, but crawlable by Google and AI agents */}
         <div className="sr-only">
           <p>
             Devraj Singh Tomar, also referred to as Devraj Tomar, Devraj Singh, and Devraj, 
@@ -168,6 +235,12 @@ export default function RootLayout({
             he brings the same dedication to IT project management, software development, 
             and business partnerships across multiple tech ventures.
           </p>
+          <address>
+            <span>Devraj Singh Tomar Operations</span>
+            <a href="mailto:hello@devrajsinghtomar.com">hello@devrajsinghtomar.com</a>
+            <a href="tel:+919140946121">+91 9140946121</a>
+            <span>chokhani square, 309, Sector 18, Noida, Uttar Pradesh 201301, India</span>
+          </address>
         </div>
       </body>
     </html>

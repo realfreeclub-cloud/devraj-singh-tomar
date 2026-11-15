@@ -8,6 +8,28 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 1080, 1200, 1920],
   },
 
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Link",
+            value: '</llms.txt>; rel="alternate"; type="text/markdown"',
+          },
+          {
+            key: "Vary",
+            value: "Accept",
+          },
+          {
+            key: "Content-Signal",
+            value: "search=yes, ai-train=yes",
+          },
+        ],
+      },
+    ];
+  },
+
   // ── Requirement 4: 301 redirects for name variation URLs ──
   // These pass SEO signals to the canonical homepage
   async redirects() {

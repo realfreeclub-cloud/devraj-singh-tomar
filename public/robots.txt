@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+Content-Signal: search=yes, ai-train=yes
+
+Sitemap: https://devrajsinghtomar.com/sitemap.xml
+Sitemap: https://devrajsinghtomar.com/image-sitemap.xml

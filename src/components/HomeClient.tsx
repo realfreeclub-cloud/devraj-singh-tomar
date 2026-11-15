@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 
 export default function Home() {
   const containerVars: Variants = {
@@ -103,6 +103,19 @@ export default function Home() {
               </span>
               {/* Background fill on hover is handled by the group hover:bg-primary */}
             </Link>
+          </motion.div>
+
+          {/* Machine-readable and direct contact links for AI agents & visitors */}
+          <motion.div variants={itemVars} className="flex flex-wrap items-center gap-6 mt-8 justify-center lg:justify-start text-sm text-foreground/80">
+            <a href="mailto:hello@devrajsinghtomar.com" className="hover:text-primary transition-colors flex items-center gap-2 group">
+              <Mail size={16} className="text-primary group-hover:scale-110 transition-transform" />
+              <span>hello@devrajsinghtomar.com</span>
+            </a>
+            <span className="hidden sm:inline text-foreground/30">•</span>
+            <a href="tel:+919140946121" className="hover:text-primary transition-colors flex items-center gap-2 group">
+              <Phone size={16} className="text-primary group-hover:scale-110 transition-transform" />
+              <span>+91 9140946121</span>
+            </a>
           </motion.div>
 
         </motion.div>

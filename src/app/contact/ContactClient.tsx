@@ -135,7 +135,11 @@ export default function Contact() {
 
               <h2 className="text-2xl font-bold mb-8 text-title">Send a Message</h2>
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
+              <form 
+                onSubmit={handleSubmit} 
+                className="flex flex-col gap-6 relative z-10"
+                {...({ toolname: "contact_devraj", tooldescription: "Submit a project inquiry or message to Devraj Singh Tomar" } as Record<string, string>)}
+              >
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
                     <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Your Name</label>

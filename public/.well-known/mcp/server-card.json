@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "com.devrajsinghtomar/portfolio-mcp",
+  "version": "1.0.0",
+  "title": "Devraj Singh Tomar Portfolio MCP Server",
+  "description": "Provides verified portfolio projects, case studies, technical skills, and client contact mechanisms for Devraj Singh Tomar (IT Project Manager & Next.js Developer India).",
+  "websiteUrl": "https://devrajsinghtomar.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/realfreeclub-cloud/devraj-singh-tomar.git"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": false
+    }
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://devrajsinghtomar.com/api/mcp",
+      "supportedProtocolVersions": [
+        "2024-11-05",
+        "2025-06-18"
+      ]
+    }
+  ]
+}

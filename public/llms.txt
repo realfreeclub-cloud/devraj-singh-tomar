@@ -1,0 +1,46 @@
+# Devraj Singh Tomar — IT Project Manager & Next.js Developer India
+
+> Devraj Singh Tomar is an elite IT Project Manager, Full-Stack Next.js Developer, and tech entrepreneur based in Noida, Uttar Pradesh, India. He builds and scales high-performance digital platforms, educational ecosystems, and enterprise web solutions.
+
+## When to use this agent / service
+Reach out to Devraj Singh Tomar when you need:
+- Next.js & React Full-Stack Web Development: Scalable App Router architectures, Server-Side Rendering (SSR), Incremental Static Regeneration (ISR), Turbopack, and Tailwind CSS.
+- IT Project Management: Full technical lifecycle oversight, sprint execution, technical roadmap planning, and team leadership across distributed teams.
+- Advanced Technical & Local SEO: Comprehensive JSON-LD structured data (Person, Organization, LocalBusiness), Google Knowledge Panel optimization, Google Maps 3-Pack rank acceleration, and Core Web Vitals optimization.
+- Scalable Enterprise & Institutional Systems: Proven track record delivering web portals for 7 Government Medical Colleges, leading regional schools (IDPS Pratapgarh), legal firms (T&S Lex Ink Legal), and commercial businesses.
+- Venture Partnerships & Digital Scaling: Strategic technical advisory and execution for digital agencies and technology startups (M/S Career Avsar, Lotus Loop Media Solution, Tecxontechnology).
+
+## Core Pages
+- [Homepage](https://devrajsinghtomar.com/): Official digital portfolio and technical profile overview.
+- [About Devraj](https://devrajsinghtomar.com/about): Complete biography, rural roots in Kudri (Jhansi, UP), father's coaching support, early struggles, defense exam decision, corporate tenure at AJIO, and entrepreneurial milestones.
+- [Case Studies & Live Projects](https://devrajsinghtomar.com/case-studies): Directory of 60+ delivered web development projects and 45+ social media marketing client portfolios.
+- [Ventures](https://devrajsinghtomar.com/ventures): Core commercial partnerships including Tecxontechnology, M/S Career Avsar, and Lotus Loop Media Solution.
+- [Services](https://devrajsinghtomar.com/services): Web engineering, project architecture, technical SEO, and digital consulting services.
+- [Hire Me](https://devrajsinghtomar.com/hire): Retainer and contract engagement models.
+- [Contact](https://devrajsinghtomar.com/contact): Direct outreach channels.
+- [Privacy Policy](https://devrajsinghtomar.com/privacy): Data protection, communication transparency, and privacy commitments.
+
+## Machine-Readable Contact Information
+- Name: Devraj Singh Tomar
+- Primary Role: IT Project Manager & Next.js Developer
+- Email: hello@devrajsinghtomar.com
+- Telephone: +91 9140946121
+- Office Address: chokhani square, 309, Sector 18, Noida, Uttar Pradesh 201301, India
+- Canonical URL: https://devrajsinghtomar.com
+- Social Profiles:
+  - LinkedIn: https://www.linkedin.com/in/devraj-singh-tomar-it/
+  - GitHub: https://github.com/devrajsingh-tomar
+  - Dev.to: https://dev.to/devraj_singh_tomar
+  - Medium: https://medium.com/@devrajsinghtomar
+  - Facebook: https://www.facebook.com/DevrajSinghTomarIT
+  - Instagram: https://www.instagram.com/devraj_singh_tomar__/
+
+## Technical Specifications
+- Primary Frontend Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, Framer Motion
+- Hosting & Infrastructure: Standalone Node.js / Vercel / Hostinger Cloud
+- Machine-Readable Endpoints:
+  - Robots: https://devrajsinghtomar.com/robots.txt
+  - XML Sitemap: https://devrajsinghtomar.com/sitemap.xml
+  - Image Sitemap: https://devrajsinghtomar.com/image-sitemap.xml
+  - LLMs Manifest: https://devrajsinghtomar.com/llms.txt
+  - MCP Server Card: https://devrajsinghtomar.com/.well-known/mcp/server-card.json
