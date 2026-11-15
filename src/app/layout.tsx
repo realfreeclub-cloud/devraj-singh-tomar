@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import WebMCPInitializer from "@/components/WebMCPInitializer";
-
-const poppins = Poppins({ 
-  weight: ['400', '500', '600', '700', '800'],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devrajsinghtomar.com"),
@@ -213,7 +206,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${poppins.className} bg-background text-foreground antialiased min-h-screen relative overflow-x-hidden`}
+        className="bg-background text-foreground antialiased min-h-screen relative overflow-x-hidden"
         suppressHydrationWarning
       >
         <WebMCPInitializer />

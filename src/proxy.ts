@@ -64,7 +64,7 @@ Here are the key pages and machine-readable resources to navigate:
 - [Contact Details](https://devrajsinghtomar.com/contact)
 `;
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const acceptHeader = request.headers.get("accept") || "";
   const wantsMarkdown = acceptHeader.includes("text/markdown");
@@ -120,6 +120,8 @@ export function middleware(request: NextRequest) {
 
   return response;
 }
+
+export default proxy;
 
 export const config = {
   matcher: [
