@@ -39,7 +39,7 @@ export default function Navbar() {
     { label: "Home", href: "/" },
     { label: "About", href: isHome ? "#about-snapshot" : "/about" },
     { label: "Work", href: isHome ? "#featured-work" : "/case-studies" },
-    { label: "Expertise", href: isHome ? "#what-i-do" : "/services" },
+    { label: "Expertise", href: isHome ? "#what-i-do" : "/expertise" },
     { label: "Ventures", href: isHome ? "#ventures" : "/ventures" },
     { label: "Insights", href: isHome ? "#insights" : "/blog" },
     { label: "Contact", href: isHome ? "#contact" : "/contact" },

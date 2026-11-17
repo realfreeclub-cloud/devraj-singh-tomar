@@ -91,14 +91,38 @@ flowchart TD
   - **Dynamic Sitemap:** Updated `src/app/sitemap.ts` to automatically include all `/case-studies/${slug}` URLs with daily/monthly frequencies.
 - **Verification:** Successfully compiled with Next.js 16.2.1 and Webpack in 5.7s with 0 errors across 29 routes (23 static + 6 SSG case study pages). Checked with `npx tsc --noEmit` (0 errors).
 
-### Phase 4: Ventures (`/ventures`), Expertise (`/expertise`), & Insights (`/insights`)
-- **Goal:** Strengthen commercial authority and knowledge distribution.
-- **Key Modules to Build:**
-  - Upgrade `/ventures` with equity roles, tech stacks, and metrics.
-  - Implement `/expertise` covering enterprise Next.js, technical SEO, and cloud architecture.
-  - Implement `/insights` and `/insights/[slug]` with reading times and `BlogPosting` schema.
-  - Retain `/services` and `/blog` with backward compatibility and canonical links.
-- **Verification:** Confirm clean metadata generation, OpenGraph cards, and schema validation.
+### Phase 4: About (`/about`), Expertise (`/expertise`), Ventures (`/ventures`) & Insights (`/blog`)
+- **Status:** **Completed & Verified**
+- **Goal:** Build a complete professional identity experience communicating Devraj Singh Tomar's journey, strategic philosophy, technical capabilities, verified ventures, and published insights.
+- **Key Modules Delivered:**
+  - **About Page (`src/app/about/AboutClient.tsx` & `page.tsx`):**
+    - Section A: Introduction ("Technology, Strategy & Ideas That Create Real-World Impact"), verified portrait, and core fact badges.
+    - Section B: My Journey — Chronological verified milestone timeline (Kudri Jhansi foundations, 2014-2016 education, defense exam choice, 2018-2022 early EdTech systems, 2022 AJIO team leadership, 2022-present enterprise architecture).
+    - Section C: Core Philosophy — 5 practical principles prioritizing problem diagnosis over technology fads.
+    - Section D: Verified Professional Experience — Lotus Loop Media, M/S Career Avsar, Route 2 Shine, AJIO, NGIT Tech Consulting.
+    - Section E: Personal Approach — Narrative on empathy, transparent communication, and team leadership.
+    - Full SEO metadata, canonical URL, OpenGraph, `Person`, and `BreadcrumbList` schemas.
+  - **Expertise Page (`src/app/expertise/ExpertiseClient.tsx` & `page.tsx`):**
+    - 6 Core Capability Pillars: Technology Strategy, Digital Product Development, Project & Product Leadership, Business Automation, Digital Transformation, and Digital Growth.
+    - Structured breakdowns: Short explanation, business problems solved, key capabilities, ownership distinction, and related case study cross-links.
+    - Explicit Role Distinction banner separating strategic architecture from code execution.
+    - Retained `/services` route with seamless re-export and canonical link to `/expertise` ensuring 100% backward compatibility.
+  - **Ventures Page (`src/app/ventures/VenturesClient.tsx` & `page.tsx`):**
+    - Category filter tabs: All, Businesses, Partnerships, Products, Milestones.
+    - Showcase for: Lotus Loop Media Solutions, Tecxontechnology, M/S Career Avsar, National Genius Institute (NGIT), Divya Jap, and Route 2 Shine.
+    - Explicit relationship disclosure ensuring client organizations and partnerships are never conflated with proprietary companies.
+    - Direct cross-links to corresponding case studies.
+  - **Insights Page (`src/app/blog/BlogClient.tsx` & `BlogPostClient.tsx`):**
+    - Featured Article Hero Spotlight for the lead strategic essay.
+    - Category navigation pills (All, Entrepreneurship, Project Management, Technology, Design).
+    - Real-time search by title, description, or keyword with reset button.
+    - Article detail view: sticky viewport reading progress bar indicator, auto-generated Table of Contents (TOC) from H2s, clean dark-luxury typography, one-click social share & link copying, author bio card, and related articles grid.
+    - Dynamic `BlogPosting` and `BreadcrumbList` JSON-LD schemas.
+  - **Site Navigation & Cross-Linking:**
+    - Updated `Navbar.tsx` linking "Expertise" to `/expertise`.
+    - Updated `FooterSection.tsx` linking both `/expertise` and `/services`.
+    - Updated `sitemap.ts` to include `/expertise`.
+- **Verification:** Successfully compiled with Next.js 16.2.1 and Webpack in 5.4s with 0 errors across 30 routes. TypeScript typecheck (`npx tsc --noEmit`) verified with 0 errors.
 
 ### Phase 5: Data Layer, Leads CRM & Admin CMS
 - **Goal:** Implement secure lead capture, meeting scheduling, and content management.

@@ -1,19 +1,19 @@
 import { Metadata } from 'next';
-import ServicesClient from '@/components/ServicesClient';
+import ExpertiseClient from '@/app/expertise/ExpertiseClient';
 
 export const metadata: Metadata = {
-  title: 'Web Development & SEO Services India | Next.js Expert',
+  title: 'Strategic Services & Capabilities | Devraj Singh Tomar',
   description:
-    'Premier web development services in India. Expert Next.js developer offering highly scalable website architecture, elite technical SEO, and radical performance optimization.',
+    'Explore Devraj Singh Tomar\'s strategic services across Technology Strategy, Digital Product Architecture, IT Project Management, and Enterprise Digital Transformation.',
   keywords: [
-    'Web Development Services India',
-    'Next.js Developer Services',
-    'SEO Services for Websites',
-    'Performance Optimization Consultant',
-    'Freelance IT Project Manager',
+    'Technology Strategy Services',
+    'Next.js Architecture Consulting',
+    'IT Project Management India',
+    'Digital Transformation Services',
+    'Technical SEO Strategy'
   ],
   alternates: {
-    canonical: '/services',
+    canonical: 'https://devrajsinghtomar.com/expertise',
   },
 };
 
@@ -30,7 +30,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Services",
+      "name": "Services & Expertise",
       "item": "https://devrajsinghtomar.com/services"
     }
   ]
@@ -43,7 +43,7 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <ServicesClient />
+      <ExpertiseClient />
     </>
   );
 }

@@ -1,221 +1,447 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Server, GraduationCap, Briefcase, Award, Rocket, Heart, Code2, Users, Target, Zap } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Heart,
+  GraduationCap,
+  Briefcase,
+  Award,
+  Rocket,
+  CheckCircle2,
+  Server,
+  Target,
+  ArrowRight,
+  Code2,
+  Compass,
+  Lightbulb,
+  Cpu,
+  Layers,
+  ShieldCheck,
+  ChevronRight,
+  Sparkles,
+  MapPin,
+  Calendar,
+  ExternalLink
+} from "lucide-react";
 
-export default function About() {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
-
-  const staggerContainer = {
+export default function AboutClient() {
+  const containerVars = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
-  const skills = [
-    "Next.js Developer India",
-    "IT Project Manager India",
-    "React.js & Full-Stack Development",
-    "Advanced Technical SEO",
-    "Website Architecture Design",
-    "Social Media Management",
-    "Digital Project Scaling",
-    "Business Operations & Strategy"
+  const itemVars = {
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  };
+
+  const journeyMilestones = [
+    {
+      period: "Early Roots",
+      title: "Roots, Family Support & Early Curiosity",
+      location: "Kudri, Jhansi (UP)",
+      desc: "Growing up in Kudri, a small agricultural village in Jhansi, the digital landscape seemed continents away. Recognizing his son's curiosity, Devraj's father drove him 7 kilometers on a bike in chilling morning winds at 6 AM every day so he could attend a computer center. Devraj became the first person in his village to formally study computers, learning speed typing and Tally fundamentals—sparking a lifelong obsession with technology.",
+      badge: "Foundations",
+    },
+    {
+      period: "2014 – 2016",
+      title: "Academic Milestones & The Unconventional Choice",
+      location: "Orai & Prayagraj (UP)",
+      desc: "Completed High School (2014) and Intermediate with Mathematics from Orai (2016). Moving to Prayagraj to prepare for competitive defense examinations, Devraj cleared the demanding Air Force Y Group exam. Standing at a crossroads, he made the deliberate, independent decision to turn down government service to dedicate his career entirely to software engineering, digital systems, and entrepreneurship.",
+      badge: "Pivotal Decision",
+    },
+    {
+      period: "2016 – 2018",
+      title: "Technical Certifications & First Digital Deployments",
+      location: "NGIT, Prayagraj",
+      desc: "Fortified his technical foundation with O Level and CCC Certifications from National Genius Institute (NGIT). Mentored by Mr. Javed Siddique, Devraj transitioned from theory to production by building and launching his first functional web portal, laying the groundwork for real-time exam engines.",
+      badge: "Applied Learning",
+    },
+    {
+      period: "2018 – 2022",
+      title: "Early Professional Work & EdTech Systems",
+      location: "Uttar Pradesh",
+      desc: "Initiated professional technology consulting and web architecture around 2018. Designed examination portals, typing evaluation software for high-stakes government recruitment candidates, and digital communication tools for regional schools and institutes across Uttar Pradesh.",
+      badge: "Industry Entry",
+    },
+    {
+      period: "2022",
+      title: "Corporate Operations & High-Velocity Team Leadership",
+      location: "Delhi-NCR / Noida",
+      desc: "Relocated to the Delhi/Noida technology corridor to achieve complete financial independence. Joined AJIO (Reliance Retail) as an Executive. Demonstrating systematic problem-solving and operational rigor, he earned promotion to Team Leader within 6 months, successfully managing workflows, KPI tracking, and operations for 9 months.",
+      badge: "Corporate Leadership",
+    },
+    {
+      period: "2022 – Present",
+      title: "Venture Co-Founding & Enterprise Technology Leadership",
+      location: "Noida & Pratapgarh",
+      desc: "Stepped fully into technology entrepreneurship: co-founded voice infrastructure company Route 2 Shine in Noida; led IT architecture at M/S Career Avsar delivering portals for 7 Government Medical Colleges and 40+ client organizations; and co-founded Lotus Loop Media Solutions in Noida (Sep 2025). Concurrently architected original technology ventures like Divya Jap and NGIT Edu.",
+      badge: "Entrepreneurship",
+    },
   ];
 
-  const achievements = [
-    { title: "Managed and delivered 60+ diverse digital projects", icon: <Award className="text-primary w-6 h-6" /> },
-    { title: "Partnered and executed digital solutions for 7 Government Medical Colleges", icon: <Rocket className="text-secondary w-6 h-6" /> },
-    { title: "Handled comprehensive IT infrastructure for 40+ clients across industries", icon: <Server className="text-emerald-500 w-6 h-6" /> },
-    { title: "Co-founded impactful digital agencies like Route 2 Shine and Lotus Loop Media", icon: <Target className="text-blue-500 w-6 h-6" /> },
+  const philosophyPrinciples = [
+    {
+      num: "01",
+      title: "Understand the Problem Before Selecting Technology",
+      desc: "Frameworks, databases, and libraries are tools—never the objective. I invest significant initial effort into diagnosing root business bottlenecks, user friction points, and operational requirements before writing architectural blueprints.",
+    },
+    {
+      num: "02",
+      title: "Prioritize Useful Solutions Over Unnecessary Complexity",
+      desc: "Over-engineered architectures cost businesses momentum and money. I believe in writing clean, modular, and maintainable software that solves real user pain points without bloated microservice sprawl or fragile dependencies.",
+    },
+    {
+      num: "03",
+      title: "Combine Technical Direction With Business Understanding",
+      desc: "A technically elegant platform is useless if it fails to generate revenue, retain clients, or reduce overhead. Every line of code and architectural decision must serve measurable commercial objectives.",
+    },
+    {
+      num: "04",
+      title: "Build for Reliability, Usability and Future Growth",
+      desc: "Whether building an emergency dialysis triage portal or an examination engine handling concurrent candidate surges, uptime, low latency, and intuitive mobile ergonomics are non-negotiable.",
+    },
+    {
+      num: "05",
+      title: "Treat Execution and Continuous Improvement as Equally Important",
+      desc: "Launching is only milestone zero. Long-term digital dominance requires rigorous post-launch telemetry, proactive performance audits, and iterative improvements driven by real-world usage data.",
+    },
+  ];
+
+  const experienceEntries = [
+    {
+      organization: "Lotus Loop Media Solutions",
+      role: "Co-Founder & Technical Head",
+      period: "Sep 2025 – Present",
+      location: "Noida, UP",
+      desc: "Digital media and technology strategy firm delivering high-end technical architectures, enterprise legal portals, and digital transformation initiatives.",
+      contributions: [
+        "Co-founded alongside Tushar Nagpal, overseeing core technology strategy and digital execution.",
+        "Architected zero-trust legal portal for T&S Lex Ink Legal with 100/100 Core Web Vitals.",
+        "Engineered automated inbound client funnels and technical SEO frameworks.",
+      ],
+      link: "https://lotusloop.in",
+    },
+    {
+      organization: "M/S Career Avsar",
+      role: "IT Project Head & Systems Architect",
+      period: "2023 – Present",
+      location: "Pratapgarh, UP",
+      desc: "Educational talent, institutional printing, and public digital systems organization operating across Northern India.",
+      contributions: [
+        "Spearheaded technical development and digital architecture for 7 Government Medical Colleges in UP.",
+        "Managed delivery of over 40+ educational, healthcare, and commercial client web ecosystems.",
+        "Designed admissions lead funnels resulting in over +300% inquiry surges for partner schools.",
+      ],
+      link: "https://careeravsar.com",
+    },
+    {
+      organization: "Route 2 Shine",
+      role: "Co-Founder & IT Infrastructure Lead",
+      period: "2022 – 2023",
+      location: "Noida, UP",
+      desc: "Voice Process Outsourcing (VPO) and enterprise communication operations firm.",
+      contributions: [
+        "Engineered complete networking infrastructure, VoIP systems, and hardware diagnostics.",
+        "Ensured 99.9% uptime across daily multi-channel communication pipelines.",
+        "Established operational security and internal software workflows.",
+      ],
+    },
+    {
+      organization: "AJIO (Reliance Retail)",
+      role: "Operations Executive → Promoted to Team Leader",
+      period: "2022 (15 Months Total)",
+      location: "Noida / Delhi-NCR",
+      desc: "Major Indian fashion e-commerce enterprise operational facility.",
+      contributions: [
+        "Earned rapid promotion to Team Leader in 6 months based on analytical troubleshooting and leadership.",
+        "Managed workflow optimization and operational metrics for 9 consecutive months.",
+        "Acquired deep mastery in team scalability, KPI reporting, and operational efficiency.",
+      ],
+    },
+    {
+      organization: "NGIT / EdTech Engineering",
+      role: "Technology Consultant & Engine Architect",
+      period: "2018 – 2022",
+      location: "Prayagraj, UP",
+      desc: "Computer certification, typing examination software, and institutional digital presence.",
+      contributions: [
+        "Architected the NGIT Edu examination evaluation engine with 0ms perceived keystroke lag.",
+        "Engineered bilingual Hindi (Mangal/Kruti Dev) and English speed evaluation state machines.",
+        "Maintained 99.98% uptime during high-concurrency state recruitment exam surges.",
+      ],
+      link: "https://ngitedu.com",
+    },
   ];
 
   return (
-    <div className="pt-32 pb-16 min-h-screen px-6 lg:px-16 mx-auto max-w-6xl">
-      <motion.div initial="hidden" animate="show" variants={staggerContainer} className="w-full">
-        
-        {/* Hero Introduction */}
-        <motion.div variants={fadeIn} className="mb-16 text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-title tracking-tight">
-            Meet <span className="text-primary">Devraj Singh Tomar</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-foreground font-medium max-w-4xl leading-relaxed mb-4">
-            A Visionary IT Project Manager & Next.js Developer in India, Building Growth-Driven Digital Solutions.
-          </p>
-          <div className="w-24 h-1 bg-primary rounded-full md:mx-0 mx-auto mt-6"></div>
-        </motion.div>
+    <div className="min-h-screen bg-background pt-[100px] lg:pt-[120px] pb-24 px-6 lg:px-20 overflow-x-hidden">
+      {/* 1. SECTION A: INTRODUCTION */}
+      <section className="w-full max-w-5xl mx-auto mb-20 lg:mb-28">
+        <motion.div variants={containerVars} initial="hidden" animate="show">
+          {/* Breadcrumb */}
+          <motion.div variants={itemVars} className="flex items-center gap-2 text-xs font-semibold text-foreground/60 mb-6">
+            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+            <ChevronRight size={13} />
+            <span className="text-foreground">About Devraj Singh Tomar</span>
+          </motion.div>
 
-        {/* Story Section 1: The Foundations */}
-        <motion.div variants={fadeIn} className="bg-layer border border-layer-border rounded-4xl p-8 md:p-12 mb-10 shadow-lg hover:border-primary/20 transition-all duration-300">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-              <Heart size={28} />
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-title">Roots & Early Life Struggles</h2>
-          </div>
-          <div className="space-y-6 text-foreground text-lg leading-relaxed">
-            <p>
-              Every great journey has a humble beginning. For <strong>Devraj Singh Tomar</strong>, that beginning was in Kudri, a small village situated in Jhansi, Uttar Pradesh (Pin: 284202). Growing up in an environment where agriculture and traditional trades were the norm, the digital world seemed continents away. Yet, from a significantly young age, a powerful fascination with computers began to take root in him. 
-            </p>
-            <p>
-              The most profound credit for this early exposure goes directly to his father, a visionary in his own right, who observed the spark of curiosity in his son and decided to fuel it despite the challenges. Devraj proudly stands as the first person in his entire village to formally pursue computer education. The reality of this achievement wasn&apos;t painted in comfort. When he was just in the 5th grade, his father would wake up before dawn and drive him 7 kilometers on a bike in the chilling winds every single morning at 6 AM, purely to attend a local computer coaching center.
-            </p>
-            <p>
-              During this crucial developmental period, Devraj learned the fundamentals of typing, and by the subsequent year, he had advanced to learning Tally. To an outsider, these might seem like rudimentary skills today, but for a young boy from Kudri, it was akin to discovering a new universe. This early, consistent exposure instilled a relentless curiosity in him—he didn&apos;t just want to know how computers functioned; he was deeply driven to discover what more could be built, achieved, and revolutionized using technology. Building a career from scratch requires immense fatherly support, undeniable grit, and decisions that go against the grain.
-            </p>
-          </div>
-        </motion.div>
+          <motion.div
+            variants={itemVars}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary mb-8"
+          >
+            <Compass size={15} />
+            <span className="text-xs font-bold tracking-widest uppercase">
+              Professional Profile &amp; Journey
+            </span>
+          </motion.div>
 
-        {/* Story Section 2: Education & the Bold Decision */}
-        <motion.div variants={fadeIn} className="bg-layer/40 border border-layer-border rounded-4xl p-8 md:p-12 mb-10 relative overflow-hidden group">
-          <div className="absolute -top-32 -right-32 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] -z-10 group-hover:bg-secondary/20 transition-colors duration-700"></div>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
-              <GraduationCap size={28} />
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-title">The Learning Phase & Early Decisions</h2>
-          </div>
-          <div className="space-y-6 text-foreground text-lg leading-relaxed">
-            <p>
-              Academic progression for Devraj was never isolated from his technical pursuits. He successfully cleared his High School in 2014 and later completed his Intermediate with a specialization in Mathematics from Orai, Jalaun, Uttar Pradesh. Navigating the pressures of formal education, he managed to complete his graduation alongside grueling preparations for highly competitive government exams—a path stereotypically expected from brilliant minds in rural and semi-urban India.
-            </p>
-            <p>
-              Simultaneously, he fortified his technical foundation. Devraj pursued an <strong>O Level Certification</strong> and a <strong>CCC Certification</strong> from NGIT Allahabad. It was under the insightful guidance of Mr. Javed Siddique that he actively transitioned from a theoretical learner to a creator, developing his very first working website. This milestone proved that his technical acumen was transitioning into usable digital assets.
-            </p>
-            <p>
-              After completing his Intermediate in 2016, traditional expectations directed him towards Allahabad (Prayagraj) to intensely prepare for defense examinations. His sharp mind prevailed, and he triumphantly cleared the demanding Air Force Y Group examination. However, this became a massive turning point. Rather than comfortably settling into a secure government job, Devraj made the fiercely independent and unconventional choice to reject the offer. He recognized that his intrinsic passion did not lie in uniform, but deeply within the realms of technological innovation, coding, and dynamic business entrepreneurship.
-            </p>
-            <p>
-              The subsequent attempts to find the perfect educational roadmap were fraught with trials. He enrolled in MAAC aiming to master graphics and advanced web design. Unfortunately, he encountered heavily outdated curriculums and a stark absence of practical, real-world exposure, leading to immense dissatisfaction. Seeking a blend of business and tech, he secured admission at the prestigious MNIT Allahabad for an MBA. Yet again, he realized the distinct lack of a dedicated IT-focused stream that aligned with his modern tech ambitions, prompting him to drop out. These bold rejections of mismatched systems solidified his resolve to educate himself through independent real-world execution.
-            </p>
-          </div>
-        </motion.div>
+          <motion.h1
+            variants={itemVars}
+            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-title uppercase tracking-tight mb-8 leading-tight"
+          >
+            Technology, Strategy &amp; Ideas That Create <span className="text-primary">Real-World Impact.</span>
+          </motion.h1>
 
-        {/* Story Section 3: Corporate Realities and the Noida Transition */}
-        <motion.div variants={fadeIn} className="bg-layer border border-layer-border rounded-4xl p-8 md:p-12 mb-10 shadow-lg">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 shrink-0">
-              <Briefcase size={28} />
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-title">Career Transition & Corporate Mastery</h2>
-          </div>
-          <div className="space-y-6 text-foreground text-lg leading-relaxed">
-            <p>
-              By 2022, fueled by the unwavering objective to become entirely financially independent and plunge directly into the industry, Devraj relocated from his hometown to the bustling technology hub of Delhi/Noida. The metropolitan landscape offered precisely the competitive momentum he sought.
-            </p>
-            <p>
-              His professional trajectory accelerated when he initiated his corporate stint at <strong>AJIO</strong>. Joining as an Executive, his innate technical troubleshooting capabilities and structured leadership mentality quickly set him apart from his peers. In a mere span of 6 months, he was deservedly promoted to a Team Leader role, a position where he actively managed operations, streamlined workflows, and maximized team productivity for 9 successful months. The corporate ecosystem armed him with indispensable problem-solving metrics and team scalability tactics. 
-            </p>
-            <p>
-              However, sitting within a corporate ladder wasn&apos;t the endgame. His entrepreneurial itch culminated when he took a massive leap, co-founding a Voice Process Outsourcing (VPO) company named <strong>&quot;Route 2 Shine&quot;</strong> stationed in Noida. As a co-founder, Devraj heavily shouldered all IT-related operations. Setting up complex networking infrastructures, managing backend technological requirements, and engineering out software anomalies became his daily routine, cementing his capability to single-handedly construct digital business foundations.
-            </p>
-          </div>
-        </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Bio Column */}
+            <motion.div variants={itemVars} className="lg:col-span-8 space-y-6 text-base sm:text-lg text-foreground/90 leading-relaxed">
+              <p>
+                I&apos;m <strong>Devraj Singh Tomar</strong>, a Technology Strategist &amp; Entrepreneur working at the intersection of technology, business and digital innovation. My focus is understanding complex problems, shaping practical solutions and leading digital initiatives from concept to execution.
+              </p>
+              <p>
+                Over the past 7+ years, I have directed and engineered scalable web ecosystems, high-concurrency examination software, and digital transformation platforms for over <strong>60+ enterprise and institutional clients</strong>—ranging from 7 Government Medical Colleges to healthcare clinics, law firms, and high-growth consumer startups.
+              </p>
+              <p>
+                My philosophy is simple: technology should serve business goals, not vanity metrics. Whether optimizing sub-second Core Web Vitals or designing zero-trust inquiry pipelines, I combine technical architecture with commercial pragmatism.
+              </p>
 
-        {/* Story Section 4: Entrepreneurial Heights and Next.js Expertise */}
-        <motion.div variants={fadeIn} className="bg-layer/40 border border-layer-border rounded-4xl p-8 md:p-12 mb-12 relative overflow-hidden">
-          <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10"></div>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-500 shrink-0">
-              <Zap size={28} />
-            </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-title">The Entrepreneurial Journey & Scaling Brands</h2>
-          </div>
-          <div className="space-y-6 text-foreground text-lg leading-relaxed">
-            <p>
-              The quest for broader impact led Devraj to work remotely alongside Vipin Singh based in Pratapgarh for a rapidly growing firm, <strong>M/S Career Avsar</strong>. It was here that Devraj&apos;s technical capabilities expanded into an enterprise-grade spectrum. Taking on immense responsibility, he seamlessly blended his roles as an expert <strong>Next.js Developer India</strong> and a strategic <strong>IT Project Manager India</strong>. 
-            </p>
-            <p>
-              At career Avsar, Devraj took total command of critical digital pillars: comprehensive Website Development prioritizing high performance, holistic SEO Optimization engineered to dominate search rankings, and targeted Social Media Management intended to drastically scale online visibility. 
-            </p>
-            <p>
-              His execution at M/S Career Avsar yielded monumental achievements. He meticulously directed the web development and digital structuring for <strong>7 distinct Government Medical Colleges</strong>, a task demanding unparalleled security protocols, accessibility standards, and robust architectural planning. Furthermore, he successfully handled over <strong>40+ robust client projects</strong>, ranging from dynamic corporate identities to scaling operational portals, establishing a rock-solid track record of trust and delivery.
-            </p>
-            <p className="font-semibold text-primary mt-6">
-              Empowered by this massive operational success, in September 2025, Devraj embarked on a new flagship venture by co-founding &quot;Lotus Loop Media Solution&quot; in Noida, joining forces with Tushar Nagpal.
-            </p>
-            <p>
-              Currently, Devraj Singh Tomar is an instrumental powerhouse acting in a dual capacity. As a key player and IT Project Manager for both M/S Career Avsar and Lotus Loop Media Solution, he flawlessly orchestrates the synergy between high-end technical developments—such as complex React and Next.js ecosystems—and large-scale digital executions.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Personal Life & Closing Storyline */}
-        <motion.div variants={fadeIn} className="mb-16">
-          <div className="bg-layer border border-layer-border rounded-4xl p-8 md:p-12 shadow-md">
-             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-500">
-                <Users size={24} />
-              </div>
-              <h3 className="text-2xl font-bold text-title">A Touch of Personal Philosophy</h3>
-            </div>
-            <p className="text-foreground text-lg leading-relaxed">
-              Devraj&apos;s story isn&apos;t just painted with professional milestones; it is deeply rooted in personal integrity. Amidst the chaos of building businesses, mastering frameworks, and shifting cities, he maintained immense dedication to his personal life. After committing to a long-term relationship, he patiently and respectfully navigated the emotional complexities of convincing two distinct families for marriage. This journey reflects a man capable of bearing extreme responsibility, emphasizing that true leadership is demonstrated just as much at home through empathy and patience as it is in the boardroom through strategy and technology.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Skills & Achievements Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-          <motion.div variants={fadeIn} className="bg-layer border border-layer-border rounded-4xl p-8 hover:shadow-xl transition-shadow duration-300">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-                <Code2 size={24} />
-              </div>
-              <h2 className="text-2xl font-bold text-title">Technical Canvas & Expertise</h2>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {skills.map((skill, idx) => (
-                <span 
-                  key={idx}
-                  className="px-4 py-2.5 rounded-xl bg-layer-border/30 border border-layer-border text-foreground font-medium hover:bg-primary/10 hover:text-primary hover:border-primary/40 transition-all cursor-default"
-                >
-                  {skill}
+              {/* Verified Snapshot Badges */}
+              <div className="flex flex-wrap gap-3 pt-4">
+                <span className="px-3.5 py-1.5 rounded-full bg-layer/40 border border-layer-border text-xs font-semibold text-title inline-flex items-center gap-1.5">
+                  <MapPin size={13} className="text-primary" /> Jhansi / Noida / UP
                 </span>
-              ))}
-            </div>
-            <p className="mt-8 text-foreground/80 leading-relaxed">
-              Proficiency as an <strong>IT Project Manager India</strong> isn&apos;t just about managing teams; it&apos;s about deeply understanding the code. From high-speed <strong>Next.js</strong> frontends offering flawless Server-Side Rendering to optimizing organic SEO channels that act as lead generation engines, the technical stack is engineered purposely for business growth. 
-            </p>
-          </motion.div>
-
-          <motion.div variants={fadeIn} className="bg-layer border border-layer-border rounded-4xl p-8 hover:shadow-xl transition-shadow duration-300">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500">
-                <CheckCircle2 size={24} />
+                <span className="px-3.5 py-1.5 rounded-full bg-layer/40 border border-layer-border text-xs font-semibold text-title inline-flex items-center gap-1.5">
+                  <Calendar size={13} className="text-primary" /> Active Since 2018
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-layer/40 border border-layer-border text-xs font-semibold text-title inline-flex items-center gap-1.5">
+                  <Server size={13} className="text-primary" /> 60+ Web Systems Delivered
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-layer/40 border border-layer-border text-xs font-semibold text-title inline-flex items-center gap-1.5">
+                  <Award size={13} className="text-primary" /> 7 Medical Colleges Scaled
+                </span>
               </div>
-              <h2 className="text-2xl font-bold text-title">Landmark Achievements</h2>
-            </div>
-            <div className="space-y-5">
-              {achievements.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-4 p-4 rounded-xl bg-layer border border-layer-border/50 hover:bg-layer-border/20 transition-colors">
-                  <div className="shrink-0 mt-1">{item.icon}</div>
-                  <p className="text-foreground text-lg font-medium">{item.title}</p>
+            </motion.div>
+
+            {/* Portrait Column */}
+            <motion.div variants={itemVars} className="lg:col-span-4 flex justify-center">
+              <div className="relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl bg-layer group">
+                <Image
+                  src="/devraj-singh-tomar.jpg"
+                  alt="Devraj Singh Tomar – Technology Strategist & Entrepreneur"
+                  fill
+                  sizes="(max-width: 768px) 256px, 288px"
+                  className="object-cover object-top filter grayscale contrast-105 group-hover:grayscale-0 transition-all duration-500"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-2xl bg-background/90 backdrop-blur-md border border-layer-border text-center">
+                  <p className="text-xs font-bold text-title">Devraj Singh Tomar</p>
+                  <p className="text-[10px] uppercase font-bold text-primary tracking-wider">Technology Strategist</p>
                 </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Vision & Mission Highlight Box */}
-        <motion.div variants={fadeIn} className="bg-linear-to-br from-primary/15 via-layer to-secondary/15 border border-primary/30 rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden group shadow-2xl">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-primary/20 rounded-full blur-[100px] transition-transform duration-1000 group-hover:scale-125"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/20 rounded-full blur-[100px] transition-transform duration-1000 group-hover:scale-125"></div>
-          
-          <Target className="w-16 h-16 text-primary mx-auto mb-8 opacity-90 relative z-10" />
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-title relative z-10 tracking-tight">Vision & Mission</h2>
-          <p className="text-foreground text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto italic relative z-10 font-medium">
-            &quot;To transcend traditional coding boundaries and deliver growth-driven digital solutions. I believe in establishing a digital presence that doesn&apos;t just exist elegantly on the web, but functions as a dynamic engine—helping modern businesses radically succeed, scale operations efficiently, and dominate their online ecosystem.&quot;
-          </p>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
+      </section>
 
-      </motion.div>
+      <div className="w-full max-w-5xl mx-auto space-y-24 lg:space-y-32">
+        {/* 2. SECTION B: MY JOURNEY (Verified Milestones Timeline) */}
+        <section className="scroll-mt-32">
+          <div className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest text-primary mb-3">
+            <Rocket size={15} /> Verified Timeline
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-title uppercase tracking-tight mb-4">
+            My Journey &amp; Milestones
+          </h2>
+          <p className="text-sm sm:text-base text-foreground/80 max-w-2xl mb-12">
+            A chronological timeline of verified milestones, from early computer curiosity in rural Bundelkhand to leading enterprise technology architecture.
+          </p>
+
+          <div className="relative border-l-2 border-primary/30 ml-4 sm:ml-8 space-y-12">
+            {journeyMilestones.map((m, idx) => (
+              <div key={idx} className="relative pl-8 sm:pl-10">
+                {/* Node indicator */}
+                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+
+                <div className="p-6 sm:p-8 rounded-3xl bg-secondary/15 border border-layer-border hover:border-primary/40 transition-colors">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className="text-xs font-bold uppercase tracking-wider text-primary px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                      {m.period}
+                    </span>
+                    <span className="text-xs font-semibold text-foreground/50 flex items-center gap-1">
+                      <MapPin size={12} /> {m.location}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-bold text-title mb-3">{m.title}</h3>
+                  <p className="text-sm sm:text-base text-foreground/85 leading-relaxed">{m.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 3. SECTION C: MY PHILOSOPHY */}
+        <section className="scroll-mt-32 p-8 lg:p-14 rounded-4xl bg-primary/5 border border-primary/20">
+          <div className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest text-primary mb-3">
+            <Lightbulb size={15} /> Core Philosophy
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-title uppercase tracking-tight mb-4">
+            My Approach to Technology &amp; Engineering
+          </h2>
+          <p className="text-sm sm:text-base text-foreground/80 max-w-2xl mb-10">
+            Guiding principles that dictate how I evaluate business problems, architect systems, and lead product executions.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {philosophyPrinciples.map((p, idx) => (
+              <div
+                key={idx}
+                className="p-6 sm:p-8 rounded-3xl bg-background border border-layer-border flex flex-col justify-between"
+              >
+                <div>
+                  <span className="text-2xl font-black text-primary/40 font-mono block mb-2">{p.num}</span>
+                  <h3 className="text-lg font-bold text-title mb-3">{p.title}</h3>
+                  <p className="text-xs sm:text-sm text-foreground/85 leading-relaxed">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 4. SECTION D: PROFESSIONAL EXPERIENCE */}
+        <section className="scroll-mt-32">
+          <div className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest text-primary mb-3">
+            <Briefcase size={15} /> Track Record
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-title uppercase tracking-tight mb-4">
+            Verified Professional Experience
+          </h2>
+          <p className="text-sm sm:text-base text-foreground/80 max-w-2xl mb-12">
+            Documented roles and key contributions across digital agencies, corporate operations, and educational technology partnerships.
+          </p>
+
+          <div className="space-y-6">
+            {experienceEntries.map((exp, idx) => (
+              <div
+                key={idx}
+                className="p-8 rounded-3xl bg-secondary/15 border border-layer-border hover:border-primary/40 transition-colors"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-title">{exp.organization}</h3>
+                    <p className="text-sm font-bold text-primary">{exp.role}</p>
+                  </div>
+                  <div className="text-xs font-semibold text-foreground/60 text-left sm:text-right">
+                    <div>{exp.period}</div>
+                    <div>{exp.location}</div>
+                  </div>
+                </div>
+
+                <p className="text-sm text-foreground/85 leading-relaxed mb-6">{exp.desc}</p>
+
+                <div className="space-y-2 mb-6">
+                  <span className="text-xs font-bold uppercase tracking-wider text-title block">
+                    Key Contributions:
+                  </span>
+                  <ul className="space-y-2">
+                    {exp.contributions.map((c, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-foreground/85">
+                        <CheckCircle2 size={15} className="text-primary shrink-0 mt-0.5" />
+                        <span>{c}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {exp.link && (
+                  <div className="pt-4 border-t border-layer-border flex justify-end">
+                    <a
+                      href={exp.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-title hover:text-primary transition-colors"
+                    >
+                      <span>Visit Organization</span>
+                      <ExternalLink size={13} />
+                    </a>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 5. SECTION E: PERSONAL APPROACH NARRATIVE */}
+        <section className="scroll-mt-32 p-8 lg:p-12 rounded-4xl bg-secondary/20 border border-layer-border">
+          <div className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest text-primary mb-3">
+            <Heart size={15} /> Personal Values
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-title uppercase tracking-tight mb-6">
+            How I Approach People, Teams &amp; Leadership
+          </h2>
+
+          <div className="space-y-6 text-sm sm:text-base text-foreground/90 leading-relaxed">
+            <p>
+              My journey has reinforced that technical capability is only half the equation of leadership. True progress is anchored in personal integrity, patience, and transparent accountability. Having built businesses from the ground up while shifting across cities, I know that resilience under pressure matters far more than theoretical credentials.
+            </p>
+            <p>
+              When working with teams and clients, I prioritize empathy, absolute clarity, and mutual respect. I do not hide behind jargon or make promises that technology cannot deliver. Whether mentoring junior developers, coordinating with medical college administrators, or consulting with corporate attorneys, I treat every stakeholder relationship as a long-term partnership founded on trust.
+            </p>
+          </div>
+        </section>
+
+        {/* 6. SECTION F: CROSS-LINKING & STRATEGIC CTA */}
+        <section className="bg-primary rounded-[3rem] p-10 lg:p-16 text-center relative overflow-hidden">
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <span className="text-xs font-black uppercase tracking-widest text-[#222222] block mb-3">
+              Next Steps
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#111111] uppercase tracking-tight mb-4">
+              Explore More of My Work
+            </h2>
+            <p className="text-[#222222] font-medium text-sm sm:text-base mb-8">
+              Inspect the practical systems, technical capabilities, and business ventures I&apos;ve helped build.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="/expertise"
+                className="px-7 py-3.5 rounded-full bg-[#111111] text-white hover:bg-white hover:text-[#111111] font-bold text-xs uppercase tracking-widest transition-all"
+              >
+                View Expertise
+              </Link>
+              <Link
+                href="/case-studies"
+                className="px-7 py-3.5 rounded-full bg-transparent border-2 border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white font-bold text-xs uppercase tracking-widest transition-all"
+              >
+                Case Studies
+              </Link>
+              <Link
+                href="/ventures"
+                className="px-7 py-3.5 rounded-full bg-transparent border-2 border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white font-bold text-xs uppercase tracking-widest transition-all"
+              >
+                My Ventures
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
-

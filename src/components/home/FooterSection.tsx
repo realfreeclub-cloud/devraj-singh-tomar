@@ -11,6 +11,7 @@ export default function FooterSection() {
     { label: "About", href: "/about" },
     { label: "Work", href: "/case-studies" },
     { label: "Services", href: "/services" },
+    { label: "Expertise", href: "/expertise" },
     { label: "Ventures", href: "/ventures" },
     { label: "Blog", href: "/blog" },
     { label: "Hire Me", href: "/hire" },
