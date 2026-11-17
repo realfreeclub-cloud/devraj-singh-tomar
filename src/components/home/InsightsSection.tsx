@@ -7,7 +7,7 @@ import { blogPosts } from "@/app/blog/data";
 
 export default function InsightsSection() {
   return (
-    <section className="py-24 bg-secondary/30 border-y border-layer-border">
+    <section id="insights" className="py-24 bg-secondary/30 border-y border-layer-border scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -20,7 +20,7 @@ export default function InsightsSection() {
             </h2>
           </div>
           <p className="text-sm sm:text-base text-foreground/80 max-w-md">
-            Strategic essays on technology architecture, startup scaling in India, and IT project governance.
+            Published essays on technology strategy, product management, and scaling digital platforms in India.
           </p>
         </div>
 
@@ -29,23 +29,23 @@ export default function InsightsSection() {
           {blogPosts.map((post, i) => (
             <motion.article
               key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-background border border-layer-border rounded-3xl p-8 hover:border-primary/50 transition-all flex flex-col justify-between group"
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="bg-background border border-layer-border rounded-3xl p-8 hover:border-primary/50 transition-all flex flex-col justify-between group hover:-translate-y-1 duration-300"
             >
               <div>
                 <div className="flex items-center gap-3 text-xs text-foreground/60 mb-4">
-                  <span className="flex items-center gap-1">
-                    <Calendar size={13} /> {post.date}
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <Calendar size={13} className="text-primary" /> {post.date}
                   </span>
                   <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <Clock size={13} /> {post.readTime}
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <Clock size={13} className="text-primary" /> {post.readTime}
                   </span>
                   <span>•</span>
-                  <span className="text-primary font-bold uppercase tracking-wider text-[11px]">
+                  <span className="text-primary font-bold uppercase tracking-wider text-[11px] px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20">
                     {post.category}
                   </span>
                 </div>
@@ -54,7 +54,7 @@ export default function InsightsSection() {
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
 
-                <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+                <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed mb-6">
                   {post.description}
                 </p>
               </div>
@@ -69,6 +69,16 @@ export default function InsightsSection() {
               </div>
             </motion.article>
           ))}
+        </div>
+
+        {/* View All Articles Link */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary hover:underline"
+          >
+            Explore all published essays on the Blog →
+          </Link>
         </div>
       </div>
     </section>

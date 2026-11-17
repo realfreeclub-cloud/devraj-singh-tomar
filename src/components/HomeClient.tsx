@@ -1,56 +1,48 @@
 "use client";
 
 import HeroSection from "./home/HeroSection";
-import StatsSection from "./home/StatsSection";
-import FeaturedProjectsSection from "./home/FeaturedProjectsSection";
-import ExpertiseSection from "./home/ExpertiseSection";
-import CaseStudiesSection from "./home/CaseStudiesSection";
-import VenturesSection from "./home/VenturesSection";
-import MethodologySection from "./home/MethodologySection";
-import JourneySection from "./home/JourneySection";
-import TestimonialsSection from "./home/TestimonialsSection";
-import InsightsSection from "./home/InsightsSection";
+import ProfessionalSnapshotSection from "./home/ProfessionalSnapshotSection";
+import FeaturedWorkSection from "./home/FeaturedWorkSection";
+import WhatIDoSection from "./home/WhatIDoSection";
+import VenturesProductsSection from "./home/VenturesProductsSection";
+import HowIWorkSection from "./home/HowIWorkSection";
 import NowBuildingSection from "./home/NowBuildingSection";
-import CtaSection from "./home/CtaSection";
+import InsightsSection from "./home/InsightsSection";
+import ContactCtaSection from "./home/ContactCtaSection";
+import FooterSection from "./home/FooterSection";
 
 export default function HomeClient() {
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* 1. Interactive Hero */}
+      {/* Section B: Hero Section */}
       <HeroSection />
 
-      {/* 2. Professional Statistics & Achievements */}
-      <StatsSection />
+      {/* Section C: Professional Snapshot */}
+      <ProfessionalSnapshotSection />
 
-      {/* 3. Featured Projects */}
-      <FeaturedProjectsSection />
+      {/* Section D: Featured Work */}
+      <FeaturedWorkSection />
 
-      {/* 4. Technology & Business Expertise */}
-      <ExpertiseSection />
+      {/* Section E: What I Do */}
+      <WhatIDoSection />
 
-      {/* 5. Selected Deep Case Studies */}
-      <CaseStudiesSection />
+      {/* Section F: Ventures & Products */}
+      <VenturesProductsSection />
 
-      {/* 6. Business Ventures */}
-      <VenturesSection />
+      {/* Section G: How I Work */}
+      <HowIWorkSection />
 
-      {/* 7. Working Methodology */}
-      <MethodologySection />
-
-      {/* 8. Professional Journey */}
-      <JourneySection />
-
-      {/* 9. Verified Testimonials */}
-      <TestimonialsSection />
-
-      {/* 10. Latest Insights */}
-      <InsightsSection />
-
-      {/* 11. Current Projects (Now Building) */}
+      {/* Section H: Now Building */}
       <NowBuildingSection />
 
-      {/* 12. Collaboration CTA */}
-      <CtaSection />
+      {/* Section I: Insights */}
+      <InsightsSection />
+
+      {/* Section J: Contact CTA */}
+      <ContactCtaSection />
+
+      {/* Section K: Footer */}
+      <FooterSection />
     </div>
   );
 }
