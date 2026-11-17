@@ -1,0 +1,28 @@
+{
+  "heroHeadline": "Turning Ideas Into Digital Solutions That Move Businesses Forward.",
+  "heroSubheadline": "Technology strategist, product architect, and entrepreneur working at the intersection of business, code, and digital systems.",
+  "availabilityText": "Available for Technology Consulting & High-Impact Projects",
+  "isAvailable": true,
+  "primaryCtaText": "Let's Discuss a Project",
+  "primaryCtaLink": "/contact",
+  "secondaryCtaText": "Explore My Work",
+  "secondaryCtaLink": "#featured-work",
+  "featuredProjectSlugs": [
+    "ngit-edu",
+    "divyajap",
+    "lexink-legal",
+    "maz-dialysis-center",
+    "idps-pratapgarh",
+    "the-home-shifting"
+  ],
+  "sectionVisibility": {
+    "snapshot": true,
+    "featuredWork": true,
+    "whatIDo": true,
+    "ventures": true,
+    "howIWork": true,
+    "nowBuilding": true,
+    "insights": true,
+    "contactCta": true
+  }
+}

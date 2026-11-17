@@ -12,7 +12,7 @@ export async function DELETE(req: NextRequest, { params }: Params) {
 
   const { id } = await params;
   const store = getCmsStore();
-  const success = store.deleteInquiry(id);
+  const success = await store.deleteInquiry(id);
 
   if (!success) {
     return NextResponse.json({ error: "Inquiry not found" }, { status: 404 });

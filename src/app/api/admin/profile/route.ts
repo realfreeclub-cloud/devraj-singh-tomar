@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  return NextResponse.json(store.getProfile());
+  const profile = await store.getProfile();
+  return NextResponse.json(profile);
 }
 
 export async function PUT(req: NextRequest) {
@@ -17,7 +18,7 @@ export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
     const store = getCmsStore();
-    const updated = store.saveProfile(body);
+    const updated = await store.saveProfile(body);
     return NextResponse.json(updated);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to update profile";

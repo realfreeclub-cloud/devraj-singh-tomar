@@ -1,0 +1,25 @@
+[
+  {
+    "id": "nb-1",
+    "title": "Vedic Sadhana AI Companion (Divya Jap)",
+    "description": "Fine-tuning localized offline Sanskrit mantra transcription models for real-time japa audio cadence evaluation.",
+    "link": "https://divyajap.com",
+    "status": "Active Sprint",
+    "progress": 85,
+    "startDate": "2026-02-01",
+    "lastUpdated": "2026-11-15",
+    "isVisible": true,
+    "displayOrder": 1
+  },
+  {
+    "id": "nb-2",
+    "title": "Autonomous Agentic SEO Telemetry",
+    "description": "Building zero-latency MCP tools that audit Core Web Vitals, Schema.org validity, and llms.txt endpoints automatically.",
+    "status": "Architecture & Testing",
+    "progress": 60,
+    "startDate": "2026-03-01",
+    "lastUpdated": "2026-11-16",
+    "isVisible": true,
+    "displayOrder": 2
+  }
+]

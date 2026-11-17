@@ -1,0 +1,74 @@
+{
+  "fullName": "Devraj Singh Tomar",
+  "title": "Technology Strategist & Entrepreneur",
+  "shortBio": "I turn business ideas into practical technology solutions and scalable digital products.",
+  "detailedBio": "Working at the intersection of technology, business and digital innovation. Over 7+ years of track record building and managing mission-critical digital platforms across India.",
+  "profileImage": "/devraj-singh-tomar.jpg",
+  "location": "Kudri (Jhansi) / Noida, UP",
+  "experienceYears": "7+ Years",
+  "milestones": [
+    {
+      "period": "Early Roots",
+      "title": "Roots, Family Support & Early Curiosity",
+      "location": "Kudri, Jhansi (UP)",
+      "desc": "First in village to study computers; daily 6 AM bike rides with father.",
+      "badge": "Foundations"
+    },
+    {
+      "period": "2014 – 2016",
+      "title": "Academic Milestones & The Unconventional Choice",
+      "location": "Orai & Prayagraj",
+      "desc": "Cleared Air Force defense exams; chose technology entrepreneurship.",
+      "badge": "Pivotal Decision"
+    },
+    {
+      "period": "2018 – 2022",
+      "title": "EdTech Systems & Professional Digital Practice",
+      "location": "Uttar Pradesh",
+      "desc": "Architected government exam software and regional school communication hubs.",
+      "badge": "Industry Entry"
+    },
+    {
+      "period": "2022 – Present",
+      "title": "Enterprise Systems, High-Concurrency & Leadership",
+      "location": "Noida / National",
+      "desc": "Leading high-scale e-commerce support operations and multi-tier enterprise platforms.",
+      "badge": "Strategic Advisory"
+    }
+  ],
+  "philosophy": [
+    {
+      "num": "01",
+      "title": "Problem Before Technology",
+      "desc": "Never deploy a framework until the unit economics and user workflow demand it."
+    },
+    {
+      "num": "02",
+      "title": "Architect for Reality",
+      "desc": "Build systems that perform flawlessly under low bandwidth and real human constraints."
+    },
+    {
+      "num": "03",
+      "title": "Tech Serving Business",
+      "desc": "Ensure every architectural choice serves commercial objectives."
+    }
+  ],
+  "socialLinks": [
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/in/devraj-singh-tomar-it/"
+    },
+    {
+      "name": "GitHub",
+      "href": "https://github.com/realfreeclub-cloud"
+    },
+    {
+      "name": "Dev.to",
+      "href": "https://dev.to/devraj_singh_tomar"
+    },
+    {
+      "name": "Medium",
+      "href": "https://medium.com/@devrajsinghtomar"
+    }
+  ]
+}

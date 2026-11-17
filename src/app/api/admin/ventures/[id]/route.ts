@@ -12,7 +12,7 @@ export async function DELETE(req: NextRequest, { params }: Params) {
 
   const { id } = await params;
   const store = getCmsStore();
-  const success = store.deleteVenture(id);
+  const success = await store.deleteVenture(id);
 
   if (!success) {
     return NextResponse.json({ error: "Venture not found" }, { status: 404 });

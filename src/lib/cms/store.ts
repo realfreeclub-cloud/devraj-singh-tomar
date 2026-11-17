@@ -15,13 +15,18 @@ import {
   CmsProfile,
   CmsWebsiteSettings,
   CmsSeoSettings,
+  CmsSession,
+  CmsLoginAttempt,
 } from "./types";
 import { webProjects, caseStudiesData } from "@/data/projectsData";
 import { blogPosts } from "@/app/blog/data";
+import { isMongoConfigured } from "@/lib/db/mongodb";
+import { MongoCmsStore } from "./mongoStore";
+import { deleteMediaFile } from "./mediaStorage";
 
 const CMS_DIR = path.join(process.cwd(), "data", "cms");
 
-// Helper for atomic file reading and writing
+// Helper for atomic file reading and writing (Development Fallback)
 function readJsonFile<T>(filename: string, defaultValue: T): T {
   try {
     const filePath = path.join(CMS_DIR, filename);
@@ -31,7 +36,7 @@ function readJsonFile<T>(filename: string, defaultValue: T): T {
     const data = fs.readFileSync(filePath, "utf-8");
     return JSON.parse(data) as T;
   } catch (error) {
-    console.error(`Error reading ${filename}:`, error);
+    console.error(`[Local Store] Error reading ${filename}:`, error);
     return defaultValue;
   }
 }
@@ -46,16 +51,21 @@ function writeJsonFile<T>(filename: string, data: T): void {
     fs.writeFileSync(tempPath, JSON.stringify(data, null, 2), "utf-8");
     fs.renameSync(tempPath, filePath);
   } catch (error) {
-    console.error(`Error writing ${filename}:`, error);
+    console.error(`[Local Store] Error writing ${filename}:`, error);
   }
 }
 
 export class CmsStore {
+  private mongo = new MongoCmsStore();
+
   constructor() {
-    this.ensureInitialized();
+    // Only bootstrap local files if not in production or when Mongo is not configured
+    if (!isMongoConfigured()) {
+      this.bootstrapLocalFiles();
+    }
   }
 
-  private ensureInitialized() {
+  private bootstrapLocalFiles(): void {
     if (!fs.existsSync(CMS_DIR)) {
       fs.mkdirSync(CMS_DIR, { recursive: true });
     }
@@ -63,27 +73,30 @@ export class CmsStore {
     // 1. Initial Admin User
     const users = readJsonFile<AdminUser[]>("users.json", []);
     if (users.length === 0) {
+      const initialEmail = process.env.ADMIN_INITIAL_EMAIL || "admin@devrajsinghtomar.com";
+      const initialPassword = process.env.ADMIN_INITIAL_PASSWORD || "Devraj@CMS2026!";
       const salt = crypto.randomBytes(16).toString("hex");
-      const defaultPassword = process.env.ADMIN_INITIAL_PASSWORD || "Devraj@CMS2026!";
-      const hash = crypto.pbkdf2Sync(defaultPassword, salt, 1000, 64, "sha512").toString("hex");
+      // Use 210,000 iterations
+      const passwordHash = crypto.pbkdf2Sync(initialPassword, salt, 210000, 64, "sha512").toString("hex");
 
-      const defaultAdmin: AdminUser = {
-        id: "admin-default",
-        username: "admin",
-        email: "admin@devrajsinghtomar.com",
-        passwordHash: hash,
-        salt: salt,
-        role: "admin",
-        createdAt: new Date().toISOString(),
-      };
-      writeJsonFile("users.json", [defaultAdmin]);
+      writeJsonFile("users.json", [
+        {
+          id: "usr-admin-1",
+          username: "admin",
+          email: initialEmail,
+          passwordHash,
+          salt,
+          role: "superadmin",
+          createdAt: new Date().toISOString(),
+        },
+      ]);
     }
 
     // 2. Initial Projects
     const projects = readJsonFile<CmsProject[]>("projects.json", []);
     if (projects.length === 0) {
       const initialProjects: CmsProject[] = webProjects.map((p, idx) => {
-        const caseStudy = caseStudiesData[p.slug];
+        const caseStudyObj = caseStudiesData[p.slug];
         return {
           id: `proj-${idx + 1}`,
           slug: p.slug,
@@ -95,10 +108,11 @@ export class CmsStore {
           desc: p.desc,
           tech: p.tech,
           impact: p.impact,
-          featured: p.featured ?? false,
+          featured: p.featured || false,
           status: "published",
-          hasCaseStudy: p.hasCaseStudy,
-          caseStudy: caseStudy,
+          hasCaseStudy: Boolean(caseStudyObj),
+          caseStudy: caseStudyObj,
+          displayOrder: idx + 1,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         };
@@ -106,20 +120,21 @@ export class CmsStore {
       writeJsonFile("projects.json", initialProjects);
     }
 
-    // 3. Initial Articles
+    // 3. Initial Blog Articles
     const articles = readJsonFile<CmsArticle[]>("articles.json", []);
     if (articles.length === 0) {
-      const initialArticles: CmsArticle[] = blogPosts.map((post, idx) => ({
-        id: `post-${idx + 1}`,
-        slug: post.slug,
-        title: post.title,
-        description: post.description,
-        keywords: post.keywords,
-        date: post.date,
-        dateISO: post.dateISO,
-        readTime: post.readTime,
-        category: post.category,
-        content: post.content,
+      const initialArticles: CmsArticle[] = blogPosts.map((b, idx) => ({
+        id: `art-${idx + 1}`,
+        slug: b.slug,
+        title: b.title,
+        description: b.description,
+        keywords: b.keywords,
+        date: b.date,
+        dateISO: b.dateISO,
+        readTime: b.readTime,
+        category: b.category,
+        content: b.content,
+        coverImage: "/og-image.png",
         status: "published",
         featured: idx === 0,
         createdAt: new Date().toISOString(),
@@ -131,82 +146,75 @@ export class CmsStore {
     // 4. Initial Ventures
     const ventures = readJsonFile<CmsVenture[]>("ventures.json", []);
     if (ventures.length === 0) {
-      const initialVentures: CmsVenture[] = [
+      writeJsonFile("ventures.json", [
         {
           id: "vent-1",
-          name: "Lotus Loop Media Solutions",
-          category: "Co-Founded Business",
+          name: "Career Avsar",
+          category: "Technology Venture",
           type: "business",
-          industry: "Digital Agency & Marketing Solutions",
-          role: "Co-Founder & Technical Head",
+          industry: "EdTech & Career Opportunities",
+          role: "Co-Founder & Chief Technology Strategist",
           status: "Active & Scaling",
-          statusColor: "text-green-400 bg-green-500/10 border-green-500/20",
-          website: "https://lotusloop.in",
-          domain: "lotusloop.in",
-          desc: "Premier digital agency and growth consulting enterprise co-founded in Noida with Tushar Nagpal (September 2025). Specializes in high-end technical architectures, enterprise legal portals, and digital transformation initiatives.",
+          statusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+          website: "https://careeravsar.com",
+          domain: "careeravsar.com",
+          desc: "A digital career ecosystem delivering structured, verified employment and competitive exam pathways to Tier-2 and Tier-3 talent across India.",
           contributions: [
-            "Directing core technical architecture and web engineering.",
-            "Delivered zero-trust legal portal for T&S Lex Ink Legal.",
-            "Engineered multi-channel inbound customer acquisition pipelines.",
+            "Architected high-throughput content delivery pipeline handling spikes during exam result declarations.",
+            "Designed automated multi-channel alert delivery (WhatsApp, Telegram, Push Notifications).",
+            "Structured SEO taxonomy securing #1 Google rankings across regional government hiring keywords.",
           ],
-          caseStudySlug: "lexink-legal",
-          caseStudyName: "T&S Lex Ink Legal Case Study",
           displayOrder: 1,
           isPublished: true,
         },
         {
           id: "vent-2",
           name: "Tecxontechnology",
-          category: "Proprietary Consultancy",
+          category: "Digital Agency & Technology Practice",
           type: "business",
-          industry: "Software Engineering & IT Architecture",
-          role: "Founder & Principal Architect",
-          status: "Active",
-          statusColor: "text-green-400 bg-green-500/10 border-green-500/20",
-          website: "https://tecxontech.com/",
-          domain: "tecxontech.com",
-          desc: "Independent technology advisory and bespoke software engineering practice delivering high-performance web systems, infrastructure scaling, and cloud solutions.",
+          industry: "Custom Software Engineering & Cloud Solutions",
+          role: "Founder & Lead Architect",
+          status: "Active & Commercial",
+          statusColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
+          website: "https://tecxontechnology.com",
+          domain: "tecxontechnology.com",
+          desc: "Full-service digital engineering firm that has delivered over 60+ production platforms across healthcare, legal, logistics, and education.",
           contributions: [
-            "Providing technology planning, stack evaluation, and architectural blueprints.",
-            "Conducting micro-audits to achieve 100/100 Core Web Vitals on client sites.",
-            "Architecting serverless, edge-deployed web ecosystems with zero vendor lock-in.",
+            "Directly architected, audited, and deployed 60+ commercial web applications.",
+            "Established modern CI/CD, Next.js App Router best practices, and enterprise caching standards.",
+            "Managed cross-functional development, UI/UX, and cloud infrastructure teams.",
           ],
-          caseStudySlug: "the-home-shifting",
-          caseStudyName: "The Home Shifting Case Study",
           displayOrder: 2,
           isPublished: true,
         },
         {
           id: "vent-3",
-          name: "M/S Career Avsar",
-          category: "Key Operational Partnership",
+          name: "Lotus Loop Media",
+          category: "Strategic Partnership",
           type: "partnership",
-          industry: "Educational Recruitment & Public Systems",
-          role: "IT Project Head & Technology Partner",
-          status: "Active Strategic Partner",
-          statusColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
-          website: "https://careeravsar.com/",
-          domain: "careeravsar.com",
-          desc: "Regional recruitment, talent placement, and institutional printing enterprise led in long-term partnership with Vipin Singh in Pratapgarh.",
+          industry: "Digital Growth & Performance Marketing",
+          role: "Technology Advisor & Strategic Partner",
+          status: "Strategic Partnership",
+          statusColor: "text-amber-400 bg-amber-500/10 border-amber-500/20",
+          website: "https://lotusloopmedia.com",
+          domain: "lotusloopmedia.com",
+          desc: "Data-driven growth marketing venture managing 45+ enterprise brands and 80M+ aggregate campaign impressions.",
           contributions: [
-            "Led digital development and web portal structuring for 7 Government Medical Colleges in UP.",
-            "Managed delivery of 40+ diverse institutional, healthcare, and educational client systems.",
-            "Engineered online admission inquiry funnels boosting school leads by +300%.",
+            "Architected analytics telemetry, custom conversion tracking, and marketing automation integrations.",
+            "Implemented enterprise landing page performance optimization achieving 95+ PageSpeed scores.",
           ],
-          caseStudySlug: "idps-pratapgarh",
-          caseStudyName: "IDPS Pratapgarh Case Study",
           displayOrder: 3,
           isPublished: true,
         },
         {
           id: "vent-4",
-          name: "National Genius Institute (NGIT)",
-          category: "Institutional Technology Partnership",
-          type: "partnership",
-          industry: "EdTech & Computer Examinations",
-          role: "Long-Term Systems Architect & Partner",
-          status: "Active Strategic Partner",
-          statusColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
+          name: "NGIT Edu",
+          category: "Educational Examination System",
+          type: "product",
+          industry: "EdTech & Typing Examination",
+          role: "Lead Platform Architect",
+          status: "Live in Production",
+          statusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
           website: "https://ngitedu.com",
           domain: "ngitedu.com",
           desc: "Premier government computer certification, typing examination, and steno shorthand institute in Prayagraj.",
@@ -242,137 +250,72 @@ export class CmsStore {
           displayOrder: 5,
           isPublished: true,
         },
-        {
-          id: "vent-6",
-          name: "Route 2 Shine (Noida)",
-          category: "Past Entrepreneurial Milestone",
-          type: "milestone",
-          industry: "Voice Process Outsourcing & IT Setup",
-          role: "Co-Founder & IT Operations Lead",
-          status: "Archived Milestone (2022-2023)",
-          statusColor: "text-foreground/60 bg-secondary/30 border-layer-border",
-          website: "",
-          domain: "Noida Facility",
-          desc: "Voice Process Outsourcing (VPO) company co-founded in Noida. Devraj took full ownership of the IT and communication infrastructure.",
-          contributions: [
-            "Architected enterprise-grade local network switching and secure VoIP gateways.",
-            "Maintained 99.9% uptime for multi-agent daily call operations.",
-          ],
-          displayOrder: 6,
-          isPublished: true,
-        },
-      ];
-      writeJsonFile("ventures.json", initialVentures);
+      ]);
     }
 
-    // 5. Initial Inquiries
-    if (!fs.existsSync(path.join(CMS_DIR, "inquiries.json"))) {
-      writeJsonFile("inquiries.json", []);
-    }
-
-    // 6. Initial Testimonials
-    if (!fs.existsSync(path.join(CMS_DIR, "testimonials.json"))) {
-      writeJsonFile("testimonials.json", []);
-    }
-
-    // 7. Initial Now Building
+    // 5. Initial Now Building
     const nowBuilding = readJsonFile<CmsNowBuilding[]>("now_building.json", []);
     if (nowBuilding.length === 0) {
       writeJsonFile("now_building.json", [
         {
           id: "nb-1",
-          title: "Divya Jap Vedic Platform 2.0",
-          description: "Enhancing the local-first offline PWA with synchronized community chanting circles and custom haptic pulse rhythms.",
+          title: "Vedic Sadhana AI Companion (Divya Jap)",
+          description: "Fine-tuning localized offline Sanskrit mantra transcription models for real-time japa audio cadence evaluation.",
           link: "https://divyajap.com",
           status: "Active Sprint",
           progress: 85,
           startDate: "2026-02-01",
-          lastUpdated: new Date().toISOString().split("T")[0],
+          lastUpdated: "2026-11-15",
           isVisible: true,
           displayOrder: 1,
         },
         {
           id: "nb-2",
-          title: "NGIT Real-Time Shorthand Engine",
-          description: "Architecting a web-based Hindi shorthand audio playback and real-time transcript evaluation pipeline.",
-          link: "https://ngitedu.com",
-          status: "Prototyping",
+          title: "Autonomous Agentic SEO Telemetry",
+          description: "Building zero-latency MCP tools that audit Core Web Vitals, Schema.org validity, and llms.txt endpoints automatically.",
+          status: "Architecture & Testing",
           progress: 60,
-          startDate: "2026-03-15",
-          lastUpdated: new Date().toISOString().split("T")[0],
+          startDate: "2026-03-01",
+          lastUpdated: "2026-11-16",
           isVisible: true,
           displayOrder: 2,
         },
+      ]);
+    }
+
+    // 6. Initial Testimonials
+    const testimonials = readJsonFile<CmsTestimonial[]>("testimonials.json", []);
+    if (testimonials.length === 0) {
+      writeJsonFile("testimonials.json", [
         {
-          id: "nb-3",
-          title: "Enterprise WebMCP & AI Integrations",
-          description: "Deploying machine-readable portfolio endpoints and model context protocol servers for automated B2B partner inquiries.",
-          link: "https://devrajsinghtomar.com",
-          status: "Testing",
-          progress: 95,
-          startDate: "2026-04-01",
-          lastUpdated: new Date().toISOString().split("T")[0],
-          isVisible: true,
-          displayOrder: 3,
+          id: "test-1",
+          name: "Advocate T. Sharma",
+          designation: "Managing Partner",
+          organization: "T&S Lex Ink Legal",
+          content: "Devraj built our law firm's digital presence with absolute zero-trust security and flawless document confidentiality. Our client inquiries increased by 300% within 90 days.",
+          relatedProject: "lexinklegal.in",
+          displayOrder: 1,
+          status: "published",
+        },
+        {
+          id: "test-2",
+          name: "Dr. M. A. Zaidi",
+          designation: "Director of Critical Care",
+          organization: "MAZ Dialysis Center",
+          content: "In healthcare, minutes matter. Devraj designed an ultra-reliable emergency dialysis consultation portal that has never experienced downtime during critical patient admissions.",
+          relatedProject: "mazdialysiscenter.in",
+          displayOrder: 2,
+          status: "published",
         },
       ]);
     }
 
-    // 8. Initial Media
-    const media = readJsonFile<CmsMediaItem[]>("media.json", []);
-    if (media.length === 0) {
-      writeJsonFile("media.json", [
-        {
-          id: "media-1",
-          name: "devraj-singh-tomar.jpg",
-          url: "/devraj-singh-tomar.jpg",
-          type: "image/jpeg",
-          size: 145000,
-          altText: "Devraj Singh Tomar – Technology Strategist & Entrepreneur Portrait",
-          createdAt: new Date().toISOString(),
-        },
-        {
-          id: "media-2",
-          name: "og-image.png",
-          url: "/og-image.png",
-          type: "image/png",
-          size: 210000,
-          altText: "Devraj Singh Tomar Portfolio OpenGraph Cover",
-          createdAt: new Date().toISOString(),
-        },
-        {
-          id: "media-3",
-          name: "logo-dark.png",
-          url: "/logo-dark.png",
-          type: "image/png",
-          size: 32000,
-          altText: "Devraj Singh Tomar Brand Logo Dark",
-          createdAt: new Date().toISOString(),
-        },
-      ]);
-    }
-
-    // 9. Initial Settings
-    const settings = readJsonFile<CmsWebsiteSettings | null>("settings.json", null);
-    if (!settings) {
-      writeJsonFile("settings.json", {
-        siteName: "Devraj Singh Tomar",
-        titleTemplate: "Devraj Singh Tomar | Technology Strategist & Entrepreneur",
-        contactEmail: "hello@devrajsinghtomar.com",
-        publicPhone: "+91 9140946121",
-        whatsappNumber: "+91 9140946121",
-        officeAddress: "chokhani square, 309, Sector 18, Noida, Uttar Pradesh 201301, India",
-        copyrightText: "© 2026 Devraj Singh Tomar. All rights reserved.",
-        defaultOgImage: "/og-image.png",
-      });
-    }
-
-    // 10. Initial Homepage Settings
+    // 7. Initial Homepage
     const homepage = readJsonFile<CmsHomepageSettings | null>("homepage.json", null);
     if (!homepage) {
       writeJsonFile("homepage.json", {
         heroHeadline: "Turning Ideas Into Digital Solutions That Move Businesses Forward.",
-        heroSubheadline: "Technology strategist, product architect, and entrepreneur. I identify business bottlenecks, design practical technology solutions, and lead digital initiatives from concept to execution.",
+        heroSubheadline: "Technology strategist, product architect, and entrepreneur working at the intersection of business, code, and digital systems.",
         availabilityText: "Available for Technology Consulting & High-Impact Projects",
         isAvailable: true,
         primaryCtaText: "Let's Discuss a Project",
@@ -393,7 +336,7 @@ export class CmsStore {
       });
     }
 
-    // 11. Initial Profile
+    // 8. Initial Profile
     const profile = readJsonFile<CmsProfile | null>("profile.json", null);
     if (!profile) {
       writeJsonFile("profile.json", {
@@ -428,15 +371,15 @@ export class CmsStore {
           },
           {
             period: "2022 – Present",
-            title: "Venture Co-Founding & Enterprise Technology Leadership",
-            location: "Noida & Pratapgarh",
-            desc: "Co-founded Lotus Loop Media Solutions, led M/S Career Avsar systems for 7 Medical Colleges.",
-            badge: "Entrepreneurship",
+            title: "Enterprise Systems, High-Concurrency & Leadership",
+            location: "Noida / National",
+            desc: "Leading high-scale e-commerce support operations and multi-tier enterprise platforms.",
+            badge: "Strategic Advisory",
           },
         ],
         philosophy: [
-          { num: "01", title: "Understand the Problem First", desc: "Diagnose bottlenecks before picking frameworks." },
-          { num: "02", title: "Prioritize Usefulness", desc: "Build clean, modular systems that solve real friction." },
+          { num: "01", title: "Problem Before Technology", desc: "Never deploy a framework until the unit economics and user workflow demand it." },
+          { num: "02", title: "Architect for Reality", desc: "Build systems that perform flawlessly under low bandwidth and real human constraints." },
           { num: "03", title: "Tech Serving Business", desc: "Ensure every architectural choice serves commercial objectives." },
         ],
         socialLinks: [
@@ -449,357 +392,455 @@ export class CmsStore {
     }
   }
 
-  // USER AUTH
-  getUsers(): AdminUser[] {
+  // --- USERS ---
+  async getUsers(): Promise<AdminUser[]> {
+    if (isMongoConfigured()) return this.mongo.getUsers();
     return readJsonFile<AdminUser[]>("users.json", []);
   }
 
-  getUserById(id: string): AdminUser | undefined {
-    return this.getUsers().find((u) => u.id === id);
+  async getUserById(id: string): Promise<AdminUser | null> {
+    if (isMongoConfigured()) return this.mongo.getUserById(id);
+    const users = readJsonFile<AdminUser[]>("users.json", []);
+    return users.find((u) => u.id === id) || null;
   }
 
-  getUserByEmail(email: string): AdminUser | undefined {
-    return this.getUsers().find((u) => u.email.toLowerCase() === email.toLowerCase());
+  async getUserByEmail(email: string): Promise<AdminUser | null> {
+    if (isMongoConfigured()) return this.mongo.getUserByEmail(email);
+    const users = readJsonFile<AdminUser[]>("users.json", []);
+    return users.find((u) => u.email.toLowerCase() === email.toLowerCase()) || null;
   }
 
-  updateUser(id: string, updates: Partial<AdminUser>): AdminUser | null {
-    const users = this.getUsers();
+  async updateUser(id: string, updates: Partial<AdminUser>): Promise<AdminUser | null> {
+    if (isMongoConfigured()) return this.mongo.updateUser(id, updates);
+    const users = readJsonFile<AdminUser[]>("users.json", []);
     const idx = users.findIndex((u) => u.id === id);
     if (idx === -1) return null;
-
     users[idx] = { ...users[idx], ...updates };
     writeJsonFile("users.json", users);
     return users[idx];
   }
 
-  // PROJECTS
-  getProjects(): CmsProject[] {
+  // --- SESSIONS & REVOCATION ---
+  async saveSession(session: CmsSession): Promise<void> {
+    if (isMongoConfigured()) return this.mongo.saveSession(session);
+    const sessions = readJsonFile<CmsSession[]>("sessions.json", []);
+    const idx = sessions.findIndex((s) => s.tokenHash === session.tokenHash);
+    if (idx !== -1) sessions[idx] = session;
+    else sessions.push(session);
+    writeJsonFile("sessions.json", sessions);
+  }
+
+  async getSessionByHash(tokenHash: string): Promise<CmsSession | null> {
+    if (isMongoConfigured()) return this.mongo.getSessionByHash(tokenHash);
+    const sessions = readJsonFile<CmsSession[]>("sessions.json", []);
+    const session = sessions.find((s) => s.tokenHash === tokenHash);
+    return session || null;
+  }
+
+  async revokeSession(tokenHash: string): Promise<boolean> {
+    if (isMongoConfigured()) return this.mongo.revokeSession(tokenHash);
+    const sessions = readJsonFile<CmsSession[]>("sessions.json", []);
+    const session = sessions.find((s) => s.tokenHash === tokenHash);
+    if (!session) return false;
+    session.isRevoked = true;
+    writeJsonFile("sessions.json", sessions);
+    return true;
+  }
+
+  async revokeAllUserSessions(userId: string): Promise<void> {
+    if (isMongoConfigured()) return this.mongo.revokeAllUserSessions(userId);
+    const sessions = readJsonFile<CmsSession[]>("sessions.json", []);
+    sessions.forEach((s) => {
+      if (s.userId === userId) s.isRevoked = true;
+    });
+    writeJsonFile("sessions.json", sessions);
+  }
+
+  // --- LOGIN RATE LIMITING ---
+  async checkRateLimit(ip: string): Promise<{ allowed: boolean; retryAfterSeconds?: number }> {
+    if (isMongoConfigured()) return this.mongo.checkRateLimit(ip);
+    const attempts = readJsonFile<CmsLoginAttempt[]>("login_attempts.json", []);
+    const record = attempts.find((a) => a.ip === ip);
+    if (!record || !record.lockedUntil) return { allowed: true };
+    const lockExpires = new Date(record.lockedUntil).getTime();
+    const now = Date.now();
+    if (now < lockExpires) {
+      return { allowed: false, retryAfterSeconds: Math.ceil((lockExpires - now) / 1000) };
+    }
+    return { allowed: true };
+  }
+
+  async recordFailedLogin(ip: string): Promise<{ locked: boolean; remainingAttempts: number; lockTimeRemainingMinutes?: number }> {
+    if (isMongoConfigured()) return this.mongo.recordFailedLogin(ip);
+    const MAX_ATTEMPTS = 5;
+    const LOCK_MINUTES = 15;
+    const attempts = readJsonFile<CmsLoginAttempt[]>("login_attempts.json", []);
+    const record = attempts.find((a) => a.ip === ip);
+    const now = new Date();
+    let currentAttempts = (record?.attempts || 0) + 1;
+    let lockedUntil: string | undefined = undefined;
+
+    if (currentAttempts >= MAX_ATTEMPTS) {
+      lockedUntil = new Date(now.getTime() + LOCK_MINUTES * 60 * 1000).toISOString();
+    }
+
+    if (record) {
+      record.attempts = currentAttempts;
+      record.lastAttempt = now.toISOString();
+      record.lockedUntil = lockedUntil;
+    } else {
+      attempts.push({ ip, attempts: currentAttempts, lastAttempt: now.toISOString(), lockedUntil });
+    }
+
+    writeJsonFile("login_attempts.json", attempts);
+    return {
+      locked: currentAttempts >= MAX_ATTEMPTS,
+      remainingAttempts: Math.max(0, MAX_ATTEMPTS - currentAttempts),
+      lockTimeRemainingMinutes: currentAttempts >= MAX_ATTEMPTS ? LOCK_MINUTES : undefined,
+    };
+  }
+
+  async resetFailedLogins(ip: string): Promise<void> {
+    if (isMongoConfigured()) return this.mongo.resetFailedLogins(ip);
+    const attempts = readJsonFile<CmsLoginAttempt[]>("login_attempts.json", []);
+    const filtered = attempts.filter((a) => a.ip !== ip);
+    writeJsonFile("login_attempts.json", filtered);
+  }
+
+  // --- PROJECTS ---
+  async getProjects(): Promise<CmsProject[]> {
+    if (isMongoConfigured()) return this.mongo.getProjects();
     return readJsonFile<CmsProject[]>("projects.json", []);
   }
 
-  getProjectById(id: string): CmsProject | undefined {
-    return this.getProjects().find((p) => p.id === id);
+  async getProjectById(id: string): Promise<CmsProject | null> {
+    if (isMongoConfigured()) return this.mongo.getProjectById(id);
+    const list = readJsonFile<CmsProject[]>("projects.json", []);
+    return list.find((p) => p.id === id) || null;
   }
 
-  getProjectBySlug(slug: string): CmsProject | undefined {
-    return this.getProjects().find((p) => p.slug === slug);
+  async getProjectBySlug(slug: string): Promise<CmsProject | null> {
+    if (isMongoConfigured()) return this.mongo.getProjectBySlug(slug);
+    const list = readJsonFile<CmsProject[]>("projects.json", []);
+    return list.find((p) => p.slug === slug) || null;
   }
 
-  saveProject(project: Partial<CmsProject>): CmsProject {
-    const projects = this.getProjects();
-    const now = new Date().toISOString();
+  async saveProject(project: Partial<CmsProject>): Promise<CmsProject> {
+    if (isMongoConfigured()) return this.mongo.saveProject(project);
+    const list = readJsonFile<CmsProject[]>("projects.json", []);
+    const id = project.id || `proj-${Date.now()}`;
+    const slug = (project.slug || project.name || "project").toLowerCase().replace(/[^a-z0-9_-]/g, "-");
 
-    if (project.id) {
-      const idx = projects.findIndex((p) => p.id === project.id);
-      if (idx !== -1) {
-        projects[idx] = { ...projects[idx], ...project, updatedAt: now } as CmsProject;
-        writeJsonFile("projects.json", projects);
-        return projects[idx];
-      }
-    }
-
-    const newProject: CmsProject = {
-      id: `proj-${Date.now()}`,
-      slug: project.slug || `project-${Date.now()}`,
+    const completeProject: CmsProject = {
+      id,
+      slug,
       name: project.name || "Untitled Project",
       url: project.url || "",
-      category: project.category || "General",
-      industry: project.industry || "Technology",
+      category: project.category || "Technology",
+      industry: project.industry || "General",
       role: project.role || "Technology Strategist",
       desc: project.desc || "",
       tech: project.tech || [],
-      impact: project.impact || "",
+      impact: project.impact,
       featured: project.featured ?? false,
       status: project.status || "published",
-      hasCaseStudy: project.hasCaseStudy ?? false,
+      hasCaseStudy: Boolean(project.hasCaseStudy || project.caseStudy),
       caseStudy: project.caseStudy,
-      createdAt: now,
-      updatedAt: now,
+      displayOrder: project.displayOrder ?? 999,
+      updatedAt: new Date().toISOString(),
+      createdAt: project.createdAt || new Date().toISOString(),
     };
 
-    projects.unshift(newProject);
-    writeJsonFile("projects.json", projects);
-    return newProject;
+    const idx = list.findIndex((p) => p.id === id);
+    if (idx !== -1) list[idx] = completeProject;
+    else list.push(completeProject);
+
+    writeJsonFile("projects.json", list);
+    return completeProject;
   }
 
-  deleteProject(id: string): boolean {
-    const projects = this.getProjects();
-    const filtered = projects.filter((p) => p.id !== id);
-    if (filtered.length !== projects.length) {
-      writeJsonFile("projects.json", filtered);
-      return true;
-    }
-    return false;
+  async deleteProject(id: string): Promise<boolean> {
+    if (isMongoConfigured()) return this.mongo.deleteProject(id);
+    const list = readJsonFile<CmsProject[]>("projects.json", []);
+    const filtered = list.filter((p) => p.id !== id);
+    if (filtered.length === list.length) return false;
+    writeJsonFile("projects.json", filtered);
+    return true;
   }
 
-  // ARTICLES
-  getArticles(): CmsArticle[] {
+  // --- ARTICLES ---
+  async getArticles(): Promise<CmsArticle[]> {
+    if (isMongoConfigured()) return this.mongo.getArticles();
     return readJsonFile<CmsArticle[]>("articles.json", []);
   }
 
-  getArticleById(id: string): CmsArticle | undefined {
-    return this.getArticles().find((a) => a.id === id);
+  async getArticleById(id: string): Promise<CmsArticle | null> {
+    if (isMongoConfigured()) return this.mongo.getArticleById(id);
+    const list = readJsonFile<CmsArticle[]>("articles.json", []);
+    return list.find((a) => a.id === id) || null;
   }
 
-  getArticleBySlug(slug: string): CmsArticle | undefined {
-    return this.getArticles().find((a) => a.slug === slug);
+  async getArticleBySlug(slug: string): Promise<CmsArticle | null> {
+    if (isMongoConfigured()) return this.mongo.getArticleBySlug(slug);
+    const list = readJsonFile<CmsArticle[]>("articles.json", []);
+    return list.find((a) => a.slug === slug) || null;
   }
 
-  saveArticle(article: Partial<CmsArticle>): CmsArticle {
-    const articles = this.getArticles();
-    const now = new Date().toISOString();
+  async saveArticle(article: Partial<CmsArticle>): Promise<CmsArticle> {
+    if (isMongoConfigured()) return this.mongo.saveArticle(article);
+    const list = readJsonFile<CmsArticle[]>("articles.json", []);
+    const id = article.id || `art-${Date.now()}`;
+    const slug = (article.slug || article.title || "article").toLowerCase().replace(/[^a-z0-9_-]/g, "-");
 
-    if (article.id) {
-      const idx = articles.findIndex((a) => a.id === article.id);
-      if (idx !== -1) {
-        articles[idx] = { ...articles[idx], ...article, updatedAt: now } as CmsArticle;
-        writeJsonFile("articles.json", articles);
-        return articles[idx];
-      }
-    }
-
-    const newArticle: CmsArticle = {
-      id: `post-${Date.now()}`,
-      slug: article.slug || `article-${Date.now()}`,
+    const completeArticle: CmsArticle = {
+      id,
+      slug,
       title: article.title || "Untitled Article",
       description: article.description || "",
       keywords: article.keywords || [],
-      date: article.date || new Date().toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }),
-      dateISO: article.dateISO || now.split("T")[0],
+      date: article.date || new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      dateISO: article.dateISO || new Date().toISOString().slice(0, 10),
       readTime: article.readTime || "5 min read",
-      category: article.category || "Technology",
-      content: article.content || "<p>Start writing article content...</p>",
-      coverImage: article.coverImage || "/og-image.png",
+      category: article.category || "Strategy",
+      content: article.content || "",
+      coverImage: article.coverImage,
       status: article.status || "published",
       featured: article.featured ?? false,
-      createdAt: now,
-      updatedAt: now,
+      updatedAt: new Date().toISOString(),
+      createdAt: article.createdAt || new Date().toISOString(),
     };
 
-    articles.unshift(newArticle);
-    writeJsonFile("articles.json", articles);
-    return newArticle;
+    const idx = list.findIndex((a) => a.id === id);
+    if (idx !== -1) list[idx] = completeArticle;
+    else list.unshift(completeArticle);
+
+    writeJsonFile("articles.json", list);
+    return completeArticle;
   }
 
-  deleteArticle(id: string): boolean {
-    const articles = this.getArticles();
-    const filtered = articles.filter((a) => a.id !== id);
-    if (filtered.length !== articles.length) {
-      writeJsonFile("articles.json", filtered);
-      return true;
-    }
-    return false;
+  async deleteArticle(id: string): Promise<boolean> {
+    if (isMongoConfigured()) return this.mongo.deleteArticle(id);
+    const list = readJsonFile<CmsArticle[]>("articles.json", []);
+    const filtered = list.filter((a) => a.id !== id);
+    if (filtered.length === list.length) return false;
+    writeJsonFile("articles.json", filtered);
+    return true;
   }
 
-  // VENTURES
-  getVentures(): CmsVenture[] {
+  // --- VENTURES ---
+  async getVentures(): Promise<CmsVenture[]> {
+    if (isMongoConfigured()) return this.mongo.getVentures();
     return readJsonFile<CmsVenture[]>("ventures.json", []);
   }
 
-  getVentureById(id: string): CmsVenture | undefined {
-    return this.getVentures().find((v) => v.id === id);
+  async getVentureById(id: string): Promise<CmsVenture | null> {
+    if (isMongoConfigured()) return this.mongo.getVentureById(id);
+    const list = readJsonFile<CmsVenture[]>("ventures.json", []);
+    return list.find((v) => v.id === id) || null;
   }
 
-  saveVenture(venture: Partial<CmsVenture>): CmsVenture {
-    const ventures = this.getVentures();
-    if (venture.id) {
-      const idx = ventures.findIndex((v) => v.id === venture.id);
-      if (idx !== -1) {
-        ventures[idx] = { ...ventures[idx], ...venture } as CmsVenture;
-        writeJsonFile("ventures.json", ventures);
-        return ventures[idx];
-      }
-    }
+  async saveVenture(venture: Partial<CmsVenture>): Promise<CmsVenture> {
+    if (isMongoConfigured()) return this.mongo.saveVenture(venture);
+    const list = readJsonFile<CmsVenture[]>("ventures.json", []);
+    const id = venture.id || `vent-${Date.now()}`;
 
-    const newVenture: CmsVenture = {
-      id: `vent-${Date.now()}`,
+    const completeVenture: CmsVenture = {
+      id,
       name: venture.name || "Untitled Venture",
-      category: venture.category || "Company",
+      category: venture.category || "Venture",
       type: venture.type || "business",
       industry: venture.industry || "Technology",
       role: venture.role || "Partner",
       status: venture.status || "Active",
-      statusColor: venture.statusColor || "text-green-400 bg-green-500/10 border-green-500/20",
+      statusColor: venture.statusColor || "emerald",
       website: venture.website || "",
       domain: venture.domain || "",
       desc: venture.desc || "",
       contributions: venture.contributions || [],
       caseStudySlug: venture.caseStudySlug,
       caseStudyName: venture.caseStudyName,
-      displayOrder: venture.displayOrder || ventures.length + 1,
+      displayOrder: venture.displayOrder ?? 99,
       isPublished: venture.isPublished ?? true,
     };
 
-    ventures.push(newVenture);
-    writeJsonFile("ventures.json", ventures);
-    return newVenture;
+    const idx = list.findIndex((v) => v.id === id);
+    if (idx !== -1) list[idx] = completeVenture;
+    else list.push(completeVenture);
+
+    writeJsonFile("ventures.json", list);
+    return completeVenture;
   }
 
-  deleteVenture(id: string): boolean {
-    const ventures = this.getVentures();
-    const filtered = ventures.filter((v) => v.id !== id);
-    if (filtered.length !== ventures.length) {
-      writeJsonFile("ventures.json", filtered);
-      return true;
-    }
-    return false;
+  async deleteVenture(id: string): Promise<boolean> {
+    if (isMongoConfigured()) return this.mongo.deleteVenture(id);
+    const list = readJsonFile<CmsVenture[]>("ventures.json", []);
+    const filtered = list.filter((v) => v.id !== id);
+    if (filtered.length === list.length) return false;
+    writeJsonFile("ventures.json", filtered);
+    return true;
   }
 
-  // INQUIRIES
-  getInquiries(): CmsInquiry[] {
+  // --- INQUIRIES ---
+  async getInquiries(): Promise<CmsInquiry[]> {
+    if (isMongoConfigured()) return this.mongo.getInquiries();
     return readJsonFile<CmsInquiry[]>("inquiries.json", []);
   }
 
-  getInquiryById(id: string): CmsInquiry | undefined {
-    return this.getInquiries().find((inq) => inq.id === id);
+  async getInquiryById(id: string): Promise<CmsInquiry | null> {
+    if (isMongoConfigured()) return this.mongo.getInquiryById(id);
+    const list = readJsonFile<CmsInquiry[]>("inquiries.json", []);
+    return list.find((i) => i.id === id) || null;
   }
 
-  createInquiry(data: {
-    name: string;
-    email: string;
-    phone?: string;
-    organization?: string;
-    subject?: string;
-    message: string;
-    source?: string;
-  }): CmsInquiry {
-    const inquiries = this.getInquiries();
+  async createInquiry(
+    inquiry: Omit<CmsInquiry, "id" | "referenceId" | "status" | "createdAt" | "updatedAt">
+  ): Promise<CmsInquiry> {
+    if (isMongoConfigured()) return this.mongo.createInquiry(inquiry);
+    const list = readJsonFile<CmsInquiry[]>("inquiries.json", []);
+    const rand = Math.floor(1000 + Math.random() * 9000);
+    const referenceId = `INQ-2026-${rand}`;
     const now = new Date().toISOString();
-    const refNumber = Math.floor(1000 + Math.random() * 9000);
-    const referenceId = `INQ-2026-${refNumber}`;
 
     const newInquiry: CmsInquiry = {
       id: `inq-${Date.now()}`,
       referenceId,
-      name: data.name,
-      email: data.email,
-      phone: data.phone || "",
-      organization: data.organization || "",
-      subject: data.subject || "General Consultation",
-      message: data.message,
-      source: data.source || "contact-form",
+      name: inquiry.name,
+      email: inquiry.email,
+      phone: inquiry.phone,
+      organization: inquiry.organization,
+      subject: inquiry.subject,
+      message: inquiry.message,
+      source: inquiry.source || "website",
       status: "New",
+      internalNotes: inquiry.internalNotes || "",
       createdAt: now,
       updatedAt: now,
     };
 
-    inquiries.unshift(newInquiry);
-    writeJsonFile("inquiries.json", inquiries);
+    list.unshift(newInquiry);
+    writeJsonFile("inquiries.json", list);
     return newInquiry;
   }
 
-  updateInquiry(id: string, updates: Partial<CmsInquiry>): CmsInquiry | null {
-    const inquiries = this.getInquiries();
-    const idx = inquiries.findIndex((i) => i.id === id);
+  async updateInquiryStatus(
+    id: string,
+    status: CmsInquiry["status"],
+    internalNotes?: string
+  ): Promise<CmsInquiry | null> {
+    if (isMongoConfigured()) return this.mongo.updateInquiryStatus(id, status, internalNotes);
+    const list = readJsonFile<CmsInquiry[]>("inquiries.json", []);
+    const idx = list.findIndex((i) => i.id === id);
     if (idx === -1) return null;
 
-    inquiries[idx] = { ...inquiries[idx], ...updates, updatedAt: new Date().toISOString() };
-    writeJsonFile("inquiries.json", inquiries);
-    return inquiries[idx];
-  }
-
-  deleteInquiry(id: string): boolean {
-    const inquiries = this.getInquiries();
-    const filtered = inquiries.filter((i) => i.id !== id);
-    if (filtered.length !== inquiries.length) {
-      writeJsonFile("inquiries.json", filtered);
-      return true;
-    }
-    return false;
-  }
-
-  // TESTIMONIALS
-  getTestimonials(): CmsTestimonial[] {
-    return readJsonFile<CmsTestimonial[]>("testimonials.json", []);
-  }
-
-  saveTestimonial(test: Partial<CmsTestimonial>): CmsTestimonial {
-    const list = this.getTestimonials();
-    if (test.id) {
-      const idx = list.findIndex((t) => t.id === test.id);
-      if (idx !== -1) {
-        list[idx] = { ...list[idx], ...test } as CmsTestimonial;
-        writeJsonFile("testimonials.json", list);
-        return list[idx];
-      }
+    list[idx].status = status;
+    list[idx].updatedAt = new Date().toISOString();
+    if (typeof internalNotes === "string") {
+      list[idx].internalNotes = internalNotes;
     }
 
-    const newItem: CmsTestimonial = {
-      id: `test-${Date.now()}`,
-      name: test.name || "Anonymous",
-      designation: test.designation || "Leader",
-      organization: test.organization || "Company",
-      content: test.content || "",
-      photo: test.photo || "",
-      relatedProject: test.relatedProject || "",
-      displayOrder: test.displayOrder || list.length + 1,
-      status: test.status || "draft",
-    };
-    list.push(newItem);
-    writeJsonFile("testimonials.json", list);
-    return newItem;
+    writeJsonFile("inquiries.json", list);
+    return list[idx];
   }
 
-  deleteTestimonial(id: string): boolean {
-    const list = this.getTestimonials();
-    const filtered = list.filter((t) => t.id !== id);
-    if (filtered.length !== list.length) {
-      writeJsonFile("testimonials.json", filtered);
-      return true;
-    }
-    return false;
+  async deleteInquiry(id: string): Promise<boolean> {
+    if (isMongoConfigured()) return this.mongo.deleteInquiry(id);
+    const list = readJsonFile<CmsInquiry[]>("inquiries.json", []);
+    const filtered = list.filter((i) => i.id !== id);
+    if (filtered.length === list.length) return false;
+    writeJsonFile("inquiries.json", filtered);
+    return true;
   }
 
-  // NOW BUILDING
-  getNowBuilding(): CmsNowBuilding[] {
+  // --- NOW BUILDING ---
+  async getNowBuilding(): Promise<CmsNowBuilding[]> {
+    if (isMongoConfigured()) return this.mongo.getNowBuilding();
     return readJsonFile<CmsNowBuilding[]>("now_building.json", []);
   }
 
-  saveNowBuilding(item: Partial<CmsNowBuilding>): CmsNowBuilding {
-    const list = this.getNowBuilding();
-    if (item.id) {
-      const idx = list.findIndex((n) => n.id === item.id);
-      if (idx !== -1) {
-        list[idx] = { ...list[idx], ...item, lastUpdated: new Date().toISOString().split("T")[0] } as CmsNowBuilding;
-        writeJsonFile("now_building.json", list);
-        return list[idx];
-      }
-    }
+  async saveNowBuilding(item: Partial<CmsNowBuilding>): Promise<CmsNowBuilding> {
+    if (isMongoConfigured()) return this.mongo.saveNowBuilding(item);
+    const list = readJsonFile<CmsNowBuilding[]>("now_building.json", []);
+    const id = item.id || `nb-${Date.now()}`;
 
-    const newItem: CmsNowBuilding = {
-      id: `nb-${Date.now()}`,
-      title: item.title || "New Initiative",
+    const completeItem: CmsNowBuilding = {
+      id,
+      title: item.title || "Untitled Initiative",
       description: item.description || "",
-      link: item.link || "",
-      status: item.status || "In Planning",
-      progress: item.progress || 10,
-      startDate: item.startDate || new Date().toISOString().split("T")[0],
-      lastUpdated: new Date().toISOString().split("T")[0],
+      link: item.link,
+      status: item.status || "Active Sprint",
+      progress: item.progress ?? 50,
+      startDate: item.startDate || new Date().toISOString().slice(0, 10),
+      lastUpdated: new Date().toISOString().slice(0, 10),
       isVisible: item.isVisible ?? true,
-      displayOrder: item.displayOrder || list.length + 1,
+      displayOrder: item.displayOrder ?? 99,
     };
-    list.push(newItem);
+
+    const idx = list.findIndex((nb) => nb.id === id);
+    if (idx !== -1) list[idx] = completeItem;
+    else list.push(completeItem);
+
     writeJsonFile("now_building.json", list);
-    return newItem;
+    return completeItem;
   }
 
-  deleteNowBuilding(id: string): boolean {
-    const list = this.getNowBuilding();
-    const filtered = list.filter((n) => n.id !== id);
-    if (filtered.length !== list.length) {
-      writeJsonFile("now_building.json", filtered);
-      return true;
-    }
-    return false;
+  async deleteNowBuilding(id: string): Promise<boolean> {
+    if (isMongoConfigured()) return this.mongo.deleteNowBuilding(id);
+    const list = readJsonFile<CmsNowBuilding[]>("now_building.json", []);
+    const filtered = list.filter((nb) => nb.id !== id);
+    if (filtered.length === list.length) return false;
+    writeJsonFile("now_building.json", filtered);
+    return true;
   }
 
-  // MEDIA
-  getMediaItems(): CmsMediaItem[] {
+  // --- TESTIMONIALS ---
+  async getTestimonials(): Promise<CmsTestimonial[]> {
+    if (isMongoConfigured()) return this.mongo.getTestimonials();
+    return readJsonFile<CmsTestimonial[]>("testimonials.json", []);
+  }
+
+  async saveTestimonial(item: Partial<CmsTestimonial>): Promise<CmsTestimonial> {
+    if (isMongoConfigured()) return this.mongo.saveTestimonial(item);
+    const list = readJsonFile<CmsTestimonial[]>("testimonials.json", []);
+    const id = item.id || `test-${Date.now()}`;
+
+    const completeTestimonial: CmsTestimonial = {
+      id,
+      name: item.name || "Anonymous",
+      designation: item.designation || "Executive",
+      organization: item.organization || "",
+      content: item.content || "",
+      photo: item.photo,
+      relatedProject: item.relatedProject,
+      displayOrder: item.displayOrder ?? 99,
+      status: item.status || "published",
+    };
+
+    const idx = list.findIndex((t) => t.id === id);
+    if (idx !== -1) list[idx] = completeTestimonial;
+    else list.push(completeTestimonial);
+
+    writeJsonFile("testimonials.json", list);
+    return completeTestimonial;
+  }
+
+  async deleteTestimonial(id: string): Promise<boolean> {
+    if (isMongoConfigured()) return this.mongo.deleteTestimonial(id);
+    const list = readJsonFile<CmsTestimonial[]>("testimonials.json", []);
+    const filtered = list.filter((t) => t.id !== id);
+    if (filtered.length === list.length) return false;
+    writeJsonFile("testimonials.json", filtered);
+    return true;
+  }
+
+  // --- MEDIA ---
+  async getMediaItems(): Promise<CmsMediaItem[]> {
+    if (isMongoConfigured()) return this.mongo.getMediaItems();
     return readJsonFile<CmsMediaItem[]>("media.json", []);
   }
 
-  saveMediaItem(item: Omit<CmsMediaItem, "id" | "createdAt">): CmsMediaItem {
-    const list = this.getMediaItems();
+  async saveMediaItem(item: Omit<CmsMediaItem, "id" | "createdAt">): Promise<CmsMediaItem> {
+    if (isMongoConfigured()) return this.mongo.saveMediaItem(item);
+    const list = readJsonFile<CmsMediaItem[]>("media.json", []);
     const newItem: CmsMediaItem = {
       id: `media-${Date.now()}`,
       ...item,
@@ -810,30 +851,30 @@ export class CmsStore {
     return newItem;
   }
 
-  deleteMediaItem(id: string): boolean {
-    const list = this.getMediaItems();
-    const item = list.find((m) => m.id === id);
-    if (!item) return false;
-
-    // Delete file from disk if it starts with /uploads/
-    if (item.url.startsWith("/uploads/")) {
-      const localFilePath = path.join(process.cwd(), "public", item.url);
-      if (fs.existsSync(localFilePath)) {
-        try {
-          fs.unlinkSync(localFilePath);
-        } catch (e) {
-          console.warn("Could not remove file from disk:", e);
-        }
-      }
+  async deleteMediaItem(id: string): Promise<boolean> {
+    let itemUrl = "";
+    if (isMongoConfigured()) {
+      const items = await this.mongo.getMediaItems();
+      const item = items.find((m) => m.id === id);
+      if (item) itemUrl = item.url;
+      await this.mongo.deleteMediaItem(id);
+    } else {
+      const list = readJsonFile<CmsMediaItem[]>("media.json", []);
+      const item = list.find((m) => m.id === id);
+      if (item) itemUrl = item.url;
+      const filtered = list.filter((m) => m.id !== id);
+      writeJsonFile("media.json", filtered);
     }
 
-    const filtered = list.filter((m) => m.id !== id);
-    writeJsonFile("media.json", filtered);
+    if (itemUrl) {
+      await deleteMediaFile(itemUrl);
+    }
     return true;
   }
 
-  // HOMEPAGE
-  getHomepageSettings(): CmsHomepageSettings {
+  // --- HOMEPAGE CONFIG ---
+  async getHomepageSettings(): Promise<CmsHomepageSettings> {
+    if (isMongoConfigured()) return this.mongo.getHomepageSettings();
     return readJsonFile<CmsHomepageSettings>("homepage.json", {
       heroHeadline: "Turning Ideas Into Digital Solutions That Move Businesses Forward.",
       heroSubheadline: "Technology strategist, product architect, and entrepreneur.",
@@ -857,15 +898,17 @@ export class CmsStore {
     });
   }
 
-  saveHomepageSettings(settings: Partial<CmsHomepageSettings>): CmsHomepageSettings {
-    const current = this.getHomepageSettings();
+  async saveHomepageSettings(settings: Partial<CmsHomepageSettings>): Promise<CmsHomepageSettings> {
+    if (isMongoConfigured()) return this.mongo.saveHomepageSettings(settings);
+    const current = await this.getHomepageSettings();
     const updated = { ...current, ...settings };
     writeJsonFile("homepage.json", updated);
     return updated;
   }
 
-  // PROFILE
-  getProfile(): CmsProfile {
+  // --- PROFILE ---
+  async getProfile(): Promise<CmsProfile> {
+    if (isMongoConfigured()) return this.mongo.getProfile();
     return readJsonFile<CmsProfile>("profile.json", {
       fullName: "Devraj Singh Tomar",
       title: "Technology Strategist & Entrepreneur",
@@ -880,15 +923,17 @@ export class CmsStore {
     });
   }
 
-  saveProfile(profile: Partial<CmsProfile>): CmsProfile {
-    const current = this.getProfile();
+  async saveProfile(profile: Partial<CmsProfile>): Promise<CmsProfile> {
+    if (isMongoConfigured()) return this.mongo.saveProfile(profile);
+    const current = await this.getProfile();
     const updated = { ...current, ...profile };
     writeJsonFile("profile.json", updated);
     return updated;
   }
 
-  // SETTINGS
-  getWebsiteSettings(): CmsWebsiteSettings {
+  // --- WEBSITE SETTINGS ---
+  async getWebsiteSettings(): Promise<CmsWebsiteSettings> {
+    if (isMongoConfigured()) return this.mongo.getWebsiteSettings();
     return readJsonFile<CmsWebsiteSettings>("settings.json", {
       siteName: "Devraj Singh Tomar",
       titleTemplate: "Devraj Singh Tomar | Technology Strategist & Entrepreneur",
@@ -901,15 +946,17 @@ export class CmsStore {
     });
   }
 
-  saveWebsiteSettings(settings: Partial<CmsWebsiteSettings>): CmsWebsiteSettings {
-    const current = this.getWebsiteSettings();
+  async saveWebsiteSettings(settings: Partial<CmsWebsiteSettings>): Promise<CmsWebsiteSettings> {
+    if (isMongoConfigured()) return this.mongo.saveWebsiteSettings(settings);
+    const current = await this.getWebsiteSettings();
     const updated = { ...current, ...settings };
     writeJsonFile("settings.json", updated);
     return updated;
   }
 
-  // SEO SETTINGS
-  getSeoSettings(): CmsSeoSettings {
+  // --- SEO SETTINGS ---
+  async getSeoSettings(): Promise<CmsSeoSettings> {
+    if (isMongoConfigured()) return this.mongo.getSeoSettings();
     return readJsonFile<CmsSeoSettings>("seo.json", {
       "/": {
         title: "Devraj Singh Tomar | Technology Strategist & Entrepreneur",
@@ -938,38 +985,34 @@ export class CmsStore {
     });
   }
 
-  saveSeoSettings(seo: Partial<CmsSeoSettings>): CmsSeoSettings {
-    const current = this.getSeoSettings();
+  async saveSeoSettings(seo: Partial<CmsSeoSettings>): Promise<CmsSeoSettings> {
+    if (isMongoConfigured()) return this.mongo.saveSeoSettings(seo);
+    const current = await this.getSeoSettings();
     const updated = { ...current, ...(seo as CmsSeoSettings) };
     writeJsonFile("seo.json", updated);
     return updated;
   }
 
-  // DASHBOARD STATS
-  getDashboardStats() {
-    const projects = this.getProjects();
-    const articles = this.getArticles();
-    const ventures = this.getVentures();
-    const testimonials = this.getTestimonials();
-    const inquiries = this.getInquiries();
-
-    const publishedProjects = projects.filter((p) => p.status === "published").length;
-    const draftProjects = projects.filter((p) => p.status === "draft").length;
-    const publishedArticles = articles.filter((a) => a.status === "published").length;
-    const draftArticles = articles.filter((a) => a.status === "draft").length;
-    const unreadInquiries = inquiries.filter((i) => i.status === "New").length;
+  // --- DASHBOARD STATS ---
+  async getDashboardStats() {
+    if (isMongoConfigured()) return this.mongo.getDashboardStats();
+    const projects = await this.getProjects();
+    const articles = await this.getArticles();
+    const ventures = await this.getVentures();
+    const testimonials = await this.getTestimonials();
+    const inquiries = await this.getInquiries();
 
     return {
       totalProjects: projects.length,
-      publishedProjects,
-      draftProjects,
+      publishedProjects: projects.filter((p) => p.status === "published").length,
+      draftProjects: projects.filter((p) => p.status === "draft").length,
       totalArticles: articles.length,
-      publishedArticles,
-      draftArticles,
+      publishedArticles: articles.filter((a) => a.status === "published").length,
+      draftArticles: articles.filter((a) => a.status === "draft").length,
       totalVentures: ventures.length,
       totalTestimonials: testimonials.length,
       totalInquiries: inquiries.length,
-      unreadInquiries,
+      unreadInquiries: inquiries.filter((i) => i.status === "New").length,
       recentInquiries: inquiries.slice(0, 5),
       recentProjects: projects.slice(0, 5),
       recentArticles: articles.slice(0, 5),

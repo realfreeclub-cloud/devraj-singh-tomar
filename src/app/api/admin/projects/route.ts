@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  const projects = store.getProjects();
+  const projects = await store.getProjects();
   return NextResponse.json(projects);
 }
 
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
 
     const store = getCmsStore();
-    const saved = store.saveProject(body);
+    const saved = await store.saveProject(body);
     return NextResponse.json(saved);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to save project";

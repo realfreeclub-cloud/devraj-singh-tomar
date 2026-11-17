@@ -120,6 +120,10 @@ export function proxy(request: NextRequest) {
   response.headers.set("Vary", "Accept");
   response.headers.set("Link", '</llms.txt>; rel="alternate"; type="text/markdown"');
   response.headers.set("Content-Signal", "search=yes, ai-train=yes");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
 
   return response;
 }

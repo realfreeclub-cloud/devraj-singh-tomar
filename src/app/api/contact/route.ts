@@ -17,13 +17,13 @@ export async function POST(req: NextRequest) {
     }
 
     const store = getCmsStore();
-    const inquiry = store.createInquiry({
-      name,
-      email,
-      phone,
-      organization,
-      subject,
-      message,
+    const inquiry = await store.createInquiry({
+      name: String(name).trim().slice(0, 100),
+      email: String(email).trim().slice(0, 100),
+      phone: phone ? String(phone).trim().slice(0, 30) : undefined,
+      organization: organization ? String(organization).trim().slice(0, 100) : undefined,
+      subject: subject ? String(subject).trim().slice(0, 200) : undefined,
+      message: String(message).trim().slice(0, 5000),
       source: source || "public-contact-form",
     });
 

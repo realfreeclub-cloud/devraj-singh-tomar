@@ -1,0 +1,105 @@
+[
+  {
+    "id": "vent-1",
+    "name": "Career Avsar",
+    "category": "Technology Venture",
+    "type": "business",
+    "industry": "EdTech & Career Opportunities",
+    "role": "Co-Founder & Chief Technology Strategist",
+    "status": "Active & Scaling",
+    "statusColor": "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+    "website": "https://careeravsar.com",
+    "domain": "careeravsar.com",
+    "desc": "A digital career ecosystem delivering structured, verified employment and competitive exam pathways to Tier-2 and Tier-3 talent across India.",
+    "contributions": [
+      "Architected high-throughput content delivery pipeline handling spikes during exam result declarations.",
+      "Designed automated multi-channel alert delivery (WhatsApp, Telegram, Push Notifications).",
+      "Structured SEO taxonomy securing #1 Google rankings across regional government hiring keywords."
+    ],
+    "displayOrder": 1,
+    "isPublished": true
+  },
+  {
+    "id": "vent-2",
+    "name": "Tecxontechnology",
+    "category": "Digital Agency & Technology Practice",
+    "type": "business",
+    "industry": "Custom Software Engineering & Cloud Solutions",
+    "role": "Founder & Lead Architect",
+    "status": "Active & Commercial",
+    "statusColor": "text-blue-400 bg-blue-500/10 border-blue-500/20",
+    "website": "https://tecxontechnology.com",
+    "domain": "tecxontechnology.com",
+    "desc": "Full-service digital engineering firm that has delivered over 60+ production platforms across healthcare, legal, logistics, and education.",
+    "contributions": [
+      "Directly architected, audited, and deployed 60+ commercial web applications.",
+      "Established modern CI/CD, Next.js App Router best practices, and enterprise caching standards.",
+      "Managed cross-functional development, UI/UX, and cloud infrastructure teams."
+    ],
+    "displayOrder": 2,
+    "isPublished": true
+  },
+  {
+    "id": "vent-3",
+    "name": "Lotus Loop Media",
+    "category": "Strategic Partnership",
+    "type": "partnership",
+    "industry": "Digital Growth & Performance Marketing",
+    "role": "Technology Advisor & Strategic Partner",
+    "status": "Strategic Partnership",
+    "statusColor": "text-amber-400 bg-amber-500/10 border-amber-500/20",
+    "website": "https://lotusloopmedia.com",
+    "domain": "lotusloopmedia.com",
+    "desc": "Data-driven growth marketing venture managing 45+ enterprise brands and 80M+ aggregate campaign impressions.",
+    "contributions": [
+      "Architected analytics telemetry, custom conversion tracking, and marketing automation integrations.",
+      "Implemented enterprise landing page performance optimization achieving 95+ PageSpeed scores."
+    ],
+    "displayOrder": 3,
+    "isPublished": true
+  },
+  {
+    "id": "vent-4",
+    "name": "NGIT Edu",
+    "category": "Educational Examination System",
+    "type": "product",
+    "industry": "EdTech & Typing Examination",
+    "role": "Lead Platform Architect",
+    "status": "Live in Production",
+    "statusColor": "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+    "website": "https://ngitedu.com",
+    "domain": "ngitedu.com",
+    "desc": "Premier government computer certification, typing examination, and steno shorthand institute in Prayagraj.",
+    "contributions": [
+      "Engineered the sub-millisecond real-time typing evaluation engine with 0ms keystroke lag.",
+      "Created bilingual Hindi (Mangal & Kruti Dev) and English exam simulation models.",
+      "Guaranteed 99.98% platform uptime during massive recruitment surges."
+    ],
+    "caseStudySlug": "ngit-edu",
+    "caseStudyName": "NGIT Edu Case Study",
+    "displayOrder": 4,
+    "isPublished": true
+  },
+  {
+    "id": "vent-5",
+    "name": "Divya Jap",
+    "category": "Digital Product Venture",
+    "type": "product",
+    "industry": "Spiritual Tech & Consumer Web",
+    "role": "Creator & Full-Stack System Architect",
+    "status": "Live in Production",
+    "statusColor": "text-purple-400 bg-purple-500/10 border-purple-500/20",
+    "website": "https://divyajap.com",
+    "domain": "divyajap.com",
+    "desc": "An original technology product combining ancient Vedic sadhana with modern web ergonomics. Features a tactile haptic Jap Mala and 100% offline resilience.",
+    "contributions": [
+      "Conceived, architected, and built the local-first PWA from scratch.",
+      "Engineered hardware-level Web Haptics and Web Audio frequency synthesis.",
+      "Designed anonymous cryptographic room synchronization for family prayer circles."
+    ],
+    "caseStudySlug": "divyajap",
+    "caseStudyName": "Divya Jap Full Case Study",
+    "displayOrder": 5,
+    "isPublished": true
+  }
+]

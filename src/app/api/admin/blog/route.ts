@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  const articles = store.getArticles();
+  const articles = await store.getArticles();
   return NextResponse.json(articles);
 }
 
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
 
     const store = getCmsStore();
-    const saved = store.saveArticle(body);
+    const saved = await store.saveArticle(body);
     return NextResponse.json(saved);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to save article";

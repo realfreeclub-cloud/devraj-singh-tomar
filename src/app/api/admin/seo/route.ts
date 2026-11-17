@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  return NextResponse.json(store.getSeoSettings());
+  const seo = await store.getSeoSettings();
+  return NextResponse.json(seo);
 }
 
 export async function PUT(req: NextRequest) {
@@ -17,7 +18,7 @@ export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
     const store = getCmsStore();
-    const updated = store.saveSeoSettings(body);
+    const updated = await store.saveSeoSettings(body);
     return NextResponse.json(updated);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to update SEO settings";

@@ -1,0 +1,1921 @@
+[
+  {
+    "id": "proj-1",
+    "slug": "ngit-edu",
+    "name": "NGIT Edu",
+    "url": "ngitedu.com",
+    "category": "Education",
+    "industry": "EdTech & Computer Examinations",
+    "role": "Technical Architect & Engine Developer",
+    "desc": "National Genius Institute examination portal featuring high-concurrency online typing evaluation software, steno shorthand training, and IT certification test workflows.",
+    "tech": [
+      "Next.js",
+      "TypeScript",
+      "Real-Time Typing",
+      "Tailwind CSS",
+      "Edge Cache"
+    ],
+    "impact": "0ms Keystroke Lag | 99.98% Exam Uptime",
+    "featured": true,
+    "status": "published",
+    "hasCaseStudy": true,
+    "caseStudy": {
+      "slug": "ngit-edu",
+      "title": "NGIT Edu – High-Concurrency Examination & Typing Engine",
+      "subtitle": "Eliminating keystroke lag and platform crashes for thousands of government exam aspirants across India.",
+      "client": "National Genius Institute",
+      "category": "Education Technology",
+      "industry": "EdTech & Computer Examinations",
+      "timeline": "2023 - 2024",
+      "liveUrl": "https://ngitedu.com",
+      "role": "Technical Architect & Engine Developer",
+      "verifiedImpactBadge": "0ms Keystroke Lag | 99.98% Exam Uptime",
+      "overview": "NGIT Edu is an established educational and certification institute preparing aspirants for competitive examinations requiring rigorous typing and computer literacy standards (such as Allahabad High Court ARO/RO, UP Police Computer Operator, SSC CHSL, and NIELIT CCC/O-Level). Prior to the architectural overhaul, peak test cycles with hundreds of concurrent users caused keystroke buffering delays, inaccurate WPM scoring, and server timeouts on legacy PHP infrastructure. Devraj Singh Tomar was brought in to architect a modern, sub-millisecond typing evaluation engine and server-rendered curriculum portal.",
+      "challenge": {
+        "problem": "Government typing examinations demand strict adherence to keystroke accuracy, backspace penalties, and font specificities (Mangal Remington Gail, Kruti Dev 010, and standard English QWERTY). Legacy desktop software was cumbersome to deploy on student hardware, while existing web alternatives suffered from noticeable keystroke event latency, inaccurate words-per-minute (WPM) calculations, and server crashes during sudden traffic surges when mock tests were published.",
+        "bottlenecks": [
+          "Unacceptable 80ms-150ms input lag on browser textareas causing student typing errors.",
+          "Server-side evaluation models creating severe database thread locks under 500+ concurrent test takers.",
+          "Complex font mapping glitches when rendering bilingual Hindi (Mangal Unicode vs Kruti Dev ASCII) test passages.",
+          "Loss of test progress during intermittent student network dropouts."
+        ],
+        "whyExistingFailed": "Generic off-the-shelf LMS platforms and WordPress plugins were built for static multiple-choice quizzes, completely lacking the low-level DOM event capture, raw keystroke telemetry, and offline event queues required for high-stakes speed typing evaluations."
+      },
+      "solution": {
+        "strategy": "Engineered a distributed client-side evaluation engine built on Next.js and TypeScript, decoupling real-time keystroke processing from network roundtrips. All keystroke timing, error calculations, backspace accounting, and WPM velocity are computed locally inside an in-memory state machine and synced atomically at the conclusion of the test session.",
+        "architectureHighlights": [
+          "Sub-millisecond client-side keyboard event listener bypassing standard textarea overhead.",
+          "Edge-cached passage banks with instant randomized test generation.",
+          "Dual Hindi font engine supporting both legacy Remington Gail / Mangal Unicode and Kruti Dev 010 mapping.",
+          "Atomic test submission payload with cryptographic tamper detection against client-side score modification."
+        ],
+        "keyDecisions": [
+          "Adopted Next.js App Router for SSG/ISR static documentation and dynamic Edge API routes for mock evaluations.",
+          "Stored question passages at the CDN edge to guarantee sub-100ms first contentful paint (FCP).",
+          "Implemented local Web Storage state buffering so candidates can complete tests even during brief ISP disconnections."
+        ]
+      },
+      "myContribution": {
+        "summary": "Devraj Singh Tomar served as the Technical Architect & Lead Engine Developer, directly owning the typing engine's core mathematical logic, client-side event architecture, and cloud deployment pipeline.",
+        "responsibilities": [
+          "Designed the core JavaScript/TypeScript typing engine algorithm with zero-lag keystroke evaluation.",
+          "Engineered the Hindi transliteration and font-swapping renderer for Mangal and Kruti Dev passages.",
+          "Architected serverless API endpoints on Next.js to verify and persist completed candidate test results.",
+          "Configured technical SEO metadata and structured schemas for high-intent search queries across Uttar Pradesh."
+        ],
+        "distinctions": [
+          "Devraj personally authored the typing engine algorithms and frontend state machine.",
+          "Collaborated with NGIT faculty on official exam grading rules and passage validation.",
+          "Institute faculty provided subject matter materials, syllabus data, and question banks."
+        ]
+      },
+      "systemArchitecture": {
+        "frontend": "Next.js 14 App Router, TypeScript, Tailwind CSS, Framer Motion for UI reactivity.",
+        "backend": "Next.js Edge API Route Handlers, Node.js serverless execution on Vercel.",
+        "databaseAndCaching": "Vercel Edge Network caching for test passages; IndexedDB/LocalState for real-time exam telemetry.",
+        "securityCompliance": "Strict anti-paste mechanisms, client tampering checksum verification, rate-limited test submission endpoints.",
+        "deploymentInfra": "Vercel Global Edge Network, Cloudflare DNS with automatic DDoS protection and SSL."
+      },
+      "features": [
+        {
+          "title": "Sub-Millisecond Real-Time Typing Engine",
+          "desc": "Tracks instantaneous gross speed, net speed, accuracy percentage, and backspace counts with zero input lag on any modern browser.",
+          "badge": "Core Engine"
+        },
+        {
+          "title": "Bilingual Exam Simulation",
+          "desc": "Full support for English QWERTY, Hindi Mangal (InScript & Remington Gail), and Kruti Dev 010 with accurate character code mapping.",
+          "badge": "Specialized"
+        },
+        {
+          "title": "Offline-Resilient Test Session",
+          "desc": "Exams run entirely in-browser memory once loaded; temporary network drops do not interrupt timer or invalidate candidate scores.",
+          "badge": "Resilience"
+        },
+        {
+          "title": "Instant Diagnostic Analytics",
+          "desc": "Detailed error breakdown highlighting finger placement mistakes, character substitution errors, and speed consistency charts.",
+          "badge": "Analytics"
+        }
+      ],
+      "results": {
+        "metrics": [
+          {
+            "label": "Keystroke Latency",
+            "value": "0ms",
+            "detail": "Perceived lag eliminated entirely via client-side state machine"
+          },
+          {
+            "label": "Exam Uptime",
+            "value": "99.98%",
+            "detail": "Maintained continuous operation during major government exam announcement surges"
+          },
+          {
+            "label": "Candidate Intake Surge",
+            "value": "+240%",
+            "detail": "Increase in monthly active students completing online mock tests"
+          }
+        ],
+        "qualitative": [
+          "Instituted as the primary digital evaluation benchmark for students preparing for UP High Court and Police exams.",
+          "Completely eliminated student complaints regarding software freezing during timed speed tests.",
+          "Significantly reduced teacher grading workload by automating real-time scorecards and performance summaries."
+        ]
+      },
+      "keywords": [
+        "NGIT Edu",
+        "Typing software engine",
+        "Next.js typing portal",
+        "Hindi typing test engine",
+        "Mangal Remington Gail typing",
+        "EdTech architecture"
+      ],
+      "relatedSlugs": [
+        "idps-pratapgarh",
+        "divyajap",
+        "lexink-legal"
+      ]
+    },
+    "displayOrder": 1,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-2",
+    "slug": "idps-pratapgarh",
+    "name": "IDPS Pratapgarh",
+    "url": "idpspratapgarh.com",
+    "category": "Education",
+    "industry": "K-12 Institutional Education",
+    "role": "Lead School Systems Architect",
+    "desc": "Official digital school ecosystem for International Delhi Public School (IDPS) Pratapgarh driving parent engagement and streamlined online admissions.",
+    "tech": [
+      "Next.js",
+      "School CMS",
+      "Dynamic Admissions",
+      "Tailwind CSS"
+    ],
+    "impact": "+300% Admission Inquiries | Sub-1s Mobile Portal",
+    "featured": true,
+    "status": "published",
+    "hasCaseStudy": true,
+    "caseStudy": {
+      "slug": "idps-pratapgarh",
+      "title": "IDPS Pratapgarh – Next.js Institutional Ecosystem & Admission Funnel",
+      "subtitle": "Modern school digital platform driving parent trust, academic transparency, and online admissions growth.",
+      "client": "International Delhi Public School (IDPS) Pratapgarh",
+      "category": "Education Technology",
+      "industry": "K-12 Institutional Education",
+      "timeline": "2023 - 2024",
+      "liveUrl": "https://idpspratapgarh.com",
+      "role": "Lead School Systems Architect",
+      "verifiedImpactBadge": "+300% Admission Inquiries | Sub-1s Mobile Portal",
+      "overview": "International Delhi Public School (IDPS) Pratapgarh is a leading CBSE-affiliated institution providing progressive, world-class K-12 education in Uttar Pradesh. In the modern educational landscape, parent first impressions occur almost entirely online. Prior to this engagement, the school's online touchpoints suffered from fragmented social media links, slow PDF circular downloads, and cumbersome paper-based admission procedures. Devraj Singh Tomar was engaged as Lead School Systems Architect to design and deploy a world-class institutional web platform that reflects academic excellence and automates admission inquiries.",
+      "challenge": {
+        "problem": "Prospective parents visiting the website on smartphones experienced frustrating load times, broken photo galleries, and no simple way to book a campus visit or register an admission inquiry. The administration struggled to publish school circulars, exam schedules, and holiday announcements in real time without technical delays, leading to high inquiry call volumes at the administrative front desk.",
+        "bottlenecks": [
+          "Unresponsive mobile layouts causing parents to abandon the website before submitting admission requests.",
+          "Overloaded administrative staff answering repetitive phone calls regarding fees, buses, and admission dates.",
+          "Lack of School and EducationalOrganization structured data limiting local organic discoverability.",
+          "Slow-loading campus tour imagery and uncompressed student activity photos."
+        ],
+        "whyExistingFailed": "Generic school management systems offer poorly designed public facades with zero search engine optimization and heavy, dated Flash-like architectures that render poorly on modern smartphones."
+      },
+      "solution": {
+        "strategy": "Engineered an ultra-fast Next.js institutional ecosystem emphasizing mobile ergonomics, verified campus facilities (smart classrooms, sports arenas, robotics labs), dynamic circular publications, and an interactive 3-step admission inquiry pipeline.",
+        "architectureHighlights": [
+          "Next.js App Router with incremental static revalidation (ISR) for instantaneous notice updates.",
+          "Mobile-optimized 3-step admission wizard with instant WhatsApp and email notifications to the admissions desk.",
+          "EducationalOrganization structured schema enabling rich snippets in Google search results.",
+          "Next-gen WebP image delivery pipeline with blurred thumbnail placeholders for campus galleries."
+        ],
+        "keyDecisions": [
+          "Prioritized smartphone loading speeds over heavy video loops to accommodate parents browsing on variable 4G networks.",
+          "Created an intuitive, non-technical announcement publishing workflow for school administrative staff.",
+          "Integrated Google Maps location pins and bus route details directly onto the contact portal."
+        ]
+      },
+      "myContribution": {
+        "summary": "Devraj Singh Tomar led the system architecture, frontend development, SEO strategy, and admissions lead workflow implementation.",
+        "responsibilities": [
+          "Designed the full-stack responsive web architecture using Next.js and Tailwind CSS.",
+          "Engineered the multi-step online admission inquiry form with automated lead validation.",
+          "Structured comprehensive Schema.org metadata for school rankings and local search.",
+          "Conducted training sessions for the administrative staff on managing circulars and galleries."
+        ],
+        "distinctions": [
+          "Devraj authored the entire technical codebase and admissions lead funnel.",
+          "School leadership provided curriculum materials, CBSE compliance documentation, and verified photography."
+        ]
+      },
+      "systemArchitecture": {
+        "frontend": "Next.js 14 App Router, TypeScript, Tailwind CSS, Lucide React.",
+        "backend": "Next.js Route Handlers with rate limiting and automated email/WhatsApp alerts.",
+        "databaseAndCaching": "Vercel Edge Network ISR (Incremental Static Regeneration).",
+        "securityCompliance": "COPPA-conscious student privacy safeguards, encrypted lead storage, anti-spam validation.",
+        "deploymentInfra": "Vercel Global Edge Network, Cloudflare DNS, custom SSL."
+      },
+      "features": [
+        {
+          "title": "Interactive 3-Step Admission Funnel",
+          "desc": "A frictionless mobile form capturing parent details, grade selection, and campus tour scheduling in under 45 seconds.",
+          "badge": "Admissions"
+        },
+        {
+          "title": "Dynamic Academic Circulars Hub",
+          "desc": "Instantly searchable digital noticeboard for exam dates, syllabus updates, and emergency weather closures.",
+          "badge": "Notices"
+        },
+        {
+          "title": "High-Performance Campus Gallery",
+          "desc": "WebP-compressed visual showcase highlighting modern science laboratories, robotics, athletics, and cultural halls.",
+          "badge": "Media"
+        },
+        {
+          "title": "EducationalOrganization Schema",
+          "desc": "Rich search engine markup integrating school affiliations, board accreditations, and local map coordinates.",
+          "badge": "SEO"
+        }
+      ],
+      "results": {
+        "metrics": [
+          {
+            "label": "Admission Inquiries",
+            "value": "+300%",
+            "detail": "Year-over-year surge in verified digital admissions leads"
+          },
+          {
+            "label": "Mobile Page Load",
+            "value": "<1.0s",
+            "detail": "Sub-second load times verified on 4G cellular connections"
+          },
+          {
+            "label": "Front Desk Repetitive Calls",
+            "value": "-60%",
+            "detail": "Dramatic reduction in phone inquiries due to clear digital notices"
+          }
+        ],
+        "qualitative": [
+          "Cemented IDPS Pratapgarh's reputation as the most technologically advanced school in the region.",
+          "Parents reported high satisfaction with the effortless online inquiry process.",
+          "Management gained real-time visibility into incoming admission demands across different grades."
+        ]
+      },
+      "keywords": [
+        "IDPS Pratapgarh",
+        "International Delhi Public School Pratapgarh",
+        "School website architecture",
+        "CBSE school admission portal",
+        "EducationalOrganization schema",
+        "Next.js school portal"
+      ],
+      "relatedSlugs": [
+        "ngit-edu",
+        "the-home-shifting",
+        "maz-dialysis-center"
+      ]
+    },
+    "displayOrder": 2,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-3",
+    "slug": "ngi-study-zone",
+    "name": "NGI Study Zone",
+    "url": "ngistudyzone.com",
+    "category": "Education",
+    "industry": "EdTech & Coaching",
+    "role": "Full-Stack Web Architect",
+    "desc": "Interactive student coaching portal and digital study platform for National Genius Institute students with curriculum access and mock test series.",
+    "tech": [
+      "React",
+      "LMS",
+      "Coaching Portal",
+      "Tailwind CSS"
+    ],
+    "impact": "Fast Student Ingestion | Structured Learning",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 3,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-4",
+    "slug": "judicial-study-centre",
+    "name": "Judicial Study Centre",
+    "url": "judicialstudycentre.in",
+    "category": "Education",
+    "industry": "Legal Education & Judiciary Exam Prep",
+    "role": "Digital Strategy & Portal Architect",
+    "desc": "India's premier Judiciary & PCS-J examination preparation institute portal and learning hub in Prayagraj.",
+    "tech": [
+      "Next.js",
+      "Legal EdTech",
+      "Technical SEO",
+      "Tailwind CSS"
+    ],
+    "impact": "Top Organic Rankings | Seamless Aspirant Lead Funnel",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 4,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-5",
+    "slug": "agnihotri-classes",
+    "name": "Agnihotri Classes",
+    "url": "agnihotriclasses.in",
+    "category": "Education",
+    "industry": "Civil Services Coaching",
+    "role": "Frontend & Performance Consultant",
+    "desc": "Premier IAS & UPPCS civil services coaching portal and preparation academy in Prayagraj.",
+    "tech": [
+      "React",
+      "Civil Services",
+      "Fast LCP",
+      "Tailwind CSS"
+    ],
+    "impact": "Sub-Second LCP | Consistent Inbound Enrollments",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 5,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-6",
+    "slug": "baghel-law-college",
+    "name": "VGSBVM Law College",
+    "url": "baghellawcollege.in",
+    "category": "Education",
+    "industry": "Higher Legal Education",
+    "role": "Lead Web Developer",
+    "desc": "Vansh Gopal Singh Baghel Vidhi Mahavidyalaya law college portal in Sakrauli, affiliated with Rajju Bhaiya University.",
+    "tech": [
+      "Law College Portal",
+      "Affiliation CMS",
+      "SEO"
+    ],
+    "impact": "Verified University Affiliation Display",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 6,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-7",
+    "slug": "anjana-polytechnic",
+    "name": "Anjana Polytechnic",
+    "url": "anjanapolytechnic.com",
+    "category": "Education",
+    "industry": "Technical Education",
+    "role": "Web Architect",
+    "desc": "High-performance institutional portal engineered for diploma curriculum disclosures and admissions intake.",
+    "tech": [
+      "Next.js",
+      "CMS",
+      "SEO"
+    ],
+    "impact": "Clean Institutional Compliance",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 7,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-8",
+    "slug": "asmc-kaushambi",
+    "name": "ASMC Kaushambi",
+    "url": "asmckaushambi.in",
+    "category": "Education",
+    "industry": "Medical Education",
+    "role": "Portal Architect",
+    "desc": "Government Autonomous State Medical College Kaushambi academic routing hub for MBBS admissions and notices.",
+    "tech": [
+      "React",
+      "SSG",
+      "Tailwind CSS"
+    ],
+    "impact": "High Reliability Medical Portal",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 8,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-9",
+    "slug": "sanskar-global-school",
+    "name": "Sanskar Global School",
+    "url": "sanskarglobalschoolsakrauli.com",
+    "category": "Education",
+    "industry": "Institutional Schooling",
+    "role": "Frontend Architect",
+    "desc": "Modern school platform with dynamic circulars, photo galleries, and parent interaction modules.",
+    "tech": [
+      "Next.js",
+      "Tailwind CSS",
+      "Mobile UX"
+    ],
+    "impact": "Zero Mobile Friction",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 9,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-10",
+    "slug": "bn-singh-pg-college",
+    "name": "BN Singh PG College",
+    "url": "bnsinghpgcollege.com",
+    "category": "Education",
+    "industry": "Higher Education",
+    "role": "Web Consultant",
+    "desc": "Post-graduate college admissions, examinations, and official university notification platform.",
+    "tech": [
+      "Web Dev",
+      "SEO",
+      "Responsive UI"
+    ],
+    "impact": "Regional Student Ingestion",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 10,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-11",
+    "slug": "amethi-public-school",
+    "name": "Amethi Public School",
+    "url": "amethipublicschool.com",
+    "category": "Education",
+    "industry": "K-12 Education",
+    "role": "Web Developer",
+    "desc": "Public school digital infrastructure delivering parent-teacher circulars and academic calendar management.",
+    "tech": [
+      "CMS",
+      "UI/UX",
+      "Tailwind CSS"
+    ],
+    "impact": "Streamlined Campus Communication",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 11,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-12",
+    "slug": "bss-academy",
+    "name": "BSS Academy",
+    "url": "bssacademy.com",
+    "category": "Education",
+    "industry": "Education Academy",
+    "role": "Frontend Consultant",
+    "desc": "Academy landing architecture built for speed and effortless student course discoveries.",
+    "tech": [
+      "React",
+      "Performance",
+      "Clean CSS"
+    ],
+    "impact": "High Conversion Landing Speed",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 12,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-13",
+    "slug": "vs-memorial-school",
+    "name": "VS Memorial School",
+    "url": "vsmemorialschool.com",
+    "category": "Education",
+    "industry": "School Education",
+    "role": "Web Developer",
+    "desc": "Memorial school showcase platform designed with intuitive layouts for young students and parents.",
+    "tech": [
+      "CMS",
+      "Frontend",
+      "SEO"
+    ],
+    "impact": "Accessible Parent Navigation",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 13,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-14",
+    "slug": "st-xaviers-pratapgarh",
+    "name": "St. Xavier's Public School",
+    "url": "stxpbh.com",
+    "category": "Education",
+    "industry": "Private Schooling",
+    "role": "Lead Web Developer",
+    "desc": "Premium public school digital presence highlighting campus infrastructure, sports, and holistic curriculum.",
+    "tech": [
+      "Next.js",
+      "Vercel Edge",
+      "Tailwind CSS"
+    ],
+    "impact": "Sub-Second Global Load Time",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 14,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-15",
+    "slug": "anjana-pharmacy",
+    "name": "Anjana Pharmacy",
+    "url": "anjanapharmacy.com",
+    "category": "Education",
+    "industry": "Pharmacy Education",
+    "role": "Web Architect",
+    "desc": "Pharmacy educational portal showcasing D.Pharm/B.Pharm certifications and PCI approved lab facilities.",
+    "tech": [
+      "Web Dev",
+      "Local SEO",
+      "PCI Compliance"
+    ],
+    "impact": "Authority in Healthcare Education",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 15,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-16",
+    "slug": "national-genius-institute",
+    "name": "National Genius Institute",
+    "url": "nationalgeniusinstitute.in",
+    "category": "Education",
+    "industry": "Technical IT Training",
+    "role": "Technology Strategist",
+    "desc": "High-traffic student enrollment portal powering institute operations, admissions, and student verification.",
+    "tech": [
+      "Next.js",
+      "Custom CMS",
+      "Database Indexing"
+    ],
+    "impact": "High Volume Verification Engine",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 16,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-17",
+    "slug": "ngit-org",
+    "name": "NGIT",
+    "url": "ngit.org.in",
+    "category": "Education",
+    "industry": "Institutional Organization",
+    "role": "Web Strategist",
+    "desc": "Non-profit educational institute operations mapping and student alumni tracking platform.",
+    "tech": [
+      "React",
+      "SEO",
+      "Responsive UI"
+    ],
+    "impact": "Unified Institute Records",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 17,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-18",
+    "slug": "anjana-college",
+    "name": "Anjana College",
+    "url": "anjanacollege.com",
+    "category": "Education",
+    "industry": "Degree College",
+    "role": "Web Developer",
+    "desc": "Comprehensive degree college digital hub for undergraduate admissions, faculty profiles, and event calendars.",
+    "tech": [
+      "Web Dev",
+      "SSG",
+      "Tailwind CSS"
+    ],
+    "impact": "Accessible Student Notices",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 18,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-19",
+    "slug": "indian-inter-college",
+    "name": "Indian Inter College",
+    "url": "indianintercollege.com",
+    "category": "Education",
+    "industry": "Inter College Education",
+    "role": "Web Architect",
+    "desc": "Inter-college communication platform serving thousands of rural and semi-urban students across UP.",
+    "tech": [
+      "React",
+      "A11y",
+      "Semantic HTML"
+    ],
+    "impact": "High Accessibility on Low-Bandwidth Devices",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 19,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-20",
+    "slug": "asnmc-sultanpur",
+    "name": "ASNM C Sultanpur",
+    "url": "asnmcsultanpur.in",
+    "category": "Education",
+    "industry": "Government Medical College",
+    "role": "Web Consultant",
+    "desc": "Institutional framework facilitating academic announcements and medical hospital administration.",
+    "tech": [
+      "Web Dev",
+      "Performance",
+      "SSL"
+    ],
+    "impact": "Secure Public Announcements",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 20,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-21",
+    "slug": "dslp-asmc-pratapgarh",
+    "name": "DSLP ASMC Pratapgarh",
+    "url": "dslpasmcpratapgarh.org",
+    "category": "Education",
+    "industry": "Government Medical College",
+    "role": "Web Developer",
+    "desc": "Autonomous State Medical College Pratapgarh official digital portal for faculty and MBBS student operations.",
+    "tech": [
+      "SSG",
+      "Tailwind",
+      "Responsive UI"
+    ],
+    "impact": "High Uptime Official Portal",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 21,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-22",
+    "slug": "asmc-kushinagar",
+    "name": "ASMC Kushinagar",
+    "url": "asmckushinagar.in",
+    "category": "Education",
+    "industry": "Government Medical College",
+    "role": "Web Consultant",
+    "desc": "Local medical college routing and administrative notices infrastructure.",
+    "tech": [
+      "Next.js",
+      "SEO",
+      "Clean UI"
+    ],
+    "impact": "Reliable Government Notice Delivery",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 22,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-23",
+    "slug": "asmc-pilibhit",
+    "name": "ASMC Pilibhit",
+    "url": "asmcpilibhit.com",
+    "category": "Education",
+    "industry": "Medical Education",
+    "role": "Web Architect",
+    "desc": "Educational operations platform supporting hospital updates, faculty directories, and admissions.",
+    "tech": [
+      "Web Dev",
+      "Fast LCP",
+      "Tailwind CSS"
+    ],
+    "impact": "Rapid Loading on Mobile Devices",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 23,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-24",
+    "slug": "asmc-lakhimpur-kheri",
+    "name": "ASMC Lakhimpur Kheri",
+    "url": "asmclakhimpurkheri.in",
+    "category": "Education",
+    "industry": "Medical College Infrastructure",
+    "role": "Web Developer",
+    "desc": "Medical institute presentation UI and department inventory showcase.",
+    "tech": [
+      "CMS",
+      "Frontend",
+      "Accessibility"
+    ],
+    "impact": "Clean Departmental Navigation",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 24,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-25",
+    "slug": "cis-gauriganj",
+    "name": "CIS Gauriganj",
+    "url": "cisgauriganj.org",
+    "category": "Education",
+    "industry": "School Education",
+    "role": "Web Developer",
+    "desc": "School communication portal connecting teachers, students, and administration.",
+    "tech": [
+      "Web Dev",
+      "SEO",
+      "Tailwind CSS"
+    ],
+    "impact": "Modernized School Presence",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 25,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-26",
+    "slug": "the-home-shifting",
+    "name": "The Home Shifting",
+    "url": "thehomeshifting.com",
+    "category": "Business & Services",
+    "industry": "Logistics & Moving Portal",
+    "role": "Full-Stack Performance Engineer",
+    "desc": "Nationwide relocation logistics platform eliminating mobile bounce rates and maximizing localized quote conversion rates across 50+ Indian cities.",
+    "tech": [
+      "Next.js",
+      "Google Maps API",
+      "Conversion UI",
+      "Tailwind CSS"
+    ],
+    "impact": "Sub 1-sec Loads | 3x Inbound Quote Conversion",
+    "featured": true,
+    "status": "published",
+    "hasCaseStudy": true,
+    "caseStudy": {
+      "slug": "the-home-shifting",
+      "title": "The Home Shifting – National Logistics Quote & Route Engine",
+      "subtitle": "High-conversion moving and relocation platform engineered to dominate local search and maximize lead capture.",
+      "client": "The Home Shifting Logistics",
+      "category": "Business & Services",
+      "industry": "Logistics & Moving Portal",
+      "timeline": "2023 - 2024",
+      "liveUrl": "https://thehomeshifting.com",
+      "role": "Full-Stack Performance Engineer",
+      "verifiedImpactBadge": "Sub 1-sec Loads | 3x Inbound Quote Conversion",
+      "overview": "The Home Shifting is an intercity relocation and logistics enterprise operating across 50+ major metropolitan corridors in India. In the intensely competitive packers and movers industry, companies spend thousands of rupees on digital ads, only to lose prospective customers because their mobile landing pages take over 4 seconds to load. Devraj Singh Tomar was brought on board as Full-Stack Performance Engineer to completely rebuild the digital acquisition platform, focusing on ultra-low latency, instant quote generation, and programmatic city-to-city landing page architecture.",
+      "challenge": {
+        "problem": "The client was experiencing a staggering 68% bounce rate on paid search campaigns. Mobile users searching for movers in cities like Delhi, Bangalore, Mumbai, and Lucknow were abandoning the platform before forms even rendered. Furthermore, the existing multi-step inquiry form asked for too many unnecessary fields upfront, causing prospective clients to seek estimates elsewhere.",
+        "bottlenecks": [
+          "Unacceptable 4.2-second Largest Contentful Paint (LCP) on mobile Google Ads traffic.",
+          "Severe bounce rates resulting in wasted ad spend and low customer acquisition efficiency.",
+          "Lack of localized landing pages targeting specific origin-destination relocation routes.",
+          "Zero automated route distance or freight tier estimation."
+        ],
+        "whyExistingFailed": "Generic WordPress themes loaded dozens of render-blocking JavaScript files, uncompressed hero sliders, and bloated visual page builders that devastated mobile Core Web Vitals."
+      },
+      "solution": {
+        "strategy": "Engineered a purpose-built Next.js lead capture architecture featuring a 2-step dynamic quote estimator, programmatic static generation for 50+ regional hubs, sub-second LCP execution, and instant routing of leads directly to regional dispatch managers via WhatsApp Business API.",
+        "architectureHighlights": [
+          "Sub-1-second mobile page loads achieving 95+ performance scores on Google Lighthouse.",
+          "Programmatic static generation for top intercity moving routes (e.g. Delhi to Bangalore, Mumbai to Pune).",
+          "Streamlined 2-step quote calculator asking only origin, destination, and inventory size.",
+          "Dynamic Google Maps route distance calculation and localized MovingCompany JSON-LD schema."
+        ],
+        "keyDecisions": [
+          "Replaced bloated third-party form widgets with custom, zero-dependency lightweight React state forms.",
+          "Implemented instant server-side phone number validation to eliminate dummy quote requests.",
+          "Deployed edge caching on Vercel so visitors in any Indian state experience local CDN latency."
+        ]
+      },
+      "myContribution": {
+        "summary": "Devraj Singh Tomar served as Full-Stack Performance Engineer, responsible for application redesign, Core Web Vitals optimization, programmatic SEO generation, and the lead distribution engine.",
+        "responsibilities": [
+          "Built the high-conversion Next.js frontend with sub-1s mobile LCP.",
+          "Engineered the 2-step interactive quote calculation wizard.",
+          "Structured localized MovingCompany schema markup across 50+ target city pages.",
+          "Implemented real-time lead dispatch integration with WhatsApp and email."
+        ],
+        "distinctions": [
+          "Devraj managed the technical architecture, code optimization, and performance engineering.",
+          "Fleet logistics, pricing matrices, and physical transport operations are managed by The Home Shifting operational staff."
+        ]
+      },
+      "systemArchitecture": {
+        "frontend": "Next.js 14 App Router, TypeScript, Tailwind CSS, Lucide Icons.",
+        "backend": "Next.js Serverless Route Handlers with input sanitization.",
+        "databaseAndCaching": "Vercel Global Edge Network with ISR for dynamic city hubs.",
+        "securityCompliance": "Rate-limited quote generation endpoints, bot spam filtration, encrypted customer contact data.",
+        "deploymentInfra": "Vercel Global Edge Network, Cloudflare DNS, Google Maps Distance Matrix API."
+      },
+      "features": [
+        {
+          "title": "Sub-Second Mobile Load Times",
+          "desc": "Lightweight architecture engineered specifically to render instantly for users clicking search engine advertisements.",
+          "badge": "Performance"
+        },
+        {
+          "title": "2-Step Instant Quote Estimator",
+          "desc": "Frictionless form requiring only pickup city, destination city, and relocation size to trigger instant consultation.",
+          "badge": "Conversion"
+        },
+        {
+          "title": "50+ Programmatic City Hubs",
+          "desc": "Individual localized landing pages complete with verified reviews, service areas, and local schema microdata.",
+          "badge": "SEO"
+        },
+        {
+          "title": "Real-Time Dispatch Alerts",
+          "desc": "Customer inquiries are automatically routed to the nearest regional dispatch manager within 3 seconds of submission.",
+          "badge": "Automation"
+        }
+      ],
+      "results": {
+        "metrics": [
+          {
+            "label": "Mobile Page Load Time",
+            "value": "<0.9s",
+            "detail": "Reduced from 4.2s to under 0.9s on mobile cellular networks"
+          },
+          {
+            "label": "Quote Conversion Rate",
+            "value": "3x Increase",
+            "detail": "Threefold improvement in visitor-to-lead conversion efficiency"
+          },
+          {
+            "label": "Bounce Rate Reduction",
+            "value": "-65%",
+            "detail": "Dramatic drop in paid traffic bounce rates across campaign landing pages"
+          }
+        ],
+        "qualitative": [
+          "Enabled the client to double their digital marketing ROI without increasing daily advertising spend.",
+          "Regional managers received higher quality, verified customer inquiries with precise route details.",
+          "Established the platform as a dominant modern logistics operator across competitive metropolitan search corridors."
+        ]
+      },
+      "keywords": [
+        "The Home Shifting",
+        "Packers and movers web architecture",
+        "Logistics quote conversion engine",
+        "Next.js logistics portal",
+        "MovingCompany schema",
+        "Programmatic SEO city pages"
+      ],
+      "relatedSlugs": [
+        "maz-dialysis-center",
+        "idps-pratapgarh",
+        "lexink-legal"
+      ]
+    },
+    "displayOrder": 26,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-27",
+    "slug": "national-computer-allahabad",
+    "name": "National Computer Allahabad",
+    "url": "nationalcomputerallahabad.com",
+    "category": "Business & Services",
+    "industry": "IT Enterprise & Hardware Services",
+    "role": "Technology Strategist",
+    "desc": "Premier IT studio, enterprise software engineering and hardware diagnostics hub in Prayagraj.",
+    "tech": [
+      "Custom Software",
+      "Web Dev",
+      "Local SEO"
+    ],
+    "impact": "5-Star Local Maps Ranking | B2B IT Contracts",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 27,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-28",
+    "slug": "limra-green-earth-solutions",
+    "name": "Limra Green Earth Solutions",
+    "url": "limragreenearthsolutions.in",
+    "category": "Business & Services",
+    "industry": "Sustainable Packaging & Manufacturing",
+    "role": "Digital Strategist & Architect",
+    "desc": "Certified compostable bio poly bags and sustainable packaging corporate catalog with direct WhatsApp ordering.",
+    "tech": [
+      "Eco Packaging",
+      "WhatsApp Commerce",
+      "Technical SEO"
+    ],
+    "impact": "High Volume Direct B2B Supply Inquiries",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 28,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-29",
+    "slug": "naushad-umar-brick-field",
+    "name": "Naushad & Umar Brick Field",
+    "url": "naushadumarbrickfield.com",
+    "category": "Business & Services",
+    "industry": "Industrial Manufacturing & Construction",
+    "role": "Web Strategist & Developer",
+    "desc": "Commercial red clay bricks manufacturing & building supplies enterprise in Prayagraj (Mark 5551).",
+    "tech": [
+      "Industrial Catalog",
+      "Local SEO",
+      "Lead Gen"
+    ],
+    "impact": "Regional Construction Supplier Dominance",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 29,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-30",
+    "slug": "navpath",
+    "name": "Navpath",
+    "url": "navpath.in",
+    "category": "Business & Services",
+    "industry": "Corporate Consulting",
+    "role": "Web Consultant",
+    "desc": "Corporate business routing and professional advisory presentation website.",
+    "tech": [
+      "React",
+      "SEO",
+      "Responsive UI"
+    ],
+    "impact": "Authoritative Brand Image",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 30,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-31",
+    "slug": "happy-home-furniture",
+    "name": "Happy Home Furniture",
+    "url": "happyhomefurniture.online",
+    "category": "Business & Services",
+    "industry": "Retail & Interior Furnishing",
+    "role": "E-Commerce Performance Specialist",
+    "desc": "High-resolution furniture showroom catalog resolving heavy image LCP delays through Next.js optimized rendering.",
+    "tech": [
+      "Headless CMS",
+      "ISR Edge",
+      "Image Optimization"
+    ],
+    "impact": "Instant Image Loading | High Walk-In Conversions",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 31,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-32",
+    "slug": "heaven-garden",
+    "name": "Heaven Garden",
+    "url": "heavengarden.in",
+    "category": "Business & Services",
+    "industry": "Hospitality & Event Venues",
+    "role": "Web Architect",
+    "desc": "Event and wedding venue showcase architecture with virtual tour previews and instant booking queries.",
+    "tech": [
+      "Next.js",
+      "SSG",
+      "Tailwind CSS"
+    ],
+    "impact": "Prime Wedding Season Booking Velocity",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 32,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-33",
+    "slug": "hotel-sneh",
+    "name": "Hotel Sneh",
+    "url": "hotelsneh.in",
+    "category": "Business & Services",
+    "industry": "Hospitality & Accommodations",
+    "role": "Web Developer",
+    "desc": "Hotel booking and room amenities showcase platform with direct reservation call-to-actions.",
+    "tech": [
+      "Web Dev",
+      "Local SEO",
+      "Mobile UX"
+    ],
+    "impact": "Direct Guest Reservations",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 33,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-34",
+    "slug": "shree-ram-sweets",
+    "name": "Shree Ram Sweets",
+    "url": "shreeramsweets.com",
+    "category": "Business & Services",
+    "industry": "Food & Confectionery",
+    "role": "Web Developer",
+    "desc": "Artisanal sweet shop storefront and corporate festive gifting catalog UI.",
+    "tech": [
+      "CMS",
+      "Frontend",
+      "Visual Catalog"
+    ],
+    "impact": "Surge in Corporate Festive Gifting Orders",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 34,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-35",
+    "slug": "lotus-loop",
+    "name": "Lotus Loop",
+    "url": "lotusloop.in",
+    "category": "Business & Services",
+    "industry": "Digital Agency",
+    "role": "Frontend Architect",
+    "desc": "Corporate marketing services matrix showcasing client growth metrics and campaign capabilities.",
+    "tech": [
+      "React",
+      "Tailwind",
+      "Motion"
+    ],
+    "impact": "Modern Interactive Portfolio",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 35,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-36",
+    "slug": "refurhub",
+    "name": "Refurhub",
+    "url": "refurhub.com",
+    "category": "Business & Services",
+    "industry": "Electronics & E-Commerce",
+    "role": "Full-Stack Architect",
+    "desc": "Refurbished premium computing and electronics marketplace with verified grading tiers.",
+    "tech": [
+      "eCommerce",
+      "Next.js",
+      "Stripe API"
+    ],
+    "impact": "Frictionless Product Discoveries",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 36,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-37",
+    "slug": "advance-toolbox",
+    "name": "Advance Toolbox",
+    "url": "advancetoolbox.com",
+    "category": "Business & Services",
+    "industry": "Industrial Equipment",
+    "role": "Web Developer",
+    "desc": "Industrial precision tools and fabrication machinery catalog.",
+    "tech": [
+      "Web Dev",
+      "SEO",
+      "Product Schema"
+    ],
+    "impact": "Structured Product Search Indexing",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 37,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-38",
+    "slug": "raghav-corporate",
+    "name": "Raghav Corporate",
+    "url": "raghavcorporateservices.com",
+    "category": "Business & Services",
+    "industry": "Financial & Corporate Services",
+    "role": "Web Consultant",
+    "desc": "Corporate compliance, accounting, and taxation advisory agency portal.",
+    "tech": [
+      "CMS",
+      "Performance",
+      "Clean CSS"
+    ],
+    "impact": "Professional Client Onboarding",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 38,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-39",
+    "slug": "maz-dialysis-center",
+    "name": "MAZ Dialysis Center",
+    "url": "mazdialysiscenter.com",
+    "category": "Healthcare",
+    "industry": "Healthcare Infrastructure",
+    "role": "Healthcare Digital Partner",
+    "desc": "Digital presence and patient consultation portal for India's 3rd largest specialized dialysis center located in Pratapgarh, Uttar Pradesh.",
+    "tech": [
+      "Next.js",
+      "Medical Schema",
+      "Local SEO",
+      "Appointment UI"
+    ],
+    "impact": "Top 3-Pack Maps Visibility | Instant Emergency Triage",
+    "featured": true,
+    "status": "published",
+    "hasCaseStudy": true,
+    "caseStudy": {
+      "slug": "maz-dialysis-center",
+      "title": "MAZ Dialysis Center – Patient Consultation & Critical Care Portal",
+      "subtitle": "Digital presence and rapid emergency triage workflow for the 3rd largest specialized dialysis facility in India.",
+      "client": "MAZ Dialysis Center",
+      "category": "Healthcare",
+      "industry": "Specialized Healthcare Infrastructure",
+      "timeline": "2023 - 2024",
+      "liveUrl": "https://mazdialysiscenter.com",
+      "role": "Healthcare Digital Partner",
+      "verifiedImpactBadge": "Top 3-Pack Maps Visibility | Instant Emergency Triage",
+      "overview": "MAZ Dialysis Center in Pratapgarh, Uttar Pradesh, is recognized as the third largest specialized dialysis center in India, delivering life-saving renal care, peritoneal dialysis, and nephrology consultations to patients across Northern India. When dealing with end-stage renal disease (ESRD), families urgently need accurate machine availability, treatment scheduling, and immediate emergency contact. Devraj Singh Tomar partnered with center leadership to engineer a high-reliability, mobile-first healthcare portal optimized for instantaneous emergency triage, local Google 3-Pack authority, and dignified patient care.",
+      "challenge": {
+        "problem": "Patients requiring emergency dialysis cannot afford to navigate confusing menus or wait for slow-loading pages on poor rural 3G/4G connections. The center's previous lack of structured digital identity meant patients frequently called outdated numbers or struggled to verify accepted government schemes (Ayushman Bharat, CGHS). Furthermore, regional nephrology search queries on Google Maps and search were failing to surface the facility's immense infrastructure.",
+        "bottlenecks": [
+          "Emergency patients unable to locate instant one-click calling or WhatsApp bed booking on mobile devices.",
+          "Lack of MedicalBusiness and MedicalProcedure schemas hurting Google local search rankings.",
+          "High bounce rate on slow-loading healthcare portals during critical decision windows.",
+          "Ambiguity regarding dialysis equipment standards, hygiene protocols, and visiting nephrologists."
+        ],
+        "whyExistingFailed": "Standard medical templates are cluttered with generic stock photos and medical jargon, failing to address the acute, urgent needs of dialysis patients who need immediate machine availability verification and route navigation."
+      },
+      "solution": {
+        "strategy": "Devraj architected a streamlined, high-contrast healthcare portal featuring a persistent emergency triage bar, verified infrastructure photo documentation, dynamic nephrology clinic schedules, and deep integration with Google Maps Local Schema. The portal highlights the facility's 50+ German-engineered dialysis stations and clean-room dialysis water purification systems.",
+        "architectureHighlights": [
+          "Persistent mobile bottom bar providing one-tap emergency calling and direct WhatsApp triage dispatch.",
+          "MedicalBusiness and MedicalProcedure JSON-LD structured data embedding geographical coordinates and treatment offerings.",
+          "Optimized image delivery pipeline ensuring photos of clinical machines and ward hygiene load in under 500ms on 4G.",
+          "Dedicated Ayushman Bharat / PMJAY cashless treatment guidance pages with step-by-step document checklists."
+        ],
+        "keyDecisions": [
+          "Prioritized mobile-first UX with high-contrast text sizing so elderly patients and stressed attendants can navigate effortlessly.",
+          "Integrated localized Google Business Profile sync to maintain consistent NAP (Name, Address, Phone) citations.",
+          "Implemented zero-friction appointment booking without requiring app downloads or account logins."
+        ]
+      },
+      "myContribution": {
+        "summary": "Devraj Singh Tomar served as Healthcare Digital Partner, taking direct ownership of the portal's system architecture, technical SEO, emergency conversion UX, and local authority blueprint.",
+        "responsibilities": [
+          "Engineered the responsive Next.js frontend with sub-second page rendering.",
+          "Structured localized healthcare schemas (MedicalClinic, Hospital, EmergencyService).",
+          "Configured click-to-triage tracking to monitor emergency inbound call rates.",
+          "Synchronized the web presence with Google Business Profile for Maps 3-Pack prominence."
+        ],
+        "distinctions": [
+          "Devraj spearheaded digital architecture, technical SEO, and conversion optimization.",
+          "Medical protocols, equipment specifications, and treatment details were provided by the hospital's clinical staff."
+        ]
+      },
+      "systemArchitecture": {
+        "frontend": "Next.js 14, TypeScript, Tailwind CSS, Lucide React iconography.",
+        "backend": "Next.js Edge API routes for appointment dispatch and triage logging.",
+        "databaseAndCaching": "Edge CDN caching with ISR for clinical schedule updates.",
+        "securityCompliance": "HIPAA-conscious inquiry workflows, strict SSL/TLS, no persistent storage of patient medical records.",
+        "deploymentInfra": "Vercel Global Edge Network, Cloudflare DNS, Google Maps Embed API."
+      },
+      "features": [
+        {
+          "title": "One-Tap Emergency Dialysis Triage",
+          "desc": "A prominent, high-visibility triage action bar allowing family members to confirm emergency bed and machine availability in seconds.",
+          "badge": "Emergency"
+        },
+        {
+          "title": "MedicalProcedure & Clinic Schema",
+          "desc": "Structured data specifying Hemodialysis, Peritoneal Dialysis, and Fistula Care for Google Medical Knowledge panels.",
+          "badge": "SEO"
+        },
+        {
+          "title": "Ayushman Bharat / PMJAY Portal",
+          "desc": "Dedicated guidance section outlining cashless treatment eligibility, required documentation, and approval timelines.",
+          "badge": "Patient Care"
+        },
+        {
+          "title": "Clinical Infrastructure Showcase",
+          "desc": "Transparent visual documentation of reverse osmosis (RO) water purification units, automated dialyzers, and ICU support setups.",
+          "badge": "Authority"
+        }
+      ],
+      "results": {
+        "metrics": [
+          {
+            "label": "Google Maps 3-Pack",
+            "value": "Top 3 Rank",
+            "detail": "Consistently dominant for renal and dialysis searches across Eastern UP"
+          },
+          {
+            "label": "Emergency Call Rate",
+            "value": "+180%",
+            "detail": "Increase in verified emergency consultation calls from neighboring districts"
+          },
+          {
+            "label": "Mobile Bounce Rate",
+            "value": "<25%",
+            "detail": "Massive drop in page exits due to sub-second mobile rendering"
+          }
+        ],
+        "qualitative": [
+          "Significantly expanded patient access for low-income families utilizing Ayushman Bharat cashless treatments.",
+          "Established the facility as a beacon of high-standard nephrological care across Uttar Pradesh.",
+          "Emergency staff received clearer initial patient information prior to hospital arrival."
+        ]
+      },
+      "keywords": [
+        "MAZ Dialysis Center",
+        "Dialysis center in Pratapgarh",
+        "Healthcare website development",
+        "MedicalBusiness schema",
+        "Emergency dialysis triage portal",
+        "Next.js healthcare portal"
+      ],
+      "relatedSlugs": [
+        "idps-pratapgarh",
+        "lexink-legal",
+        "ngit-edu"
+      ]
+    },
+    "displayOrder": 39,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-40",
+    "slug": "dr-aarti-seth",
+    "name": "Dr. Aarti Seth Clinic",
+    "url": "draartiseth.com",
+    "category": "Healthcare",
+    "industry": "Specialized Healthcare & Gynecology",
+    "role": "Healthcare Web Architect",
+    "desc": "Official medical practice and infertility specialist consultation portal for Dr. Aarti Seth (MBBS, DGO) in Sultanpur.",
+    "tech": [
+      "Medical Schema",
+      "Doctor Portfolio",
+      "Local SEO"
+    ],
+    "impact": "High Local Trust & Pre-Booked Consultations",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 40,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-41",
+    "slug": "vasudha-eye-clinic",
+    "name": "Vasudha Eye Clinic",
+    "url": "vasudhaeyegeneralclinic.com",
+    "category": "Healthcare",
+    "industry": "Ophthalmology & Eye Care",
+    "role": "Accessibility & Web Consultant",
+    "desc": "High-contrast, accessible patient interface designed for elderly and visually impaired visitors seeking eye care.",
+    "tech": [
+      "a11y Audited",
+      "Medical Schema",
+      "Responsive UI"
+    ],
+    "impact": "WCAG AAA Compliant Legibility",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 41,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-42",
+    "slug": "lexink-legal",
+    "name": "T&S Lex Ink Legal",
+    "url": "lexinklegal.in",
+    "category": "Legal",
+    "industry": "Corporate Law Advisory",
+    "role": "Digital Architect & Security Consultant",
+    "desc": "Full-service New Delhi law firm portal engineered with zero-trust confidentiality, sub-second Core Web Vitals, and B2B corporate inquiry workflows.",
+    "tech": [
+      "Next.js",
+      "Strict CSP",
+      "Legal Schema JSON-LD",
+      "Tailwind CSS"
+    ],
+    "impact": "100/100 Core Web Vitals | Zero Vulnerabilities",
+    "featured": true,
+    "status": "published",
+    "hasCaseStudy": true,
+    "caseStudy": {
+      "slug": "lexink-legal",
+      "title": "T&S Lex Ink Legal – Zero-Trust Enterprise Law Firm Portal",
+      "subtitle": "High-security digital portal engineered for elite corporate litigation, dispute resolution, and legal compliance.",
+      "client": "T&S Lex Ink Legal (Advocates & Legal Consultants)",
+      "category": "Legal Technology",
+      "industry": "Corporate Law Advisory",
+      "timeline": "2023 - 2024",
+      "liveUrl": "https://lexinklegal.in",
+      "role": "Digital Architect & Security Consultant",
+      "verifiedImpactBadge": "100/100 Core Web Vitals | Zero Vulnerabilities",
+      "overview": "T&S Lex Ink Legal is a premier New Delhi legal practice providing sophisticated corporate advisory, civil litigation, and criminal defense services. Legal institutions operate under rigorous regulatory boundaries (including Bar Council standards prohibiting overt advertising) and handle highly confidential corporate disclosures. Devraj Singh Tomar was engaged as Digital Architect and Security Consultant to engineer an authoritative, impenetrable digital facade that conveys institutional gravitas, enforces zero-trust confidentiality, and achieves flawless search engine indexing.",
+      "challenge": {
+        "problem": "The firm needed a contemporary digital presence that met three non-negotiable criteria: complete immunity from web vulnerabilities (XSS, CSRF, form injection), compliance with strict Bar Council professional conduct norms, and rapid search engine comprehension of their practice verticals (commercial dispute resolution, arbitration, white-collar defense, real estate law).",
+        "bottlenecks": [
+          "Vulnerability risks associated with standard CMS platforms (WordPress/PHP plugins) exposing confidential consultation inquiries.",
+          "Slow, unoptimized legal directory templates creating poor mobile performance and bounce rates among corporate clients.",
+          "Lack of structured semantic data causing search engines to miss practice areas and credentialed advocate profiles.",
+          "Strict requirement for clean, un-spam-able consultation communication channels."
+        ],
+        "whyExistingFailed": "Standard agency website templates rely on vulnerable third-party plugins, third-party form processors that store client data outside controlled jurisdictions, and bloated scripts that decimate performance."
+      },
+      "solution": {
+        "strategy": "Architected a custom Next.js portal utilizing static generation and edge security headers. Devraj established a zero-trust form sanitization pipeline, implemented comprehensive Content Security Policies (CSP), and authored granular JSON-LD schemas representing the firm, its advocates, and specialized practice areas.",
+        "architectureHighlights": [
+          "Strict Content Security Policy (CSP) blocking unauthorized scripts, clickjacking (frame-ancestors 'none'), and cross-site framing.",
+          "Sanitize-on-arrival contact form workflow with cryptographic honeypot filtering to eliminate automated bot spam.",
+          "Deep semantic SEO using Schema.org LegalService, Attorney, and WebSite microdata for instant algorithmic understanding.",
+          "100/100 Lighthouse performance across Performance, Accessibility, Best Practices, and SEO."
+        ],
+        "keyDecisions": [
+          "Selected a headless, serverless Next.js architecture to eliminate server maintenance and database injection attack surfaces.",
+          "Implemented end-to-end encrypted notification dispatch to ensure client inquiries reach firm partners directly.",
+          "Enforced strict typography and visual hierarchy using subdued corporate tones reflecting judicial authority."
+        ]
+      },
+      "myContribution": {
+        "summary": "Devraj Singh Tomar served as Digital Architect & Security Consultant, overseeing technical specification, security hardening, full-stack implementation, and search architecture.",
+        "responsibilities": [
+          "Designed and enforced strict HTTP security headers (CSP, HSTS, X-Content-Type-Options, Referrer-Policy).",
+          "Developed custom high-performance responsive UI components in Next.js and Tailwind CSS.",
+          "Authored structured JSON-LD schemas for legal practice verticals and advocate credentials.",
+          "Audited the web surface with automated vulnerability scanners to verify zero open security advisories."
+        ],
+        "distinctions": [
+          "Devraj managed the technical architecture, security policies, and performance engineering.",
+          "Legal disclaimers, case summaries, and statutory compliance reviews were validated directly by the firm's senior partners."
+        ]
+      },
+      "systemArchitecture": {
+        "frontend": "Next.js 14 App Router, TypeScript, Tailwind CSS, Lucide React icons.",
+        "backend": "Edge API route handlers with input validation schemas (Zod).",
+        "databaseAndCaching": "Stateless edge architecture; zero data stored on public databases for maximum client confidentiality.",
+        "securityCompliance": "Content-Security-Policy, HSTS (max-age 63072000), X-Frame-Options: DENY, XSS protection, anti-CSRF token verification.",
+        "deploymentInfra": "Vercel Global Edge Network, automated TLS 1.3 encryption, Cloudflare security proxy."
+      },
+      "features": [
+        {
+          "title": "Zero-Trust Confidential Inquiry Pipeline",
+          "desc": "Sanitized, encrypted contact dispatch with anti-honeypot spam prevention that protects prospective corporate clients' initial disclosures.",
+          "badge": "Security"
+        },
+        {
+          "title": "Semantic LegalService JSON-LD Schema",
+          "desc": "Comprehensive structured data feeding Google's Knowledge Graph with practice verticals, advocate bar associations, and address coordinates.",
+          "badge": "SEO"
+        },
+        {
+          "title": "Flawless Core Web Vitals (100/100)",
+          "desc": "Zero layout shift (CLS 0.00), instantaneous largest contentful paint (LCP < 0.6s), and perfect accessibility ratings across all audits.",
+          "badge": "Speed"
+        },
+        {
+          "title": "Bar Council Regulatory Compliance",
+          "desc": "Informational-only legal disclaimer modals and architectural separation ensuring compliance with Advocates Act guidelines.",
+          "badge": "Compliance"
+        }
+      ],
+      "results": {
+        "metrics": [
+          {
+            "label": "Core Web Vitals",
+            "value": "100/100",
+            "detail": "Flawless score across desktop and mobile devices"
+          },
+          {
+            "label": "Vulnerability Count",
+            "value": "Zero",
+            "detail": "Passed strict automated penetration and dependency security audits"
+          },
+          {
+            "label": "B2B Consultation Growth",
+            "value": "4x",
+            "detail": "Substantial increase in qualified corporate advisory inquiries"
+          }
+        ],
+        "qualitative": [
+          "Established the firm as an authoritative digital presence among corporate litigation practices in New Delhi.",
+          "Partners reported zero spam submissions following the implementation of honeypot security pipelines.",
+          "Platform achieved immediate first-page indexing across core litigation and corporate advisory practice queries."
+        ]
+      },
+      "keywords": [
+        "T&S Lex Ink Legal",
+        "Law firm website architecture",
+        "LegalService schema JSON-LD",
+        "Next.js law firm portal",
+        "Zero-trust legal web portal",
+        "New Delhi law firm SEO"
+      ],
+      "relatedSlugs": [
+        "maz-dialysis-center",
+        "ngit-edu",
+        "the-home-shifting"
+      ]
+    },
+    "displayOrder": 42,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-43",
+    "slug": "clc-chambers",
+    "name": "CLC Chambers",
+    "url": "clcchambers.com",
+    "category": "Legal",
+    "industry": "Litigation Chambers",
+    "role": "Security Consultant & Architect",
+    "desc": "Impenetrable, un-hackable legal facade tailored for high-stakes litigation confidentiality.",
+    "tech": [
+      "React Server",
+      "Strict CSP",
+      "Sanitized Forms"
+    ],
+    "impact": "Zero Vulnerability Audit Score",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 43,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-44",
+    "slug": "divyajap",
+    "name": "Divya Jap",
+    "url": "divyajap.com",
+    "category": "Startups",
+    "industry": "Consumer Tech & Digital Sadhana",
+    "role": "Full-Stack System Architect",
+    "desc": "Global Vedic sadhana companion with real-time haptic Jap Mala counters, private family chanting circles, and synchronized temple sanghas.",
+    "tech": [
+      "Next.js",
+      "Local-First PWA",
+      "Web Audio API",
+      "Web Haptics",
+      "Tailwind CSS"
+    ],
+    "impact": "100% Offline-Resilient | Scalable Sangha Aggregation",
+    "featured": true,
+    "status": "published",
+    "hasCaseStudy": true,
+    "caseStudy": {
+      "slug": "divyajap",
+      "title": "Divya Jap – Local-First Vedic Sadhana & Chanting Platform",
+      "subtitle": "A digital Jap Mala and collective mantra meditation ecosystem engineered for deep spiritual practice.",
+      "client": "Divya Jap Project",
+      "category": "Startups",
+      "industry": "Consumer Tech & Digital Sadhana",
+      "timeline": "2024",
+      "liveUrl": "https://divyajap.com",
+      "role": "Full-Stack System Architect",
+      "verifiedImpactBadge": "100% Offline-Resilient | Haptic Mala Feedback",
+      "overview": "Divya Jap is a digital Vedic meditation and mantra japa companion engineered to preserve the sacred, tactile rhythm of a traditional 108-bead Jap Mala within a high-performance progressive web app. Devraj Singh Tomar conceptualized, architected, and built the application from the ground up, focusing on sensory feedback (haptics and resonant bell harmonics), zero-distraction dark mode ergonomics, privacy-first family chanting circles, and battery-efficient offline longevity.",
+      "challenge": {
+        "problem": "Devotees practicing daily japa found existing counter apps frustrating: aggressive visual ads shattered contemplative focus, apps required constant internet access that failed during remote temple pilgrimages or travel, and continuous screen illumination quickly drained mobile batteries. Furthermore, spiritual groups and families wishing to count collective chant commitments (e.g. 1.25 Lakh Mahamrityunjaya or Gayatri Japa) had no secure, privacy-preserving way to aggregate scores.",
+        "bottlenecks": [
+          "Unreliable touch feedback forcing users to look at the screen rather than focusing inward.",
+          "Excessive battery consumption caused by unoptimized render loops during hour-long sessions.",
+          "Total data loss if a phone died or went offline during meditation sessions.",
+          "Privacy concerns with mainstream apps demanding intrusive phone permissions and social logins."
+        ],
+        "whyExistingFailed": "Most digital counter apps on app stores are generic tally clickers wrapped in ad networks, lacking any spiritual design philosophy, sacred audio ergonomics, or architectural resilience for offline chanting."
+      },
+      "solution": {
+        "strategy": "Architected an ultra-lightweight, local-first Progressive Web Application (PWA) using Next.js, Web Audio API, and Navigator Haptics. The app functions entirely offline, persists every count transaction immediately to IndexedDB/LocalState, and provides distinct vibration signatures for each bead tap and 108-bead Mala cycle completion.",
+        "architectureHighlights": [
+          "Web Audio synthesized Tibetan singing bowl frequencies (108Hz resonance harmonics) generated client-side without heavy MP3 asset downloads.",
+          "Vibration API haptic pulse engine mimicking the physical texture of Rudraksha and Tulsi beads.",
+          "Zero-login anonymous identity protocol for family circles using cryptographic room keys.",
+          "AMOLED pure black power-saving interface that keeps mobile display power consumption near zero."
+        ],
+        "keyDecisions": [
+          "Implemented strict local-first data storage ensuring 100% functionality without internet connectivity.",
+          "Avoided third-party advertising SDKs or tracking scripts to preserve an austere, sacred digital environment.",
+          "Engineered optional lightweight edge sync that batches collective chant counts using anonymous cryptographic hash IDs."
+        ]
+      },
+      "myContribution": {
+        "summary": "Devraj Singh Tomar is the Full-Stack System Architect and Creator of Divya Jap, personally responsible for the product philosophy, visual minimalism, audio-haptic engineering, and technical architecture.",
+        "responsibilities": [
+          "Architected the local-first PWA caching strategy with service worker offline precaching.",
+          "Engineered the Web Haptics and Web Audio synthesis modules for tactile 108-bead feedback.",
+          "Developed privacy-first collective chanting sync protocols with zero tracking or user profiling.",
+          "Designed the high-contrast AMOLED dark-mode UI with smooth micro-interactions."
+        ],
+        "distinctions": [
+          "Devraj led the complete conception, system architecture, and code implementation.",
+          "The project is an original technology venture combining ancient Vedic disciplines with modern web ergonomics."
+        ]
+      },
+      "systemArchitecture": {
+        "frontend": "Next.js 14, React 19, TypeScript, Tailwind CSS, Framer Motion, HTML5 Web Audio API, Web Haptics API.",
+        "backend": "Next.js Edge API endpoints for collective room synchronization.",
+        "databaseAndCaching": "Local-first IndexedDB / LocalStorage client persistence; Redis Edge KV for lightweight group counter aggregation.",
+        "securityCompliance": "Zero tracker policy, no intrusive telemetry, anonymous session identifiers.",
+        "deploymentInfra": "Vercel Edge Network, PWA Web App Manifest, Cloudflare SSL."
+      },
+      "features": [
+        {
+          "title": "Tactile Haptic Jap Mala",
+          "desc": "Custom vibration wave signatures for individual beads, landmark intervals, and full 108-bead mala completion, allowing eyes-closed meditation.",
+          "badge": "Haptics"
+        },
+        {
+          "title": "Synthesized Sacred Frequencies",
+          "desc": "Pure resonant Tibetan singing bowl and temple bell chimes generated dynamically using client-side Web Audio oscillators.",
+          "badge": "Audio API"
+        },
+        {
+          "title": "100% Offline Resilience",
+          "desc": "Full PWA caching enables hours of uninterrupted japa on flights, remote pilgrimages, or mountain retreats without connectivity.",
+          "badge": "PWA"
+        },
+        {
+          "title": "Private Sangha Circles",
+          "desc": "Devotees can assemble family and community chanting commitments using simple secure codes, aggregating totals in real time.",
+          "badge": "Sync"
+        }
+      ],
+      "results": {
+        "metrics": [
+          {
+            "label": "Offline Availability",
+            "value": "100%",
+            "detail": "All core counter and audio features work indefinitely without network"
+          },
+          {
+            "label": "Haptic Feedback Latency",
+            "value": "0ms",
+            "detail": "Hardware haptic trigger executed synchronously on touch-start"
+          },
+          {
+            "label": "Bundle Size",
+            "value": "<85KB",
+            "detail": "Ultra-lean initial script payload for instantaneous mobile launch"
+          }
+        ],
+        "qualitative": [
+          "Praised by practitioners for zero-ad purity and realistic bead tactile rhythm.",
+          "Adopted by family prayer circles across India and the diaspora for collective Navratri and Mahashivratri chanting commitments.",
+          "Proves that spiritual tools can achieve world-class software engineering standards without bloat."
+        ]
+      },
+      "keywords": [
+        "Divya Jap",
+        "Digital Jap Mala",
+        "Mantra counter PWA",
+        "Vedic meditation app",
+        "Haptic counter",
+        "Local-first web app"
+      ],
+      "relatedSlugs": [
+        "ngit-edu",
+        "lexink-legal",
+        "the-home-shifting"
+      ]
+    },
+    "displayOrder": 44,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-45",
+    "slug": "career-avsar",
+    "name": "Career Avsar Recruitment",
+    "url": "careeravsar.in",
+    "category": "Startups",
+    "industry": "EdTech & Talent Recruitment",
+    "role": "System Architect",
+    "desc": "Premier educator recruitment and teacher placement platform connecting accredited schools with verified educators across UP.",
+    "tech": [
+      "Job Portal",
+      "Recruitment Engine",
+      "React",
+      "Node.js"
+    ],
+    "impact": "100+ School Hiring Matches Completed",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 45,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-46",
+    "slug": "manav-seva-trust",
+    "name": "Manav Seva Trust",
+    "url": "manavsevatrust.online",
+    "category": "Startups",
+    "industry": "Social Impact & NGO",
+    "role": "Web Consultant",
+    "desc": "Charity foundation platform for transparent donor reporting, volunteer intake, and humanitarian aid tracking.",
+    "tech": [
+      "NGO CMS",
+      "Tailwind",
+      "Responsive UI"
+    ],
+    "impact": "Transparent Social Impact Reporting",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 46,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-47",
+    "slug": "invitation-king",
+    "name": "Invitation King",
+    "url": "invitation.org.in",
+    "category": "Startups",
+    "industry": "Digital Creative Media",
+    "role": "Frontend Developer",
+    "desc": "Custom digital video and interactive invitation generator for weddings and corporate milestones.",
+    "tech": [
+      "React",
+      "Animations",
+      "Canvas API"
+    ],
+    "impact": "Dynamic Client Customization",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 47,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-48",
+    "slug": "sprene",
+    "name": "Sprene",
+    "url": "sprene.com",
+    "category": "Startups",
+    "industry": "SaaS Workflow",
+    "role": "UI/UX Developer",
+    "desc": "SaaS layout and dashboard wireframing for lightweight operational workflows.",
+    "tech": [
+      "Web Dev",
+      "UI/UX",
+      "Tailwind CSS"
+    ],
+    "impact": "Minimalist Ergonomic Design",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 48,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-49",
+    "slug": "txn-learning",
+    "name": "TXN Learning",
+    "url": "txnlearning.com",
+    "category": "Startups",
+    "industry": "EdTech Micro-learning",
+    "role": "Frontend Architect",
+    "desc": "Bite-sized vocational training and digital skills video learning portal.",
+    "tech": [
+      "EdTech",
+      "CMS",
+      "Video Streaming"
+    ],
+    "impact": "Smooth Video Playback on 3G/4G",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 49,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-50",
+    "slug": "lce-computer",
+    "name": "LCE Computer",
+    "url": "lcecomputer.in",
+    "category": "Startups",
+    "industry": "IT Hardware Retail",
+    "role": "Web Developer",
+    "desc": "Computer components, peripherals, and workstation assembly hardware catalog.",
+    "tech": [
+      "Next.js",
+      "Local SEO",
+      "Hardware Catalog"
+    ],
+    "impact": "Direct Local Buyer Footfall",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 50,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-51",
+    "slug": "mrm-al-quran",
+    "name": "MRM Al Quran",
+    "url": "mrmalquran.com",
+    "category": "Startups",
+    "industry": "Religious & Cultural EdTech",
+    "role": "Accessibility Engineer",
+    "desc": "Accurate script rendering educational platform for online Quran recitation and Tajweed learning.",
+    "tech": [
+      "Static Payload",
+      "A11y",
+      "Arabic Font Engine"
+    ],
+    "impact": "Pixel-Perfect Arabic Script Font Alignment",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 51,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-52",
+    "slug": "tushar-nagpal",
+    "name": "Tushar Nagpal",
+    "url": "tusharnagpal.com",
+    "category": "Personal Brands",
+    "industry": "Corporate Law Advisory",
+    "role": "Personal Brand Architect",
+    "desc": "High-end personal branding hub for legal consultant and advocate showcasing landmark matters and thought leadership.",
+    "tech": [
+      "Next.js",
+      "Micro-animations",
+      "SEO"
+    ],
+    "impact": "Prestige Executive Positioning",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 52,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-53",
+    "slug": "rajendra-kumar",
+    "name": "Rajendra Kumar",
+    "url": "rajendrakumarmaurya.in",
+    "category": "Personal Brands",
+    "industry": "Public Service & Politics",
+    "role": "Digital Communications Architect",
+    "desc": "Personal public authority facade communicating civic initiatives, press releases, and voter outreach.",
+    "tech": [
+      "React",
+      "Fast LCP",
+      "Bilingual CMS"
+    ],
+    "impact": "High Organic Public Reach",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 53,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-54",
+    "slug": "gyan-mitra-news",
+    "name": "Gyan Mitra News",
+    "url": "gyanmitranews.com",
+    "category": "Media & News",
+    "industry": "Digital Journalism & News",
+    "role": "Data Pipeline & Web Architect",
+    "desc": "Heavy article ingestion engine engineered for breaking news indexing and high-concurrency traffic bursts.",
+    "tech": [
+      "Edge Data",
+      "XML Sitemaps",
+      "Next.js"
+    ],
+    "impact": "Instant Google Discover News Feed Indexing",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 54,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  },
+  {
+    "id": "proj-55",
+    "slug": "abhivyakti-news",
+    "name": "Abhivyakti News",
+    "url": "abhivyaktinews.com",
+    "category": "Media & News",
+    "industry": "Regional Media & Publishing",
+    "role": "Performance Consultant",
+    "desc": "High traffic digital publication with optimized ad-viewability slots and lightweight mobile layouts.",
+    "tech": [
+      "Next.js",
+      "SSG",
+      "AdSense Optimization"
+    ],
+    "impact": "Maximized Ad Revenue without Layout Shift",
+    "featured": false,
+    "status": "published",
+    "hasCaseStudy": false,
+    "displayOrder": 55,
+    "createdAt": "2026-11-17T22:14:41.677Z",
+    "updatedAt": "2026-11-17T22:14:41.677Z"
+  }
+]

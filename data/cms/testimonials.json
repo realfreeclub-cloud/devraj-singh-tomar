@@ -1,0 +1,22 @@
+[
+  {
+    "id": "test-1",
+    "name": "Advocate T. Sharma",
+    "designation": "Managing Partner",
+    "organization": "T&S Lex Ink Legal",
+    "content": "Devraj built our law firm's digital presence with absolute zero-trust security and flawless document confidentiality. Our client inquiries increased by 300% within 90 days.",
+    "relatedProject": "lexinklegal.in",
+    "displayOrder": 1,
+    "status": "published"
+  },
+  {
+    "id": "test-2",
+    "name": "Dr. M. A. Zaidi",
+    "designation": "Director of Critical Care",
+    "organization": "MAZ Dialysis Center",
+    "content": "In healthcare, minutes matter. Devraj designed an ultra-reliable emergency dialysis consultation portal that has never experienced downtime during critical patient admissions.",
+    "relatedProject": "mazdialysiscenter.in",
+    "displayOrder": 2,
+    "status": "published"
+  }
+]

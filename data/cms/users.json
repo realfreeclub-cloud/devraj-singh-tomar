@@ -1,0 +1,11 @@
+[
+  {
+    "id": "usr-admin-1",
+    "username": "admin",
+    "email": "admin@devrajsinghtomar.com",
+    "passwordHash": "914180b3a22d6670d689c567687b341ac92df745d82b3d56ac3329b9cd3781ac72e443679a7d8b94ec385cd068d0e03216e94297a1437a7a2d20ea3cb43e473e",
+    "salt": "fddbb6c3b8a977672f8337a4d7532813",
+    "role": "superadmin",
+    "createdAt": "2026-11-17T22:14:41.675Z"
+  }
+]

@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  return NextResponse.json(store.getHomepageSettings());
+  const settings = await store.getHomepageSettings();
+  return NextResponse.json(settings);
 }
 
 export async function PUT(req: NextRequest) {
@@ -17,7 +18,7 @@ export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
     const store = getCmsStore();
-    const updated = store.saveHomepageSettings(body);
+    const updated = await store.saveHomepageSettings(body);
     return NextResponse.json(updated);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to update homepage settings";

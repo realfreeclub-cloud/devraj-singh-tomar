@@ -12,7 +12,7 @@ export async function DELETE(req: NextRequest, { params }: Params) {
 
   const { id } = await params;
   const store = getCmsStore();
-  const success = store.deleteMediaItem(id);
+  const success = await store.deleteMediaItem(id);
 
   if (!success) {
     return NextResponse.json({ error: "Media item not found" }, { status: 404 });

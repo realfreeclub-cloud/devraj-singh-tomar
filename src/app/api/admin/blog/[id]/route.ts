@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, { params }: Params) {
 
   const { id } = await params;
   const store = getCmsStore();
-  const article = store.getArticleById(id);
+  const article = await store.getArticleById(id);
 
   if (!article) {
     return NextResponse.json({ error: "Article not found" }, { status: 404 });
@@ -27,7 +27,7 @@ export async function DELETE(req: NextRequest, { params }: Params) {
 
   const { id } = await params;
   const store = getCmsStore();
-  const success = store.deleteArticle(id);
+  const success = await store.deleteArticle(id);
 
   if (!success) {
     return NextResponse.json({ error: "Article not found" }, { status: 404 });

@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, { params }: Params) {
 
   const { id } = await params;
   const store = getCmsStore();
-  const project = store.getProjectById(id);
+  const project = await store.getProjectById(id);
 
   if (!project) {
     return NextResponse.json({ error: "Project not found" }, { status: 404 });
@@ -27,7 +27,7 @@ export async function DELETE(req: NextRequest, { params }: Params) {
 
   const { id } = await params;
   const store = getCmsStore();
-  const success = store.deleteProject(id);
+  const success = await store.deleteProject(id);
 
   if (!success) {
     return NextResponse.json({ error: "Project not found" }, { status: 404 });

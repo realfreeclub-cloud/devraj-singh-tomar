@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  const ventures = store.getVentures();
+  const ventures = await store.getVentures();
   return NextResponse.json(ventures);
 }
 
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
 
     const store = getCmsStore();
-    const saved = store.saveVenture(body);
+    const saved = await store.saveVenture(body);
     return NextResponse.json(saved);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to save venture";

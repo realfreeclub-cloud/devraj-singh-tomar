@@ -23,6 +23,7 @@ export interface CmsProject {
   featured: boolean;
   status: "published" | "draft";
   hasCaseStudy: boolean;
+  displayOrder?: number;
   caseStudy?: {
     title: string;
     subtitle: string;
@@ -242,3 +243,23 @@ export interface CmsRouteSeo {
 }
 
 export type CmsSeoSettings = Record<string, CmsRouteSeo>;
+
+export interface CmsSession {
+  tokenHash: string;
+  userId: string;
+  username: string;
+  email: string;
+  role: string;
+  ip: string;
+  userAgent: string;
+  createdAt: string;
+  expiresAt: string;
+  isRevoked: boolean;
+}
+
+export interface CmsLoginAttempt {
+  ip: string;
+  attempts: number;
+  lastAttempt: string;
+  lockedUntil?: string;
+}

@@ -7,6 +7,6 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  const stats = store.getDashboardStats();
+  const stats = await store.getDashboardStats();
   return NextResponse.json(stats);
 }

@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  return NextResponse.json(store.getTestimonials());
+  const items = await store.getTestimonials();
+  return NextResponse.json(items);
 }
 
 export async function POST(req: NextRequest) {
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
 
     const store = getCmsStore();
-    const saved = store.saveTestimonial(body);
+    const saved = await store.saveTestimonial(body);
     return NextResponse.json(saved);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : "Failed to save testimonial";

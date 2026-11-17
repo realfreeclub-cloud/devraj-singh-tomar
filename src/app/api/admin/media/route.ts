@@ -7,5 +7,6 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  return NextResponse.json(store.getMediaItems());
+  const items = await store.getMediaItems();
+  return NextResponse.json(items);
 }

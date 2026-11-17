@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  const inquiries = store.getInquiries();
+  const inquiries = await store.getInquiries();
   return NextResponse.json(inquiries);
 }
 
@@ -22,10 +22,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const store = getCmsStore();
-    const updated = store.updateInquiry(id, {
-      ...(status ? { status } : {}),
-      ...(internalNotes !== undefined ? { internalNotes } : {}),
-    });
+    const updated = await store.updateInquiryStatus(id, status, internalNotes);
 
     if (!updated) {
       return NextResponse.json({ error: "Inquiry not found" }, { status: 404 });

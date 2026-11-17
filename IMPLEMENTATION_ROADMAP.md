@@ -124,7 +124,31 @@ flowchart TD
     - Updated `sitemap.ts` to include `/expertise`.
 - **Verification:** Successfully compiled with Next.js 16.2.1 and Webpack in 5.4s with 0 errors across 30 routes. TypeScript typecheck (`npx tsc --noEmit`) verified with 0 errors.
 
-### Phase 5: Advanced Admin CMS & Portfolio Management System [COMPLETED]
+### Phase 5.1: CMS Production Readiness & Security Hardening [COMPLETED]
+- **Status:** **Completed & Verified**
+- **Goal:** Harden the CMS for production hosting on Vercel, replace ephemeral filesystem dependency with MongoDB Atlas, enforce OWASP cryptographic security standards, eliminate CSV injection, and implement persistent cloud media storage.
+- **Key Modules Delivered:**
+  - **Serverless Database Architecture (`src/lib/db/mongodb.ts` & `src/lib/cms/mongoStore.ts`):**
+    - MongoDB connection singleton with connection pooling (`global._mongoClientPromise`) preventing connection exhaustion in Vercel serverless environments.
+    - Full MongoDB store implementation for all collections (`cms_projects`, `cms_articles`, `cms_ventures`, `cms_inquiries`, `cms_testimonials`, `cms_now_building`, `cms_homepage`, `cms_profile`, `cms_settings`, `cms_seo`, `cms_media`, `cms_users`, `cms_sessions`, `cms_login_attempts`).
+    - Automated unique indexes on `slug`, `id`, `referenceId`, `email`, `username`, and TTL indexes on sessions and rate limits.
+    - Graceful development fallback: Seamless delegation to MongoDB Atlas when `MONGODB_URI` is provided, with local file-based JSON persistence kept as development fallback.
+  - **Migration Engine (`src/lib/cms/migrateToMongo.ts` & `/api/admin/system/migrate`):**
+    - Idempotent migration script that reads existing JSON records and upserts into MongoDB Atlas with zero data loss.
+    - Preserved all 55 verified projects, 6 deep case studies, 4 blog articles, 5 ventures, testimonials, and active sprints.
+  - **Persistent Media Storage Provider (`src/lib/cms/mediaStorage.ts` & `/api/media/file/[filename]`):**
+    - Pluggable media storage: Uploads to Cloudinary (if configured) or MongoDB Atlas binary storage with immutable HTTP caching headers, eliminating Vercel `EROFS: read-only file system` errors.
+    - Strict MIME verification, 10MB size capping, and directory traversal sanitizer for filenames.
+    - Backward-compatible streaming route serving existing and new uploads.
+  - **Cryptographic & Authentication Hardening (`src/lib/cms/auth.ts`):**
+    - Upgraded PBKDF2 password hashing from 1,000 to **210,000 iterations** (OWASP 2024 guidance for SHA-512) with backward compatibility fallback.
+    - Server-side session persistence in `cms_sessions` with instant revocation on logout and global revocation across all devices on password change.
+    - IP-based brute-force login rate limiting (max 5 failed attempts per 15 minutes with exponential lockout).
+    - CSRF protection: Origin and Referer validation on all state-modifying requests (`POST`, `PUT`, `DELETE`).
+  - **Data Integrity & Security Headers (`src/proxy.ts` & `/api/admin/inquiries/export`):**
+    - Prevented CSV Formula Injection (CWE-1236) by automatically escaping formula triggers (`=`, `+`, `-`, `@`, `\t`, `\r`) with single quotes.
+    - Injected production security headers: `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy`.
+- **Verification:** 21/21 Automated Security & Cryptographic tests passed (`scripts/test-security-and-cms.mjs`). Next.js 16.2.1 production webpack build succeeded in 7.4s across all 62 routes with 0 errors. TypeScript check (`tsc --noEmit`) verified with 0 errors.
 - **Status:** **Completed & Verified**
 - **Goal:** Centralized content management system allowing Devraj Singh Tomar to manage the complete public portfolio without editing source code manually.
 - **Key Modules Delivered:**

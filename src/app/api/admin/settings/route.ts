@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
   if (!auth.authorized) return auth.response!;
 
   const store = getCmsStore();
-  return NextResponse.json(store.getWebsiteSettings());
+  const settings = await store.getWebsiteSettings();
+  return NextResponse.json(settings);
 }
 
 export async function PUT(req: NextRequest) {
@@ -30,12 +31,16 @@ export async function PUT(req: NextRequest) {
         return NextResponse.json({ error: "New password must be at least 8 characters long." }, { status: 400 });
       }
 
+      // Hash with modern OWASP 210,000 iterations
       const { hash, salt } = hashPassword(body.newPassword);
-      store.updateUser(user.id, { passwordHash: hash, salt });
+      await store.updateUser(user.id, { passwordHash: hash, salt });
+
+      // Invalidate all active sessions across devices
+      await store.revokeAllUserSessions(user.id);
     }
 
     const { currentPassword, newPassword, ...settingsData } = body;
-    const updated = store.saveWebsiteSettings(settingsData);
+    const updated = await store.saveWebsiteSettings(settingsData);
 
     return NextResponse.json({
       success: true,
