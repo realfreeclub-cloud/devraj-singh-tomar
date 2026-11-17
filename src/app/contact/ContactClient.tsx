@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -36,18 +36,55 @@ const GithubIcon = ({ size = 24 }: { size?: number }) => (
 );
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    organization: "",
+    message: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState<{
+    type: "success" | "error";
+    message: string;
+    referenceId?: string;
+  } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate sending
-    setTimeout(() => {
+    setSubmitResult(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          source: "contact-page",
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit inquiry.");
+      }
+
+      setSubmitResult({
+        type: "success",
+        referenceId: data.referenceId,
+        message: data.message || "Thank you. Your message has been received.",
+      });
+      setFormData({ name: "", email: "", phone: "", organization: "", message: "" });
+    } catch (err: unknown) {
+      setSubmitResult({
+        type: "error",
+        message: err instanceof Error ? err.message : "Failed to send message. Please try again or email directly.",
+      });
+    } finally {
       setIsSubmitting(false);
-      alert("Message sent successfully!");
-      setFormData({ name: "", email: "", message: "" });
-    }, 1500);
+    }
   };
 
   return (
@@ -135,6 +172,30 @@ export default function Contact() {
 
               <h2 className="text-2xl font-bold mb-8 text-title">Send a Message</h2>
 
+              {submitResult?.type === "success" && (
+                <div className="mb-6 p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-400 space-y-2 relative z-10">
+                  <div className="flex items-center gap-2 font-bold text-sm">
+                    <CheckCircle2 size={18} />
+                    Message Dispatched Successfully
+                  </div>
+                  <p className="text-xs text-foreground opacity-85 leading-relaxed">
+                    {submitResult.message}
+                  </p>
+                  {submitResult.referenceId && (
+                    <div className="pt-2 border-t border-emerald-500/20 text-xs font-mono">
+                      Inquiry Tracking ID: <span className="text-emerald-300 font-bold">{submitResult.referenceId}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {submitResult?.type === "error" && (
+                <div className="mb-6 p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-400 text-xs flex items-center gap-2 relative z-10">
+                  <AlertCircle size={18} />
+                  <span>{submitResult.message}</span>
+                </div>
+              )}
+
               <form 
                 onSubmit={handleSubmit} 
                 className="flex flex-col gap-6 relative z-10"
@@ -142,7 +203,7 @@ export default function Contact() {
               >
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
-                    <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Your Name</label>
+                    <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Your Name *</label>
                     <input
                       type="text"
                       required
@@ -153,7 +214,7 @@ export default function Contact() {
                     />
                   </div>
                   <div className="flex-1">
-                    <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Email Address</label>
+                    <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Email Address *</label>
                     <input
                       type="email"
                       required
@@ -165,15 +226,38 @@ export default function Contact() {
                   </div>
                 </div>
 
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Phone / WhatsApp (Optional)</label>
+                    <input
+                      type="text"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-background border border-layer-border rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-title"
+                      placeholder="+91 9876543210"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Organization / Venture (Optional)</label>
+                    <input
+                      type="text"
+                      value={formData.organization}
+                      onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                      className="w-full bg-background border border-layer-border rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-title"
+                      placeholder="e.g. Acme Innovations"
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Message</label>
+                  <label className="block text-sm font-medium text-foreground opacity-60 mb-2">Message & Project Scope *</label>
                   <textarea
                     rows={6}
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-background border border-layer-border rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-title"
-                    placeholder="How can we help?"
+                    placeholder="Describe your project, technology challenges, or strategic advisory requirements..."
                   ></textarea>
                 </div>
 

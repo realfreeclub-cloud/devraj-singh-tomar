@@ -77,6 +77,7 @@ export function proxy(request: NextRequest) {
     if (
       pathname.startsWith("/_next") ||
       pathname.startsWith("/api") ||
+      pathname.startsWith("/admin") ||
       pathname.includes(".") // e.g. logo.png, robots.txt, sitemap.xml
     ) {
       return NextResponse.next();

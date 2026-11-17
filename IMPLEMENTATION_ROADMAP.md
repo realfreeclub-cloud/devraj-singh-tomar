@@ -124,14 +124,49 @@ flowchart TD
     - Updated `sitemap.ts` to include `/expertise`.
 - **Verification:** Successfully compiled with Next.js 16.2.1 and Webpack in 5.4s with 0 errors across 30 routes. TypeScript typecheck (`npx tsc --noEmit`) verified with 0 errors.
 
-### Phase 5: Data Layer, Leads CRM & Admin CMS
-- **Goal:** Implement secure lead capture, meeting scheduling, and content management.
-- **Key Modules to Build:**
-  - Introduce lightweight, type-safe data storage engine with Zod validation.
-  - Implement `/api/contact`, `/api/estimator`, and `/api/meetings` endpoints.
-  - Build authenticated `/admin` portal with password hashing and session tokens.
-  - CRUD interfaces for managing Projects, Leads, Meetings, and Settings.
-- **Verification:** Test form submissions end-to-end; verify leads persist and generate reference IDs.
+### Phase 5: Advanced Admin CMS & Portfolio Management System [COMPLETED]
+- **Status:** **Completed & Verified**
+- **Goal:** Centralized content management system allowing Devraj Singh Tomar to manage the complete public portfolio without editing source code manually.
+- **Key Modules Delivered:**
+  - **Type System & Storage Engine (`src/lib/cms/`):**
+    - `types.ts`: Comprehensive TypeScript interfaces for AdminUser, CmsProject, CmsArticle, CmsVenture, CmsInquiry, CmsTestimonial, CmsNowBuilding, CmsMediaItem, CmsHomepageSettings, CmsProfile, CmsWebsiteSettings, CmsSeoSettings.
+    - `auth.ts`: PBKDF2 password hashing with random per-user salt + HMAC-SHA256 session tokens with HTTP-only cookies (`admin_session`) and `requireAdminAuth()` route guard.
+    - `store.ts`: High-performance atomic JSON persistence engine auto-bootstrapping default admin user (`admin@devrajsinghtomar.com`), 60+ projects, 6 case studies, 4 blog articles, and 6 ventures.
+  - **Server-Side REST APIs (`src/app/api/admin/` & `src/app/api/contact/`):**
+    - `auth/login`, `auth/logout`, `auth/me`
+    - `stats`: Real database metrics (projects, articles, ventures, testimonials, unread inquiries)
+    - `projects` & `projects/[id]`: Full CRUD for projects and detailed case studies
+    - `blog` & `blog/[id]`: Full CRUD for articles with draft/published state
+    - `ventures` & `ventures/[id]`: Full CRUD for ventures and partnerships
+    - `inquiries`, `inquiries/[id]`, `inquiries/export`: CRM pipeline with status updates, internal notes, and RFC-4180 CSV export
+    - `now-building` & `now-building/[id]`: Sprint roadmap manager
+    - `testimonials` & `testimonials/[id]`: Client endorsements manager
+    - `media`, `media/upload`, `media/[id]`: Sanitized multipart file upload to `/public/uploads/` with MIME/size limits
+    - `homepage`: Hero copy, CTA links, and section visibility toggles
+    - `profile`: Personal bio, career milestones timeline, philosophy principles, social links
+    - `seo`: Route-specific title, description, OG image, and noIndex tags
+    - `settings`: Site-wide configuration and secure PBKDF2 password updating
+    - `src/app/api/contact/route.ts`: Public inquiry endpoint assigning `INQ-2026-XXXX` reference IDs
+  - **Admin UI Console (`src/app/admin/`):**
+    - `layout.tsx`: Responsive dashboard layout with sidebar navigation, session verification, and mobile drawer
+    - `login/page.tsx`: Clean, secure login portal with validation alerts
+    - `page.tsx`: Executive dashboard overview with live metrics and recent activity
+    - `projects/page.tsx`: Project explorer manager with search, category filtering, and edit drawer
+    - `blog/page.tsx`: Blog article manager with live preview tab
+    - `inquiries/page.tsx`: Inquiries CRM with status filtering, detail drawer, internal notes, and CSV export
+    - `ventures/page.tsx`: Ventures & commercial products manager
+    - `now-building/page.tsx`: Active sprints and progress tracker
+    - `testimonials/page.tsx`: Endorsement quotes manager
+    - `media/page.tsx`: Drag-and-drop media uploader with thumbnail grid, size formatting, and one-click URL copying
+    - `homepage/page.tsx`: Hero text, CTA buttons, featured work selector, and section visibility toggles
+    - `profile/page.tsx`: Bio editor, milestone timeline builder, and philosophy principles
+    - `seo/page.tsx`: Route SEO editor with Google SERP snippet preview and character counters
+    - `settings/page.tsx`: Site settings and password change utility
+  - **Public Contact Integration:**
+    - Updated `src/app/contact/ContactClient.tsx` connecting directly to `POST /api/contact`, providing real-time submission feedback with tracking reference IDs.
+  - **Middleware Hardening:**
+    - Updated `src/proxy.ts` bypassing markdown negotiation for all `/admin` routes.
+- **Verification:** Successfully compiled with Next.js 16.2.1 and Webpack in 7.4s with 0 errors across 61 routes and API endpoints. `npx tsc --noEmit` verified with 0 errors.
 
 ### Phase 6: Interactive Tools Suite (Assistant, Estimator, Digital Lab, Now)
 - **Goal:** Deploy high-utility, interactive features.
