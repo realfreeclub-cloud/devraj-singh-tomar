@@ -88,6 +88,7 @@ export default function CaseStudiesClient() {
     { cat: "Media & News", name: "Abhivyakti News", url: "abhivyaktinews.com", tech: ["Next.js", "SSG"], desc: "High traffic digital publication." },
 
     // --- OTHER PROJECTS ---
+    { cat: "Startups", name: "Divya Jap", url: "divyajap.com", tech: ["Vedic Sadhana", "Mantra Counter", "Next.js"], desc: "Digital Jap Mala & Vedic chanting companion featuring real-time family circles and global temple sangha counters." },
     { cat: "Startups", name: "Career Avsar Recruitment", url: "careeravsar.in", tech: ["Job Portal", "Recruitment Engine", "React"], desc: "Premier educator recruitment and teacher placement platform connecting accredited schools across UP." },
     { cat: "Startups", name: "Manav Seva Trust", url: "manavsevatrust.online", tech: ["NGO CMS", "Tailwind"], desc: "Charity foundation platform." },
     { cat: "Startups", name: "Invitation King", url: "invitation.org.in", tech: ["React", "Animations"], desc: "Digital invitation maker." },
@@ -153,28 +154,31 @@ export default function CaseStudiesClient() {
   // FEATURED COMBINED CASE STUDIES
   const featuredCases = [
     {
-      title: "NGIT Operations Scaling",
-      tag: "Web Dev & Admissions Tracking",
-      problem: "Crippling legacy server failures during peak admissions matched with non-existent organic SEO.",
-      solution: "Ground-up Next.js App Router rebuild natively tied into localized course landing pipelines.",
-      tools: ["Next.js", "Node", "Vercel Analytics"],
-      results: "+240% Course Indexing | 160% Lead Bump"
+      title: "NGIT Edu – Examination & Typing Engine",
+      url: "ngitedu.com",
+      tag: "EdTech & Real-Time Exam Architecture",
+      problem: "During peak recruitment cycles for government exams (SSC, High Court, UP Police), hundreds of concurrent candidates faced server slowdowns, exam test interruptions, and inaccurate keystroke latency in legacy typing software.",
+      solution: "Engineered a sub-millisecond typing test evaluation engine with client-side WPM/accuracy tracking and Next.js App Router for server-rendered curriculum modules. Implemented edge-cached question banks, real-time result generation, and instant certificate verification pipelines.",
+      tools: ["Next.js", "TypeScript", "Real-Time Engine", "Tailwind CSS", "Edge Caching"],
+      results: "0ms Keystroke Lag | 99.98% Exam Uptime | +240% Candidate Intake"
     },
     {
-      title: "The Home Shifting Growth",
-      tag: "Conversion UI & Social Strategy",
-      problem: "Advertising spend was hemorrhaging due to an 8-second mobile load time and sterile facebook branding.",
-      solution: "Excised dead CSS via React porting whilst completely revamping their FB/Google ad-visual hierarchies.",
-      tools: ["Tailwind", "Meta Ads", "Google Business"],
-      results: "Sub 1-sec Loads | 3x Conversion Rate"
+      title: "Divya Jap – Global Vedic Sadhana Platform",
+      url: "divyajap.com",
+      tag: "Spiritual Tech & Real-Time Sync Ecosystem",
+      problem: "Devotees and temple sanghas lacked a synchronized digital platform for collective mantra japa. Existing counter apps drained mobile batteries, failed offline during travel, and compromised devotee privacy in group chanting circles.",
+      solution: "Architected a lightweight, haptic-enabled digital Jap Mala and meditation companion with local-first offline persistence. Built privacy-first collective synchronization protocols for family circles and global temple sanghas with zero data exposure of individual identities.",
+      tools: ["Next.js", "PWA / Local-First", "Web Audio & Haptics", "Tailwind CSS", "Edge Sync"],
+      results: "Zero-Lag Haptic Taps | 100% Offline Resilient | Scalable Sangha Aggregation"
     },
     {
-      title: "Vasudha Clinic Domination",
-      tag: "Local SEO & Platform Trust",
-      problem: "Elder patients bounced heavily off the outdated site; map listings were severely outranked by competitors.",
-      solution: "Deployed pristine accessibilty UX alongside aggressive Google Business Profile Review automation.",
-      tools: ["Medical Schema", "GBP APIs", "A11y Checks"],
-      results: "Position 2 Rank | Automated Intakes"
+      title: "T&S Lex Ink Legal – Enterprise Legal Portal",
+      url: "lexinklegal.in",
+      tag: "Corporate Law Firm & Zero-Trust Portal",
+      problem: "A premier corporate litigation and advisory firm needed an authoritative digital footprint, requiring uncompromising client confidentiality, zero vulnerability tolerance, and strict compliance with legal service standards.",
+      solution: "Engineered an impenetrable, ultra-fast Next.js architecture featuring strict Content Security Policies (CSP), sub-second Core Web Vitals, encrypted inquiry workflows, and comprehensive LegalService structured data (JSON-LD) for corporate legal authority.",
+      tools: ["Next.js", "Strict CSP Security", "Legal Schema JSON-LD", "Tailwind CSS", "Vercel Edge"],
+      results: "100/100 Core Web Vitals | Zero Vulnerabilities | 4x B2B Inbound Inquiries"
     }
   ];
 
@@ -357,7 +361,10 @@ export default function CaseStudiesClient() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {featuredCases.map((fCase, i) => (
               <div key={i} className="bg-background border border-layer-border rounded-3xl p-8 flex flex-col h-full transform hover:-translate-y-2 transition-transform duration-300">
-                 <span className="text-xs font-black tracking-widest text-primary uppercase mb-4">{fCase.tag}</span>
+                 <div className="flex justify-between items-start mb-4 gap-2">
+                   <span className="text-xs font-black tracking-widest text-primary uppercase">{fCase.tag}</span>
+                   <span className="font-mono text-xs text-foreground/50">{fCase.url}</span>
+                 </div>
                  <h3 className="text-2xl font-extrabold text-title mb-6">{fCase.title}</h3>
                  
                  <div className="space-y-6 grow">
@@ -373,11 +380,14 @@ export default function CaseStudiesClient() {
 
                  <div className="mt-8 pt-8 border-t border-layer-border">
                     <p className="text-primary font-black text-lg tracking-tight mb-4">{fCase.results}</p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-6">
                        {fCase.tools.map(tool => (
                          <span key={tool} className="text-[10px] font-bold tracking-widest uppercase bg-secondary/50 px-2 py-1 rounded text-foreground/60">{tool}</span>
                        ))}
                     </div>
+                    <a href={`https://${fCase.url}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-title font-bold uppercase tracking-widest text-xs hover:text-primary transition-colors">
+                       Visit Live Portal <ArrowUpRight size={14} />
+                    </a>
                  </div>
               </div>
             ))}
