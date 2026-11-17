@@ -2,287 +2,378 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { 
-  ArrowRight, ChevronDown, CheckCircle, Target, Activity,
-  Briefcase, Globe, LayoutDashboard,
-  Share2, ArrowUpRight, Code2
+import {
+  ArrowRight,
+  ChevronDown,
+  CheckCircle,
+  Target,
+  Activity,
+  Briefcase,
+  Globe,
+  LayoutDashboard,
+  Share2,
+  ArrowUpRight,
+  Code2,
+  Search,
+  Filter,
+  X,
+  Sparkles,
+  BookOpen,
+  Layers
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import {
+  webProjects,
+  socialProjects,
+  getAllCaseStudies,
+} from "@/data/projectsData";
 
 export default function CaseStudiesClient() {
   const [activeTab, setActiveTab] = useState<"web" | "social">("web");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   const containerVars = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 },
+      transition: { staggerChildren: 0.08 },
     },
   };
 
   const itemVars = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.35 } },
   };
 
-  // WEB DEVELOPMENT PROJECTS
-  const webProjects = [
-    // --- EDUCATION & INSTITUTES ---
-    { cat: "Education", name: "Anjana Polytechnic", url: "anjanapolytechnic.com", tech: ["Next.js", "CMS", "SEO"], desc: "High-performance institutional portal." },
-    { cat: "Education", name: "ASMC Kaushambi", url: "asmckaushambi.in", tech: ["React", "SSG"], desc: "Educational routing hub for admissions." },
-    { cat: "Education", name: "Sanskar Global School", url: "sanskarglobalschoolsakrauli.com", tech: ["Next.js", "Tailwind"], desc: "Modern school platform with dynamic routing." },
-    { cat: "Education", name: "IDPS Pratapgarh", url: "idpspratapgarh.com", tech: ["Next.js", "School CMS", "Performance"], desc: "Official digital school platform for International Delhi Public School (IDPS) Pratapgarh." },
-    { cat: "Education", name: "NGIT Edu", url: "ngitedu.com", tech: ["EdTech Portal", "Typing Software", "O Level / CCC"], desc: "National Genius Institute portal for online typing tests, steno shorthand software, and IT certification courses." },
-    { cat: "Education", name: "NGI Study Zone", url: "ngistudyzone.com", tech: ["React", "LMS", "Coaching Portal"], desc: "Digital study platform and interactive student coaching portal for National Genius Institute." },
-    { cat: "Education", name: "Judicial Study Centre", url: "judicialstudycentre.in", tech: ["Next.js", "Legal EdTech", "SEO"], desc: "India's premier Judiciary & PCS-J examination preparation institute portal and learning hub in Prayagraj." },
-    { cat: "Education", name: "Agnihotri Classes", url: "agnihotriclasses.in", tech: ["React", "Civil Services", "Fast LCP"], desc: "Premier IAS & UPPCS civil services coaching portal and preparation academy in Prayagraj." },
-    { cat: "Education", name: "VGSBVM Law College", url: "baghellawcollege.in", tech: ["Law College Portal", "Affiliation CMS", "SEO"], desc: "Vansh Gopal Singh Baghel Vidhi Mahavidyalaya law college portal in Sakrauli, affiliated with Rajju Bhaiya University." },
-    { cat: "Education", name: "BN Singh PG College", url: "bnsinghpgcollege.com", tech: ["Web Dev", "SEO"], desc: "College admissions and information portal." },
-    { cat: "Education", name: "Amethi Public School", url: "amethipublicschool.com", tech: ["CMS", "UI/UX"], desc: "Public school digital infrastructure." },
-    { cat: "Education", name: "BSS Academy", url: "bssacademy.com", tech: ["React", "Performance"], desc: "Academy landing architecture." },
-    { cat: "Education", name: "VS Memorial School", url: "vsmemorialschool.com", tech: ["CMS", "Frontend"], desc: "Memorial school showcase platform." },
-    { cat: "Education", name: "St. Xavier's Public School", url: "stxpbh.com", tech: ["Next.js", "Vercel"], desc: "Premium public school digital presence." },
-    { cat: "Education", name: "Anjana Pharmacy", url: "anjanapharmacy.com", tech: ["Web Dev", "Local SEO"], desc: "Pharmacy educational portal." },
-    { cat: "Education", name: "National Genius Institute", url: "nationalgeniusinstitute.in", tech: ["Next.js", "Custom CMS"], desc: "High-traffic student enrollment portal." },
-    { cat: "Education", name: "NGIT", url: "ngit.org.in", tech: ["React", "SEO"], desc: "Institute operations mapping." },
-    { cat: "Education", name: "Anjana College", url: "anjanacollege.com", tech: ["Web Dev", "SSG"], desc: "College digital hub." },
-    { cat: "Education", name: "Indian Inter College", url: "indianintercollege.com", tech: ["React", "A11y"], desc: "Inter-college communication platform." },
-    { cat: "Education", name: "ASNM C Sultanpur", url: "asnmcsultanpur.in", tech: ["Web Dev", "Performance"], desc: "Institutional framework." },
-    { cat: "Education", name: "DSLP ASMC Pratapgarh", url: "dslpasmcpratapgarh.org", tech: ["SSG", "Tailwind"], desc: "Educational infrastructure." },
-    { cat: "Education", name: "ASMC Kushinagar", url: "asmckushinagar.in", tech: ["Next.js", "SEO"], desc: "Local institute routing." },
-    { cat: "Education", name: "ASMC Pilibhit", url: "asmcpilibhit.com", tech: ["Web Dev", "Fast LCP"], desc: "Educational operations platform." },
-    { cat: "Education", name: "ASMC Lakhimpur Kheri", url: "asmclakhimpurkheri.in", tech: ["CMS", "Frontend"], desc: "Institute presentation UI." },
-    { cat: "Education", name: "CIS Gauriganj", url: "cisgauriganj.org", tech: ["Web Dev", "SEO"], desc: "School communication portal." },
-
-    // --- BUSINESS & SERVICES ---
-    { cat: "Business & Services", name: "National Computer Allahabad", url: "nationalcomputerallahabad.com", tech: ["Custom Software", "Web Dev", "Local SEO"], desc: "Premier IT studio, enterprise software engineering & hardware diagnostics hub in Prayagraj." },
-    { cat: "Business & Services", name: "Limra Green Earth Solutions", url: "limragreenearthsolutions.in", tech: ["Eco Packaging", "WhatsApp Commerce", "SEO"], desc: "Certified compostable bio poly bags and sustainable packaging corporate catalog with direct ordering." },
-    { cat: "Business & Services", name: "Naushad & Umar Brick Field", url: "naushadumarbrickfield.com", tech: ["Industrial Catalog", "Local SEO", "Lead Gen"], desc: "Commercial red clay bricks manufacturing & building supplies enterprise in Prayagraj (Mark 5551)." },
-    { cat: "Business & Services", name: "The Home Shifting", url: "thehomeshifting.com", tech: ["Next.js", "Maps API"], desc: "National logistics dashboard crushing local bounce rates." },
-    { cat: "Business & Services", name: "Navpath", url: "navpath.in", tech: ["React", "SEO"], desc: "Corporate business routing." },
-    { cat: "Business & Services", name: "Happy Home Furniture", url: "happyhomefurniture.online", tech: ["Headless CMS", "ISR Edge"], desc: "Heavy image-based storefront resolving painful LCP delays." },
-    { cat: "Business & Services", name: "Heaven Garden", url: "heavengarden.in", tech: ["Next.js", "SSG"], desc: "Event and hospitality landing architecture." },
-    { cat: "Business & Services", name: "Hotel Sneh", url: "hotelsneh.in", tech: ["Web Dev", "Local SEO"], desc: "Hotel booking and room showcase." },
-    { cat: "Business & Services", name: "Shree Ram Sweets", url: "shreeramsweets.com", tech: ["CMS", "Frontend"], desc: "Storefront and catalog UI." },
-    { cat: "Business & Services", name: "Lotus Loop", url: "lotusloop.in", tech: ["React", "Tailwind"], desc: "Corporate services matrix." },
-    { cat: "Business & Services", name: "Refurhub", url: "refurhub.com", tech: ["eCommerce", "Next.js"], desc: "Refurbished product marketplace." },
-    { cat: "Business & Services", name: "Advance Toolbox", url: "advancetoolbox.com", tech: ["Web Dev", "SEO"], desc: "Industrial tools corporate facade." },
-    { cat: "Business & Services", name: "Raghav Corporate", url: "raghavcorporateservices.com", tech: ["CMS", "Performance"], desc: "Corporate consulting agency." },
-
-    // --- HEALTHCARE ---
-    { cat: "Healthcare", name: "MAZ Dialysis Center", url: "mazdialysiscenter.com", tech: ["Next.js", "Healthcare Web", "Local SEO"], desc: "Digital presence and patient portal for the 3rd largest dialysis center in India, located in Pratapgarh." },
-    { cat: "Healthcare", name: "Dr. Aarti Seth Clinic", url: "draartiseth.com", tech: ["Medical Schema", "Doctor Portfolio", "Local SEO"], desc: "Official medical practice and infertility specialist consultation portal for Dr. Aarti Seth (MBBS, DGO) in Sultanpur." },
-    { cat: "Healthcare", name: "Vasudha Eye Clinic", url: "vasudhaeyegeneralclinic.com", tech: ["a11y Audited", "Schema"], desc: "Premium accessible interface requiring instant bookings." },
-
-    // --- LEGAL / PROFESSIONAL ---
-    { cat: "Legal", name: "T&S Lex Ink Legal", url: "lexinklegal.in", tech: ["Next.js", "Corporate Law", "SEO"], desc: "Full-service New Delhi law firm portal specializing in civil litigation, criminal defence & corporate advisory." },
-    { cat: "Legal", name: "CLC Chambers", url: "clcchambers.com", tech: ["React Sever", "CSP"], desc: "Impenetrable, un-hackable legal facade." },
-
-    // --- PERSONAL BRANDS ---
-    { cat: "Personal Brands", name: "Tushar Nagpal", url: "tusharnagpal.com", tech: ["Next.js Port", "Micro-animations"], desc: "High-end personal branding hub." },
-    { cat: "Personal Brands", name: "Rajendra Kumar", url: "rajendrakumarmaurya.in", tech: ["React", "Fast LCP"], desc: "Personal authority facade." },
-
-    // --- MEDIA / NEWS ---
-    { cat: "Media & News", name: "Gyan Mitra News", url: "gyanmitranews.com", tech: ["Edge Data", "XML"], desc: "Heavy article ingestion engine." },
-    { cat: "Media & News", name: "Abhivyakti News", url: "abhivyaktinews.com", tech: ["Next.js", "SSG"], desc: "High traffic digital publication." },
-
-    // --- OTHER PROJECTS ---
-    { cat: "Startups", name: "Divya Jap", url: "divyajap.com", tech: ["Vedic Sadhana", "Mantra Counter", "Next.js"], desc: "Digital Jap Mala & Vedic chanting companion featuring real-time family circles and global temple sangha counters." },
-    { cat: "Startups", name: "Career Avsar Recruitment", url: "careeravsar.in", tech: ["Job Portal", "Recruitment Engine", "React"], desc: "Premier educator recruitment and teacher placement platform connecting accredited schools across UP." },
-    { cat: "Startups", name: "Manav Seva Trust", url: "manavsevatrust.online", tech: ["NGO CMS", "Tailwind"], desc: "Charity foundation platform." },
-    { cat: "Startups", name: "Invitation King", url: "invitation.org.in", tech: ["React", "Animations"], desc: "Digital invitation maker." },
-    { cat: "Startups", name: "Sprene", url: "sprene.com", tech: ["Web Dev", "UI/UX"], desc: "SaaS layout." },
-    { cat: "Startups", name: "TXN Learning", url: "txnlearning.com", tech: ["EdTech", "CMS"], desc: "Learning management routing." },
-    { cat: "Startups", name: "LCE Computer", url: "lcecomputer.in", tech: ["Next.js", "Local SEO"], desc: "Computer hardware catalog." },
-    { cat: "Startups", name: "MRM Al Quran", url: "mrmalquran.com", tech: ["Static Payload", "A11y"], desc: "Religious ed platform." }
+  const categories = [
+    "All",
+    "Education",
+    "Business & Services",
+    "Healthcare",
+    "Legal",
+    "Startups",
+    "Personal Brands",
+    "Media & News",
   ];
 
-  // SOCIAL MEDIA MANAGEMENT CLIENTS
-  const socialProjects = [
-    { name: "International Delhi Public School", industry: "Education", platforms: ["facebook", "instagram"], type: "Enrollment Drop & Reach", stats: "Targeted Audience" },
-    { name: "Academy for Competitive Exams", industry: "Education", platforms: ["facebook", "instagram"], type: "Lead Generation", stats: "Locality Domination" },
-    { name: "Gurukul The School of Professionals", industry: "Education", platforms: ["facebook", "instagram"], type: "Brand Authority", stats: "Enrollment Surge" },
-    { name: "Sanskar Global School Barabanki", industry: "Education", platforms: ["facebook", "instagram"], type: "Community Building", stats: "High Engagement" },
-    { name: "New Path Academy Education", industry: "Education", platforms: ["facebook", "google"], type: "Student Intake", stats: "Local Search Pack" },
-    { name: "Sanskar Global School Sakrauli", industry: "Education", platforms: ["facebook", "instagram"], type: "Awareness & Content", stats: "Massive Footfall" },
-    { name: "Anjana Group of Institutions", industry: "Education Trust", platforms: ["facebook", "instagram", "google"], type: "Omnichannel Growth", stats: "Regional Authority" },
-    { name: "Indian Inter College Pratapgarh", industry: "Education", platforms: ["facebook"], type: "Digital Communications", stats: "Public Trust" },
-    { name: "Awadh Public School", industry: "Education", platforms: ["facebook", "instagram"], type: "Content Pipeline", stats: "Parent Engagement" },
-    { name: "Model Public School", industry: "Education", platforms: ["facebook"], type: "Event Coverage", stats: "Community Scaling" },
-    { name: "Sanskar Global School Pratapgarh", industry: "Education", platforms: ["facebook", "instagram"], type: "Brand Campaigns", stats: "Consistent Reach" },
-    { name: "Sanskar Global School Gauriganj", industry: "Education", platforms: ["facebook", "instagram"], type: "Social Blueprinting", stats: "High Impressions" },
-    { name: "B.S.S Academy", industry: "Education", platforms: ["facebook", "google"], type: "Admissions Scaling", stats: "Conversion Lift" },
-    { name: "GOVT. Global School", industry: "Education", platforms: ["facebook"], type: "Public Broadcasting", stats: "Local Dominance" },
-    { name: "S.S Public School Pratapgarh", industry: "Education", platforms: ["facebook"], type: "Student Intake", stats: "Consistent Reach" },
+  // Filtered Web Projects
+  const filteredProjects = useMemo(() => {
+    return webProjects.filter((project) => {
+      const matchesCategory =
+        selectedCategory === "All" || project.category === selectedCategory;
 
-    { name: "Vasudha Eye & General Clinic", industry: "Healthcare", platforms: ["facebook", "google"], type: "Patient Intake Schema", stats: "5-Star Scaling" },
-    { name: "Dr. Vivek Shukla Homoeopath", industry: "Healthcare", platforms: ["facebook", "google"], type: "Local Trust Building", stats: "+12k Local Reach" },
-    { name: "Life Care Hospital Pratapgarh", industry: "Healthcare", platforms: ["facebook", "google", "instagram"], type: "Medical Brand Authority", stats: "3-Pack Maps" },
-    { name: "Aastha Charitable Blood Bank", industry: "Healthcare", platforms: ["facebook", "x"], type: "Community Support", stats: "Public Trust" },
-    { name: "Dev Pragya Homoeopathy", industry: "Healthcare", platforms: ["facebook", "google"], type: "Clinical Reach", stats: "Dominant Intake" },
+      const q = searchQuery.toLowerCase().trim();
+      const matchesSearch =
+        !q ||
+        project.name.toLowerCase().includes(q) ||
+        project.desc.toLowerCase().includes(q) ||
+        project.url.toLowerCase().includes(q) ||
+        project.industry.toLowerCase().includes(q) ||
+        project.role.toLowerCase().includes(q) ||
+        project.tech.some((t) => t.toLowerCase().includes(q));
 
-    { name: "Rajendra Kumar Maurya", industry: "Personal Branding", platforms: ["x", "facebook"], type: "Public Figure Authority", stats: "Viral Syndication" },
-    { name: "Vipin Singh", industry: "Personal Branding", platforms: ["instagram", "facebook"], type: "Audience Architect", stats: "High Engagement" },
-    { name: "Navdeep Singh Arshiya", industry: "Personal Branding", platforms: ["instagram"], type: "Organic Profile Scaling", stats: "Follower Growth" },
-    { name: "Laxmi", industry: "Personal Branding", platforms: ["instagram"], type: "Influencer Pipeline", stats: "Content Virality" },
-    { name: "Rajesh Tiwari", industry: "Personal Branding", platforms: ["facebook", "x"], type: "Message Broadcasting", stats: "Social Trust" },
-    { name: "Tushar Nagpal & Associates", industry: "Legal/Consultation", platforms: ["x", "google"], type: "B2B Authority Architecture", stats: "Premium Leads" },
+      return matchesCategory && matchesSearch;
+    });
+  }, [searchQuery, selectedCategory]);
 
-    { name: "Happy Home Furniture", industry: "Retail", platforms: ["facebook", "instagram"], type: "Sales Conversion", stats: "Massive Catalog Hits" },
-    { name: "Shree Ram Sweets", industry: "Food & Beverage", platforms: ["instagram", "google"], type: "Visual Marketing", stats: "High Store Walk-ins" },
-    { name: "Kshirod Food Products", industry: "FMCG", platforms: ["facebook", "instagram"], type: "Product Brand Scaling", stats: "Regional Reach" },
-    { name: "Kshirod Mithai Bhandar", industry: "Food & Retail", platforms: ["instagram", "google"], type: "Festive Campaigns", stats: "3x Sales ROI" },
-    { name: "Tandori Factory Restaurant", industry: "Hospitality", platforms: ["facebook", "instagram", "google"], type: "Local Reservations", stats: "Fully Booked Tables" },
-    { name: "Lotus Loop Media Solutions", industry: "B2B Agency", platforms: ["facebook", "instagram", "x"], type: "Client Magnet SEO", stats: "Industry Authority" },
-    { name: "Career Avsar", industry: "EdTech Service", platforms: ["facebook", "instagram"], type: "Job & Course Traffic", stats: "Lead Generation" },
-    { name: "Highway Garden Infrastructure", industry: "Hospitality", platforms: ["facebook", "instagram", "google"], type: "Premium Booking Trust", stats: "Schedule Domination" },
-    { name: "Navrang Industries India", industry: "Corporate", platforms: ["facebook", "x"], type: "B2B Lead Funnels", stats: "Corporate Trust" },
-    { name: "Delhi-UP Property Hub", industry: "Real Estate", platforms: ["facebook", "instagram", "google"], type: "Property Prospecting", stats: "High-Ticket Closures" },
-    { name: "Pratapgarh Inter Pradesh", industry: "Business Region", platforms: ["facebook"], type: "Area Authority", stats: "Local Dominance" },
-    { name: "Naman News Corporation", industry: "Media & News", platforms: ["facebook", "x", "google"], type: "Real-Time Broadcast", stats: "Massive Distribution" },
-    { name: "Future Securitization & Financial", industry: "Finance Setup", platforms: ["x", "google"], type: "Credibility Mapping", stats: "B2B Impressions" },
-    { name: "MAZ Dialysis Center", industry: "Healthcare", platforms: ["facebook", "google"], type: "Regional Healthcare Awareness", stats: "High Patient Footfall" },
-    { name: "Judicial Study Centre", industry: "Education", platforms: ["facebook", "instagram", "google"], type: "Aspirant Enrollment Funnel", stats: "High Inquiries" },
-    { name: "Dr. Aarti Seth Clinic", industry: "Healthcare", platforms: ["facebook", "google"], type: "Local Clinical Authority", stats: "5-Star Scaling" },
-    { name: "Limra Green Earth Solutions", industry: "Eco Packaging", platforms: ["facebook", "instagram"], type: "B2B WhatsApp Leads", stats: "High Engagement" },
-    { name: "Naushad & Umar Brick Field", industry: "Manufacturing", platforms: ["facebook", "google"], type: "B2B Contractor Outreach", stats: "Local Dominance" },
-    { name: "VGSBVM Law College", industry: "Legal Education", platforms: ["facebook", "google"], type: "Admissions & Authority", stats: "Regional Reach" },
-    { name: "Agnihotri Classes", industry: "Civil Services", platforms: ["facebook", "instagram", "google"], type: "Aspirant Reach & Enrollment", stats: "High Engagement" }
-  ];
+  const featuredCaseList = useMemo(() => {
+    return getAllCaseStudies();
+  }, []);
 
-  // FEATURED COMBINED CASE STUDIES
-  const featuredCases = [
-    {
-      title: "NGIT Edu – Examination & Typing Engine",
-      url: "ngitedu.com",
-      tag: "EdTech & Real-Time Exam Architecture",
-      problem: "During peak recruitment cycles for government exams (SSC, High Court, UP Police), hundreds of concurrent candidates faced server slowdowns, exam test interruptions, and inaccurate keystroke latency in legacy typing software.",
-      solution: "Engineered a sub-millisecond typing test evaluation engine with client-side WPM/accuracy tracking and Next.js App Router for server-rendered curriculum modules. Implemented edge-cached question banks, real-time result generation, and instant certificate verification pipelines.",
-      tools: ["Next.js", "TypeScript", "Real-Time Engine", "Tailwind CSS", "Edge Caching"],
-      results: "0ms Keystroke Lag | 99.98% Exam Uptime | +240% Candidate Intake"
-    },
-    {
-      title: "Divya Jap – Global Vedic Sadhana Platform",
-      url: "divyajap.com",
-      tag: "Spiritual Tech & Real-Time Sync Ecosystem",
-      problem: "Devotees and temple sanghas lacked a synchronized digital platform for collective mantra japa. Existing counter apps drained mobile batteries, failed offline during travel, and compromised devotee privacy in group chanting circles.",
-      solution: "Architected a lightweight, haptic-enabled digital Jap Mala and meditation companion with local-first offline persistence. Built privacy-first collective synchronization protocols for family circles and global temple sanghas with zero data exposure of individual identities.",
-      tools: ["Next.js", "PWA / Local-First", "Web Audio & Haptics", "Tailwind CSS", "Edge Sync"],
-      results: "Zero-Lag Haptic Taps | 100% Offline Resilient | Scalable Sangha Aggregation"
-    },
-    {
-      title: "T&S Lex Ink Legal – Enterprise Legal Portal",
-      url: "lexinklegal.in",
-      tag: "Corporate Law Firm & Zero-Trust Portal",
-      problem: "A premier corporate litigation and advisory firm needed an authoritative digital footprint, requiring uncompromising client confidentiality, zero vulnerability tolerance, and strict compliance with legal service standards.",
-      solution: "Engineered an impenetrable, ultra-fast Next.js architecture featuring strict Content Security Policies (CSP), sub-second Core Web Vitals, encrypted inquiry workflows, and comprehensive LegalService structured data (JSON-LD) for corporate legal authority.",
-      tools: ["Next.js", "Strict CSP Security", "Legal Schema JSON-LD", "Tailwind CSS", "Vercel Edge"],
-      results: "100/100 Core Web Vitals | Zero Vulnerabilities | 4x B2B Inbound Inquiries"
-    }
-  ];
+  const handleResetFilters = () => {
+    setSearchQuery("");
+    setSelectedCategory("All");
+  };
 
   // AEO FAQS
   const faqs = [
-    { q: "Why hire a dual expert for Web Development and Social Media Management?", a: "By unifying your technical website architecture with your social branding (FB, Insta, GBP), you create a frictionless sales funnel. I control both the traffic generation and the structural conversion endpoint." },
-    { q: "How does Google Business Profile management impact local SEO?", a: "Google Business Profile optimization directly dictates your rank in the Google Maps 3-Pack. We sync your local citations, map coordinates, and review velocity natively with your Next.js schema." },
-    { q: "Are your Next.js applications fully optimized for SEO?", a: "Absolutely. As a Freelance Web Developer in India, I heavily utilize Server-Side Rendering (SSR) and dynamic JSON-LD injection so algorithms instantly parse and rank your data globally." }
+    {
+      q: "What is Devraj Singh Tomar's strategic role across these projects?",
+      a: "Devraj acts as a Technology Strategist & Architect. Rather than simply writing frontend code, he designs scalable system architectures, eliminates performance bottlenecks, hardens cybersecurity and privacy models, and aligns technical platforms with commercial revenue objectives.",
+    },
+    {
+      q: "Can I inspect the full architectural breakdown of your flagship projects?",
+      a: "Yes. Click 'Read Case Study' on flagship projects like NGIT Edu, Divya Jap, T&S Lex Ink Legal, MAZ Dialysis Center, IDPS Pratapgarh, and The Home Shifting to inspect the exact problems, architectural specifications, technical decisions, and verified outcomes.",
+    },
+    {
+      q: "Why unify Web Architecture with Social Media & Local SEO Strategy?",
+      a: "By interconnecting high-speed Next.js web platforms with localized Schema markup, Google Business Profile 3-Pack optimization, and targeted social media reach, businesses create a frictionless funnel that converts casual traffic into verified clients.",
+    },
+    {
+      q: "Are the performance and uptime metrics independently verifiable?",
+      a: "Yes. Live production deployments can be tested using standard web diagnostic tools (Google PageSpeed Insights, Chrome DevTools, WebPageTest) to verify Core Web Vitals, SSL integrity, and low response latency.",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-background pt-[100px] lg:pt-[120px] pb-24 px-6 lg:px-20 overflow-x-hidden">
-      
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO & INTRO SECTION */}
       <section className="w-full max-w-5xl mx-auto text-center mb-16 lg:mb-20">
         <motion.div variants={containerVars} initial="hidden" animate="show">
-          <motion.div variants={itemVars} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary mb-8">
-            <Target size={16} />
-            <span className="text-sm font-semibold tracking-wider uppercase">Complete Digital Dominance</span>
+          <motion.div
+            variants={itemVars}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary mb-6"
+          >
+            <Layers size={16} />
+            <span className="text-xs font-bold tracking-widest uppercase">
+              Proven Digital Portfolio
+            </span>
           </motion.div>
-          
-          <motion.h1 variants={itemVars} className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-title uppercase tracking-tight mb-8">
-            <span className="opacity-40">60+ Projects Across</span><br/>
-            Web Development &amp; <span className="text-primary">Social Media</span>
+
+          <motion.h1
+            variants={itemVars}
+            className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-title uppercase tracking-tight mb-6"
+          >
+            Selected Work &amp; <span className="text-primary">Digital Experiences</span>
           </motion.h1>
-          
-          <motion.p variants={itemVars} className="text-lg md:text-xl text-foreground leading-relaxed max-w-3xl mx-auto mb-10">
-            I don&apos;t just build websites; I engineer interconnected digital ecosystems. From massive Next.js enterprise portals to explosive Social Media Management funnels. Welcome to the elite tier of execution.
+
+          <motion.p
+            variants={itemVars}
+            className="text-lg md:text-xl text-foreground leading-relaxed max-w-3xl mx-auto mb-10"
+          >
+            Explore digital platforms, technology solutions, and products I&apos;ve helped shape across education, healthcare, legal advisory, logistics, and consumer tech.
           </motion.p>
 
-          <motion.div variants={itemVars} className="flex justify-center">
-             <Link href="#portfolio-tabs" className="bg-primary text-background font-bold uppercase tracking-widest text-sm px-8 py-4 rounded-full flex items-center gap-3 hover:bg-white transition-colors duration-300">
-               View My Work <ArrowDownIcon size={18} />
-             </Link>
+          {/* Quick Metrics Bar */}
+          <motion.div
+            variants={itemVars}
+            className="flex flex-wrap justify-center items-center gap-8 py-4 px-8 rounded-full bg-layer/40 border border-layer-border max-w-3xl mx-auto text-xs sm:text-sm font-semibold text-foreground/80"
+          >
+            <div>
+              <span className="text-primary font-bold">60+</span> Web Systems
+            </div>
+            <div className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+            <div>
+              <span className="text-primary font-bold">45+</span> Social Brands
+            </div>
+            <div className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+            <div>
+              <span className="text-primary font-bold">6+</span> Industry Verticals
+            </div>
+            <div className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+            <div>
+              <span className="text-primary font-bold">7+</span> Years Architecture
+            </div>
           </motion.div>
         </motion.div>
       </section>
 
       <div className="w-full max-w-[1440px] mx-auto space-y-24 lg:space-y-32">
-        
-        {/* 2. PORTFOLIO TABS UI */}
+        {/* 2. TAB CONTROLS (Web Projects vs Social Brands) */}
         <section id="portfolio-tabs" className="scroll-mt-32">
-          
-          {/* Toggle UI */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16">
-            <div className="bg-secondary/40 p-2 rounded-full border border-layer-border flex items-center w-full max-w-lg relative">
-               <button 
-                 onClick={() => setActiveTab("web")}
-                 className={`flex-1 py-4 px-6 rounded-full font-bold uppercase tracking-wider text-sm transition-all duration-300 z-10 flex items-center justify-center gap-2 ${activeTab === "web" ? "text-background" : "text-foreground hover:text-primary"}`}
-               >
-                 <Code2 size={18} /> Web Projects
-               </button>
-               <button 
-                 onClick={() => setActiveTab("social")}
-                 className={`flex-1 py-4 px-6 rounded-full font-bold uppercase tracking-wider text-sm transition-all duration-300 z-10 flex items-center justify-center gap-2 ${activeTab === "social" ? "text-background" : "text-foreground hover:text-primary"}`}
-               >
-                 <Share2 size={18} /> Social Media
-               </button>
-               
-               {/* Sliding Pill */}
-               <div 
-                 className={`absolute top-2 bottom-2 w-[calc(50%-0.5rem)] bg-primary rounded-full transition-transform duration-500 ease-in-out shadow-lg ${activeTab === "web" ? "translate-x-0" : "translate-x-full ml-2"}`}
-               ></div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
+            <div className="bg-secondary/40 p-2 rounded-full border border-layer-border flex items-center w-full max-w-md relative">
+              <button
+                onClick={() => setActiveTab("web")}
+                className={`flex-1 py-3 px-6 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm transition-all duration-300 z-10 flex items-center justify-center gap-2 ${
+                  activeTab === "web" ? "text-background" : "text-foreground hover:text-primary"
+                }`}
+              >
+                <Code2 size={16} /> Web Systems ({webProjects.length})
+              </button>
+              <button
+                onClick={() => setActiveTab("social")}
+                className={`flex-1 py-3 px-6 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm transition-all duration-300 z-10 flex items-center justify-center gap-2 ${
+                  activeTab === "social" ? "text-background" : "text-foreground hover:text-primary"
+                }`}
+              >
+                <Share2 size={16} /> Social Media ({socialProjects.length})
+              </button>
+
+              {/* Sliding Pill */}
+              <div
+                className={`absolute top-2 bottom-2 w-[calc(50%-0.5rem)] bg-primary rounded-full transition-transform duration-300 ease-in-out shadow-lg ${
+                  activeTab === "web" ? "translate-x-0" : "translate-x-full ml-2"
+                }`}
+              />
             </div>
           </div>
 
           <div className="min-h-[600px]">
             <AnimatePresence mode="wait">
-              
-              {/* TAB 1: WEBSITE PROJECTS */}
+              {/* TAB 1: WEB SYSTEMS & PROJECT EXPLORER */}
               {activeTab === "web" && (
                 <motion.div
                   key="web"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-16"
                 >
-                   {webProjects.map((proj, idx) => (
-                     <div key={idx} className="bg-secondary/20 border border-layer-border rounded-3xl p-8 hover:border-primary/50 transition-colors duration-300 flex flex-col group relative overflow-hidden">
-                        <div className="flex justify-between items-start mb-6">
-                           <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-lg border border-primary/20">
-                             {proj.cat}
-                           </span>
-                           <Globe size={20} className="text-foreground/30 group-hover:text-primary transition-colors" />
-                        </div>
-                        <h3 className="text-2xl font-extrabold text-title tracking-tight mb-2">{proj.name}</h3>
-                        <p className="font-mono text-sm text-foreground/50 mb-6">{proj.url}</p>
-                        <p className="text-foreground leading-relaxed mb-8 grow">{proj.desc}</p>
-                        
-                        <div className="flex flex-wrap gap-2 mb-8">
-                          {proj.tech.map((t, i) => (
-                             <span key={i} className="text-xs font-semibold bg-background border border-layer-border px-3 py-1.5 rounded-md text-foreground/80">
-                               {t}
-                             </span>
-                          ))}
-                        </div>
-                        
-                        <a href={`https://${proj.url}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-title font-bold uppercase tracking-widest text-sm group-hover:text-primary transition-colors mt-auto pt-4">
-                           Visit Website <ArrowUpRight size={16} />
-                        </a>
-                     </div>
-                   ))}
+                  {/* SEARCH & FILTER CONTROLS */}
+                  <div className="p-6 sm:p-8 rounded-3xl bg-secondary/20 border border-layer-border space-y-6">
+                    {/* Search Input Bar */}
+                    <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+                      <div className="relative flex-1">
+                        <Search
+                          size={18}
+                          className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/50"
+                        />
+                        <input
+                          type="text"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          placeholder="Search by project name, tech stack, industry, or role..."
+                          className="w-full pl-12 pr-10 py-3.5 bg-background border border-layer-border rounded-2xl text-title text-sm focus:outline-none focus:border-primary transition-colors placeholder:text-foreground/40"
+                        />
+                        {searchQuery && (
+                          <button
+                            onClick={() => setSearchQuery("")}
+                            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-foreground/40 hover:text-primary"
+                            aria-label="Clear search"
+                          >
+                            <X size={16} />
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Active Results Counter & Reset */}
+                      <div className="flex items-center gap-3 text-xs font-semibold text-foreground/70 shrink-0">
+                        <span>
+                          Showing <strong className="text-primary">{filteredProjects.length}</strong> of {webProjects.length}
+                        </span>
+                        {(searchQuery || selectedCategory !== "All") && (
+                          <button
+                            onClick={handleResetFilters}
+                            className="px-3 py-1.5 rounded-full bg-layer/40 border border-layer-border hover:border-primary text-primary transition-colors inline-flex items-center gap-1.5"
+                          >
+                            <X size={12} /> Reset Filters
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Category Filter Pills */}
+                    <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+                      <Filter size={15} className="text-primary shrink-0 mr-1" />
+                      {categories.map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => setSelectedCategory(cat)}
+                          className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 shrink-0 border ${
+                            selectedCategory === cat
+                              ? "bg-primary text-background border-primary"
+                              : "bg-background/60 text-foreground/70 border-layer-border hover:border-primary/50 hover:text-title"
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* ALL FILTERED PROJECTS GRID */}
+                  {filteredProjects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                      {filteredProjects.map((proj) => {
+                        const hasDetail = proj.hasCaseStudy;
+                        return (
+                          <div
+                            key={proj.slug}
+                            className="bg-secondary/20 border border-layer-border rounded-3xl p-8 hover:border-primary/50 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+                          >
+                            <div>
+                              {/* Top Bar: Category & Case Study Badge */}
+                              <div className="flex justify-between items-start mb-4">
+                                <span className="px-3 py-1 bg-primary/10 text-primary text-[11px] font-bold uppercase tracking-wider rounded-lg border border-primary/20">
+                                  {proj.category}
+                                </span>
+                                {hasDetail && (
+                                  <span className="px-2.5 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">
+                                    <BookOpen size={11} /> Case Study
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Title & Domain */}
+                              <h3 className="text-2xl font-extrabold text-title tracking-tight mb-1 group-hover:text-primary transition-colors">
+                                {proj.name}
+                              </h3>
+                              <p className="font-mono text-xs text-foreground/50 mb-3">{proj.url}</p>
+
+                              {/* Verified Role */}
+                              <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-4">
+                                Role: <span className="text-foreground/90 font-bold">{proj.role}</span>
+                              </p>
+
+                              {/* Description */}
+                              <p className="text-xs sm:text-sm text-foreground/85 leading-relaxed mb-6">
+                                {proj.desc}
+                              </p>
+
+                              {/* Tech Stack Pills */}
+                              <div className="flex flex-wrap gap-1.5 mb-6">
+                                {proj.tech.map((t, i) => (
+                                  <span
+                                    key={i}
+                                    className="text-[11px] font-medium bg-background border border-layer-border px-2.5 py-1 rounded-md text-foreground/80"
+                                  >
+                                    {t}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Bottom: Impact & Dual Actions */}
+                            <div className="pt-6 border-t border-layer-border mt-auto">
+                              {proj.impact && (
+                                <p className="text-xs font-bold text-primary mb-4 tracking-tight flex items-center gap-1.5">
+                                  <Sparkles size={13} className="shrink-0" />
+                                  <span>{proj.impact}</span>
+                                </p>
+                              )}
+
+                              <div className="flex items-center justify-between gap-3">
+                                {hasDetail ? (
+                                  <Link
+                                    href={`/case-studies/${proj.slug}`}
+                                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-title group-hover:text-primary transition-colors"
+                                  >
+                                    <span>Read Case Study</span>
+                                    <ArrowRight size={14} />
+                                  </Link>
+                                ) : (
+                                  <span className="text-[11px] text-foreground/40 font-mono">
+                                    Enterprise Portal
+                                  </span>
+                                )}
+
+                                <a
+                                  href={`https://${proj.url}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-foreground/70 hover:text-primary transition-colors"
+                                >
+                                  <span>Live Site</span>
+                                  <ArrowUpRight size={14} />
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    /* EMPTY SEARCH RESULTS STATE */
+                    <div className="p-16 rounded-3xl bg-secondary/10 border border-layer-border text-center max-w-xl mx-auto">
+                      <div className="w-16 h-16 rounded-full bg-primary/10 text-primary mx-auto flex items-center justify-center mb-4">
+                        <Search size={28} />
+                      </div>
+                      <h3 className="text-xl font-bold text-title mb-2">No Projects Match Your Filter</h3>
+                      <p className="text-sm text-foreground/70 mb-6">
+                        No projects found matching &ldquo;{searchQuery}&rdquo; in category &ldquo;{selectedCategory}&rdquo;. Try another search term or reset your filters.
+                      </p>
+                      <button
+                        onClick={handleResetFilters}
+                        className="px-6 py-3 rounded-full bg-primary text-background font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors"
+                      >
+                        Reset All Filters
+                      </button>
+                    </div>
+                  )}
                 </motion.div>
               )}
 
@@ -290,151 +381,232 @@ export default function CaseStudiesClient() {
               {activeTab === "social" && (
                 <motion.div
                   key="social"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
                   className="space-y-12"
                 >
-                   {/* Social Stats Board */}
-                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-                     <div className="bg-primary/10 border border-primary/20 rounded-3xl p-8 text-center">
-                       <h4 className="text-4xl font-black text-title mb-2">45+</h4>
-                       <span className="text-sm tracking-widest uppercase font-bold text-primary">Clients Mapped</span>
-                     </div>
-                     <div className="bg-secondary/20 border border-layer-border rounded-3xl p-8 text-center flex flex-col items-center justify-center gap-4">
-                        <div className="flex gap-4">
-                           <FbIcon/> <InstaIcon/> <XIcon/> <GoogleIcon/>
-                        </div>
-                        <span className="text-sm tracking-widest uppercase font-bold text-foreground/60">Omnichannel Control</span>
-                     </div>
-                     <div className="bg-primary/10 border border-primary/20 rounded-3xl p-8 text-center">
-                       <h4 className="text-4xl font-black text-title mb-2">80M+</h4>
-                       <span className="text-sm tracking-widest uppercase font-bold text-primary">Impression Engine</span>
-                     </div>
-                   </div>
+                  {/* Social Stats Board */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                    <div className="bg-primary/10 border border-primary/20 rounded-3xl p-8 text-center">
+                      <h4 className="text-4xl font-black text-title mb-2">45+</h4>
+                      <span className="text-xs tracking-widest uppercase font-bold text-primary">
+                        Brands &amp; Institutions Scaled
+                      </span>
+                    </div>
+                    <div className="bg-secondary/20 border border-layer-border rounded-3xl p-8 text-center flex flex-col items-center justify-center gap-3">
+                      <div className="flex gap-4">
+                        <FbIcon /> <InstaIcon /> <XIcon /> <GoogleIcon />
+                      </div>
+                      <span className="text-xs tracking-widest uppercase font-bold text-foreground/70">
+                        Omnichannel Lead Funnels
+                      </span>
+                    </div>
+                    <div className="bg-primary/10 border border-primary/20 rounded-3xl p-8 text-center">
+                      <h4 className="text-4xl font-black text-title mb-2">80M+</h4>
+                      <span className="text-xs tracking-widest uppercase font-bold text-primary">
+                        Verified Impressions Generated
+                      </span>
+                    </div>
+                  </div>
 
-                   {/* Social Grid */}
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                     {socialProjects.map((soc, idx) => (
-                       <div key={idx} className="bg-background border border-layer-border rounded-4xl p-8 lg:p-10 flex flex-col md:flex-row gap-8 items-center md:items-start group hover:border-primary/50 transition-colors">
-                          <div className="w-24 h-24 bg-secondary/40 rounded-full flex items-center justify-center shrink-0 border border-layer-border relative overflow-hidden group-hover:bg-primary/10 transition-colors">
-                             <LayoutDashboard size={32} className="text-primary z-10" />
+                  {/* Social Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                    {socialProjects.map((soc, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-background border border-layer-border rounded-4xl p-8 lg:p-10 flex flex-col md:flex-row gap-6 items-center md:items-start group hover:border-primary/50 transition-colors"
+                      >
+                        <div className="w-20 h-20 bg-secondary/40 rounded-full flex items-center justify-center shrink-0 border border-layer-border relative overflow-hidden group-hover:bg-primary/10 transition-colors">
+                          <LayoutDashboard size={28} className="text-primary z-10" />
+                        </div>
+                        <div className="flex-1 text-center md:text-left">
+                          <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-2 gap-3">
+                            <h3 className="text-xl font-extrabold text-title">{soc.name}</h3>
+                            <span className="bg-primary text-background font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full whitespace-nowrap">
+                              {soc.stats}
+                            </span>
                           </div>
-                          <div className="flex-1 text-center md:text-left">
-                             <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-2 gap-4">
-                                <h3 className="text-2xl font-extrabold text-title">{soc.name}</h3>
-                                <span className="bg-primary text-background font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full whitespace-nowrap">{soc.stats}</span>
-                             </div>
-                             <span className="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">{soc.industry}</span>
-                             <p className="text-foreground leading-relaxed mb-6">{soc.type}</p>
-                             
-                             <div className="flex items-center justify-center md:justify-start gap-3">
-                                {soc.platforms.map((plat) => (
-                                   <div key={plat} className="w-10 h-10 bg-secondary/50 rounded-full flex items-center justify-center">
-                                      {plat === 'facebook' && <FbIcon size={18} />}
-                                      {plat === 'instagram' && <InstaIcon size={18} />}
-                                      {plat === 'x' && <XIcon size={18} />}
-                                      {plat === 'google' && <GoogleIcon size={18} />}
-                                   </div>
-                                ))}
-                             </div>
+                          <span className="text-primary font-bold tracking-wider uppercase text-xs mb-3 block">
+                            {soc.industry}
+                          </span>
+                          <p className="text-xs sm:text-sm text-foreground/85 leading-relaxed mb-6">
+                            {soc.type}
+                          </p>
+
+                          <div className="flex items-center justify-center md:justify-start gap-2.5">
+                            {soc.platforms.map((plat) => (
+                              <div
+                                key={plat}
+                                className="w-9 h-9 bg-secondary/50 rounded-full flex items-center justify-center text-foreground/80"
+                              >
+                                {plat === "facebook" && <FbIcon size={16} />}
+                                {plat === "instagram" && <InstaIcon size={16} />}
+                                {plat === "x" && <XIcon size={16} />}
+                                {plat === "google" && <GoogleIcon size={16} />}
+                              </div>
+                            ))}
                           </div>
-                       </div>
-                     ))}
-                   </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </motion.div>
               )}
-
             </AnimatePresence>
           </div>
         </section>
 
-        {/* 3. FEATURED CASE STUDIES */}
+        {/* 3. DEEP ARCHITECTURAL CASE STUDIES SECTION */}
         <section className="bg-primary/5 border border-primary/20 p-8 lg:p-16 rounded-[4rem]">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-title uppercase tracking-wide mb-4">Deep Architectural Case Studies</h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6"></div>
-            <p className="text-foreground max-w-2xl mx-auto text-lg">Investigate precisely how we combine front-end reactivity with algorithmic marketing dynamics.</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-3">
+              <BookOpen size={14} /> Full Technical Breakdowns
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-extrabold text-title uppercase tracking-wide mb-4">
+              Deep Architectural Case Studies
+            </h2>
+            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
+            <p className="text-foreground max-w-2xl mx-auto text-base sm:text-lg">
+              Explore in-depth documentation detailing exact business bottlenecks, technical specifications, and verified outcomes.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {featuredCases.map((fCase, i) => (
-              <div key={i} className="bg-background border border-layer-border rounded-3xl p-8 flex flex-col h-full transform hover:-translate-y-2 transition-transform duration-300">
-                 <div className="flex justify-between items-start mb-4 gap-2">
-                   <span className="text-xs font-black tracking-widest text-primary uppercase">{fCase.tag}</span>
-                   <span className="font-mono text-xs text-foreground/50">{fCase.url}</span>
-                 </div>
-                 <h3 className="text-2xl font-extrabold text-title mb-6">{fCase.title}</h3>
-                 
-                 <div className="space-y-6 grow">
-                   <div>
-                     <h4 className="flex items-center gap-2 font-bold text-foreground mb-2"><CheckCircle size={16} className="text-red-500"/> Critical Bottleneck</h4>
-                     <p className="text-foreground/80 leading-relaxed text-sm">{fCase.problem}</p>
-                   </div>
-                   <div>
-                     <h4 className="flex items-center gap-2 font-bold text-foreground mb-2"><CheckCircle size={16} className="text-green-500"/> Engineered Solution</h4>
-                     <p className="text-foreground/80 leading-relaxed text-sm">{fCase.solution}</p>
-                   </div>
-                 </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredCaseList.map((fCase) => (
+              <div
+                key={fCase.slug}
+                className="bg-background border border-layer-border rounded-3xl p-8 flex flex-col justify-between h-full transform hover:-translate-y-2 transition-transform duration-300 group"
+              >
+                <div>
+                  <div className="flex justify-between items-start mb-4 gap-2">
+                    <span className="text-[10px] font-black tracking-widest text-primary uppercase px-2.5 py-1 rounded bg-primary/10 border border-primary/20">
+                      {fCase.category}
+                    </span>
+                    <span className="font-mono text-xs text-foreground/50">{fCase.liveUrl.replace("https://", "")}</span>
+                  </div>
+                  <h3 className="text-xl font-extrabold text-title mb-6 group-hover:text-primary transition-colors">
+                    {fCase.title}
+                  </h3>
 
-                 <div className="mt-8 pt-8 border-t border-layer-border">
-                    <p className="text-primary font-black text-lg tracking-tight mb-4">{fCase.results}</p>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                       {fCase.tools.map(tool => (
-                         <span key={tool} className="text-[10px] font-bold tracking-widest uppercase bg-secondary/50 px-2 py-1 rounded text-foreground/60">{tool}</span>
-                       ))}
+                  <div className="space-y-5 mb-8">
+                    <div>
+                      <h4 className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-foreground mb-1.5">
+                        <CheckCircle size={14} className="text-red-400" /> Operational Bottleneck
+                      </h4>
+                      <p className="text-foreground/80 leading-relaxed text-xs line-clamp-3">
+                        {fCase.challenge.problem}
+                      </p>
                     </div>
-                    <a href={`https://${fCase.url}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-title font-bold uppercase tracking-widest text-xs hover:text-primary transition-colors">
-                       Visit Live Portal <ArrowUpRight size={14} />
+                    <div>
+                      <h4 className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-foreground mb-1.5">
+                        <CheckCircle size={14} className="text-green-400" /> Engineered Solution
+                      </h4>
+                      <p className="text-foreground/80 leading-relaxed text-xs line-clamp-3">
+                        {fCase.solution.strategy}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-layer-border mt-auto">
+                  <p className="text-primary font-bold text-sm tracking-tight mb-6">
+                    {fCase.verifiedImpactBadge}
+                  </p>
+                  <div className="flex items-center justify-between gap-4">
+                    <Link
+                      href={`/case-studies/${fCase.slug}`}
+                      className="inline-flex items-center gap-2 text-title font-bold uppercase tracking-widest text-xs group-hover:text-primary transition-colors"
+                    >
+                      <span>Read Full Study</span>
+                      <ArrowRight size={14} />
+                    </Link>
+                    <a
+                      href={fCase.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-bold uppercase text-foreground/50 hover:text-primary transition-colors inline-flex items-center gap-1"
+                    >
+                      <span>Live</span>
+                      <ArrowUpRight size={13} />
                     </a>
-                 </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 4. TRUST & AUTHORITY */}
-        <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
-           <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-              <Target size={32} className="text-primary mb-4" />
-              <h4 className="text-3xl font-black text-title mb-1">60+</h4>
-              <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">Global Projects</span>
-           </div>
-           <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-              <Activity size={32} className="text-primary mb-4" />
-              <h4 className="text-3xl font-black text-title mb-1">7+ Years</h4>
-              <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">Digital Experience</span>
-           </div>
-           <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-              <Briefcase size={32} className="text-primary mb-4" />
-              <h4 className="text-2xl font-black text-title mb-1">IT Project Head</h4>
-              <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">Architectural Role</span>
-           </div>
-           <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
-              <Globe size={32} className="text-primary mb-4" />
-              <h4 className="text-2xl font-black text-title mb-1">6+ Verticals</h4>
-              <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">Industries Scaled</span>
-           </div>
+        {/* 4. TRUST & AUTHORITY METRICS */}
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
+            <Target size={32} className="text-primary mb-4" />
+            <h4 className="text-3xl font-black text-title mb-1">60+</h4>
+            <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">
+              Enterprise Projects
+            </span>
+          </div>
+          <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
+            <Activity size={32} className="text-primary mb-4" />
+            <h4 className="text-3xl font-black text-title mb-1">7+ Years</h4>
+            <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">
+              Technology Architecture
+            </span>
+          </div>
+          <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
+            <Briefcase size={32} className="text-primary mb-4" />
+            <h4 className="text-2xl font-black text-title mb-1">Strategist</h4>
+            <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">
+              Product &amp; Systems Head
+            </span>
+          </div>
+          <div className="bg-secondary/20 border border-layer-border p-8 rounded-3xl flex flex-col items-center justify-center text-center">
+            <Globe size={32} className="text-primary mb-4" />
+            <h4 className="text-2xl font-black text-title mb-1">6+ Verticals</h4>
+            <span className="text-xs uppercase font-bold tracking-widest text-foreground/60">
+              Industries Engineered
+            </span>
+          </div>
         </section>
 
-        {/* 5. FAQS (AEO) */}
+        {/* 5. AEO / FAQS */}
         <section className="max-w-4xl mx-auto w-full">
-           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-title uppercase tracking-wide mb-4">Frequently Asked Questions</h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6"></div>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl lg:text-5xl font-bold text-title uppercase tracking-wide mb-4">
+              Frequently Asked Questions
+            </h2>
+            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
           </div>
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="border border-layer-border rounded-2xl overflow-hidden bg-secondary/20">
-                <button onClick={() => setActiveFaq(activeFaq === index ? null : index)} className="w-full text-left p-6 flex justify-between items-center hover:bg-secondary/40 transition-colors">
-                  <span className="font-bold text-title pr-8">{faq.q}</span>
-                  <ChevronDown className={`text-primary shrink-0 transition-transform duration-300 ${activeFaq === index ? "rotate-180" : ""}`} size={24} />
+              <div
+                key={index}
+                className="border border-layer-border rounded-2xl overflow-hidden bg-secondary/20"
+              >
+                <button
+                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  className="w-full text-left p-6 flex justify-between items-center hover:bg-secondary/40 transition-colors"
+                >
+                  <span className="font-bold text-title pr-8 text-sm sm:text-base">{faq.q}</span>
+                  <ChevronDown
+                    className={`text-primary shrink-0 transition-transform duration-300 ${
+                      activeFaq === index ? "rotate-180" : ""
+                    }`}
+                    size={20}
+                  />
                 </button>
                 <AnimatePresence>
                   {activeFaq === index && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                      <div className="p-6 pt-0 text-foreground leading-relaxed border-t border-layer-border mt-2">{faq.a}</div>
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-6 pt-0 text-foreground/90 leading-relaxed border-t border-layer-border mt-2 text-sm sm:text-base">
+                        {faq.a}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -443,28 +615,36 @@ export default function CaseStudiesClient() {
           </div>
         </section>
 
-        {/* 6. CTA SECTION */}
+        {/* 6. CALL TO ACTION SECTION */}
         <section className="bg-primary rounded-[4rem] p-12 lg:p-20 text-center relative overflow-hidden">
-          <div className="relative z-10">
-            <h2 className="text-4xl lg:text-6xl font-extrabold text-[#111111] uppercase tracking-tight mb-8">
-              Launch Your Next Stage
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <span className="text-xs font-black uppercase tracking-widest text-[#222222] block mb-3">
+              Strategic Partnership
+            </span>
+            <h2 className="text-4xl lg:text-6xl font-extrabold text-[#111111] uppercase tracking-tight mb-6">
+              Turn Your Ideas Into Digital Platforms
             </h2>
-            <p className="text-[#222222] font-medium text-lg lg:text-xl max-w-3xl mx-auto mb-10">
-              Stop handing digital dominance over to competitors. Whether you need a massive technical web overhaul or dedicated social media scaling, let&apos;s engineer absolute superiority.
+            <p className="text-[#222222] font-medium text-base lg:text-lg mb-10 leading-relaxed">
+              Whether you need to architect an enterprise web application, resolve critical scaling bottlenecks, or orchestrate end-to-end digital growth, let&apos;s build solutions with lasting impact.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-3 bg-[#111111] text-white hover:bg-white hover:text-[#111111] border-2 border-[#111111] font-bold tracking-widest text-sm rounded-full px-10 py-5 transition-all duration-300 w-full sm:w-auto">
-                START YOUR PROJECT <ArrowRight size={20} />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-3 bg-[#111111] text-white hover:bg-white hover:text-[#111111] border-2 border-[#111111] font-bold tracking-widest text-xs uppercase rounded-full px-9 py-4 transition-all duration-300 w-full sm:w-auto"
+              >
+                Discuss a Project <ArrowRight size={18} />
               </Link>
-              <Link href="/hire" className="inline-flex items-center justify-center gap-3 bg-transparent text-[#111111] border-2 border-[#111111] hover:bg-[#111111] hover:text-white font-bold tracking-widest text-sm rounded-full px-10 py-5 transition-all duration-300 w-full sm:w-auto">
-                HIRE ME DIRECTLY
+              <Link
+                href="/hire"
+                className="inline-flex items-center justify-center gap-3 bg-transparent text-[#111111] border-2 border-[#111111] hover:bg-[#111111] hover:text-white font-bold tracking-widest text-xs uppercase rounded-full px-9 py-4 transition-all duration-300 w-full sm:w-auto"
+              >
+                Hire as Technology Strategist
               </Link>
             </div>
           </div>
-          <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-white/20 rounded-full blur-3xl mix-blend-overlay"></div>
-          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#111] rounded-full blur-3xl opacity-20 mix-blend-overlay"></div>
+          <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-white/20 rounded-full blur-3xl mix-blend-overlay" />
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-[#111] rounded-full blur-3xl opacity-20 mix-blend-overlay" />
         </section>
-
       </div>
     </div>
   );
@@ -473,28 +653,38 @@ export default function CaseStudiesClient() {
 // ----------------------
 // HELPER ICONS COMPONENTS
 // ----------------------
-function ArrowDownIcon({ size }: { size: number }) {
+function FbIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
   );
 }
-function FbIcon({ size = 24 }: { size?: number }) {
+
+function InstaIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
   );
 }
-function InstaIcon({ size = 24 }: { size?: number }) {
+
+function XIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
+    </svg>
   );
 }
-function XIcon({ size = 24 }: { size?: number }) {
+
+function GoogleIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg> // Actually twitter bird or simple icon
-  );
-}
-function GoogleIcon({ size = 24 }: { size?: number }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 8v8" />
+      <path d="M8 12h8" />
+    </svg>
   );
 }

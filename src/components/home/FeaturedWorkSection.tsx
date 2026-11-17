@@ -7,6 +7,7 @@ import { ArrowUpRight, ArrowRight, Layers, ExternalLink } from "lucide-react";
 export default function FeaturedWorkSection() {
   const projects = [
     {
+      slug: "ngit-edu",
       name: "NGIT Edu",
       url: "ngitedu.com",
       category: "Education & Examinations",
@@ -16,6 +17,7 @@ export default function FeaturedWorkSection() {
       impact: "0ms Keystroke Lag | 99.98% Exam Uptime",
     },
     {
+      slug: "divyajap",
       name: "Divya Jap",
       url: "divyajap.com",
       category: "Spiritual Tech Platform",
@@ -25,6 +27,7 @@ export default function FeaturedWorkSection() {
       impact: "100% Offline-Resilient | Scalable Sangha Aggregation",
     },
     {
+      slug: "lexink-legal",
       name: "T&S Lex Ink Legal",
       url: "lexinklegal.in",
       category: "Corporate Law Advisory",
@@ -34,6 +37,7 @@ export default function FeaturedWorkSection() {
       impact: "100/100 Core Web Vitals | Zero Vulnerabilities",
     },
     {
+      slug: "maz-dialysis-center",
       name: "MAZ Dialysis Center",
       url: "mazdialysiscenter.com",
       category: "Healthcare Infrastructure",
@@ -43,6 +47,7 @@ export default function FeaturedWorkSection() {
       impact: "5-Star Local Maps Scaling | Instant Patient Bookings",
     },
     {
+      slug: "idps-pratapgarh",
       name: "IDPS Pratapgarh",
       url: "idpspratapgarh.com",
       category: "Institutional Education",
@@ -52,6 +57,7 @@ export default function FeaturedWorkSection() {
       impact: "+300% Admission Inquiries | Seamless Mobile Portal",
     },
     {
+      slug: "the-home-shifting",
       name: "The Home Shifting",
       url: "thehomeshifting.com",
       category: "Logistics & Moving Portal",
@@ -139,13 +145,13 @@ export default function FeaturedWorkSection() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-title group-hover:text-primary transition-colors"
                 >
-                  Visit Live Platform <ArrowUpRight size={14} />
+                  Visit Live <ArrowUpRight size={14} />
                 </a>
                 <Link
-                  href="/case-studies"
-                  className="text-xs font-medium text-foreground/60 hover:text-primary transition-colors"
+                  href={`/case-studies/${proj.slug}`}
+                  className="text-xs font-bold text-foreground/70 hover:text-primary transition-colors inline-flex items-center gap-1"
                 >
-                  View Details →
+                  Case Study →
                 </Link>
               </div>
             </div>

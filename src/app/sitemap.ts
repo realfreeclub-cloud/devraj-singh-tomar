@@ -1,14 +1,16 @@
 import { MetadataRoute } from 'next'
 import { blogPosts } from './blog/data'
+import { getAllCaseStudies } from '@/data/projectsData'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://devrajsinghtomar.com'
+  const today = new Date().toISOString().split('T')[0]
   
   // Static routes with image references
   const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: '2026-04-04',
+      lastModified: today,
       changeFrequency: 'weekly',
       priority: 1.0,
       images: [
@@ -19,50 +21,50 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: '2026-04-04',
+      lastModified: today,
       changeFrequency: 'monthly',
       priority: 0.7,
       images: [`${baseUrl}/devraj-singh-tomar.jpg`],
     },
     {
       url: `${baseUrl}/ventures`,
-      lastModified: '2026-04-04',
+      lastModified: today,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: '2026-04-04',
+      lastModified: today,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: '2026-04-04',
+      lastModified: today,
       changeFrequency: 'yearly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/hire`,
-      lastModified: new Date().toISOString().split('T')[0],
+      lastModified: today,
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/case-studies`,
-      lastModified: new Date().toISOString().split('T')[0],
+      lastModified: today,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/services`,
-      lastModified: new Date().toISOString().split('T')[0],
+      lastModified: today,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/privacy`,
-      lastModified: new Date().toISOString().split('T')[0],
+      lastModified: today,
       changeFrequency: 'yearly',
       priority: 0.5,
     },
@@ -75,6 +77,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'yearly' as const,
     priority: 0.7,
   }))
+
+  // Case Study routes (auto-generated from projectsData)
+  const caseStudyRoutes = getAllCaseStudies().map((cs) => ({
+    url: `${baseUrl}/case-studies/${cs.slug}`,
+    lastModified: today,
+    changeFrequency: 'monthly' as const,
+    priority: 0.85,
+    images: [`${baseUrl}/og-image.png`],
+  }))
  
-  return [...routes, ...blogRoutes]
+  return [...routes, ...blogRoutes, ...caseStudyRoutes]
 }
