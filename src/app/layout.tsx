@@ -7,11 +7,11 @@ import WebMCPInitializer from "@/components/WebMCPInitializer";
 export const metadata: Metadata = {
   metadataBase: new URL("https://devrajsinghtomar.com"),
   title: {
-    default: "Devraj Singh Tomar | Web Developer & IT Manager India",
+    default: "Devraj Singh Tomar | Technology Strategist & Entrepreneur",
     template: "%s | Devraj Singh Tomar"
   },
-  description: "Devraj Singh Tomar is an elite Next.js Web Developer, Social Media Manager, and IT Project Manager in India scaling digital platforms.",
-  keywords: ["Devraj Singh Tomar", "Freelance Web Developer India", "Social Media Manager India", "Next.js Developer India", "IT Project Head"],
+  description: "Devraj Singh Tomar is a Technology Strategist & Entrepreneur in India turning business ideas into practical technology solutions and scalable digital products.",
+  keywords: ["Devraj Singh Tomar", "Technology Strategist India", "Entrepreneur India", "Next.js Architecture", "IT Project Manager India", "Freelance Web Developer India", "Next.js Developer India"],
   authors: [{ name: "Devraj Singh Tomar" }],
   creator: "Devraj Singh Tomar",
   openGraph: {
@@ -19,15 +19,15 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://devrajsinghtomar.com",
     siteName: "Devraj Singh Tomar Operations",
-    title: "Devraj Singh Tomar | Web Developer & IT Manager India",
-    description: "Elite Next.js Web Developer and Social Media Manager scaling operational capacity for 50+ global brands.",
+    title: "Devraj Singh Tomar | Technology Strategist & Entrepreneur",
+    description: "Devraj Singh Tomar is a Technology Strategist & Entrepreneur in India turning business ideas into practical technology solutions and scalable digital products.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@devrajsinghtomar",
-    title: "Devraj Singh Tomar | Web Developer",
-    description: "Elite Next.js Web Developer scaling operational capacity globally."
+    title: "Devraj Singh Tomar | Technology Strategist & Entrepreneur",
+    description: "Technology Strategist & Entrepreneur turning business ideas into practical technology solutions."
   },
   verification: {
     google: "2TejsEGEIMCMujPsmIig8u9EJprgmvEj4HnyOWxrfL8",
@@ -49,11 +49,11 @@ const personJsonLd = {
     "Devraj S Tomar",
   ],
   url: "https://devrajsinghtomar.com",
-  jobTitle: "IT Professional & Entrepreneur",
+  jobTitle: "Technology Strategist & Entrepreneur",
   email: "hello@devrajsinghtomar.com",
   telephone: "+91-9140946121",
   description:
-    "Devraj Singh Tomar, also referred to as Devraj Tomar and Devraj Singh, is an experienced IT project manager and entrepreneur specializing in scalable digital solutions since 2018.",
+    "Devraj Singh Tomar is a Technology Strategist & Entrepreneur in India turning business ideas into practical technology solutions and scalable digital products since 2018.",
   image: "https://devrajsinghtomar.com/devraj-singh-tomar.jpg",
   address: {
     "@type": "PostalAddress",

@@ -2,14 +2,16 @@ import { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
 
 export const metadata: Metadata = {
-  title: "Devraj Singh Tomar | Next.js Developer & Entrepreneur",
+  title: "Devraj Singh Tomar | Technology Strategist & Entrepreneur",
   description:
-    "Devraj Singh Tomar is an IT Project Manager, Next.js Developer, and Entrepreneur in India, providing scalable software and digital solutions since 2018.",
+    "Devraj Singh Tomar is a Technology Strategist & Entrepreneur in India turning business ideas into practical technology solutions and scalable digital products.",
   keywords: [
     "Devraj Singh Tomar",
-    "IT Project Manager India",
+    "Technology Strategist India",
     "Entrepreneur India",
-    "Next.js Developer India",
+    "Next.js Architecture",
+    "IT Project Manager India",
+    "Digital Product Scaling",
   ],
   alternates: {
     canonical: "/",
@@ -25,15 +27,23 @@ const faqSchema = {
       name: "Who is Devraj Singh Tomar?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Devraj Singh Tomar is an experienced IT Project Manager, Next.js Developer, and Entrepreneur based in India, specializing in scalable software and digital solutions since 2018.",
+        text: "Devraj Singh Tomar is a Technology Strategist and Entrepreneur based in India with hands-on technical leadership since 2018. He specializes in turning business ideas into practical technology solutions and scalable digital products.",
       },
     },
     {
       "@type": "Question",
-      name: "What services does Devraj Singh Tomar offer?",
+      name: "What does Devraj Singh Tomar specialize in?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "He specializes in IT project management, Next.js web development, and digital transformation, partnering with multiple tech ventures to build robust digital platforms.",
+        text: "He specializes in enterprise Next.js full-stack architectures, strategic IT project management, algorithmic technical SEO/AEO, and building scalable digital platforms across education, healthcare, legal, and commercial industries.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What tech ventures is Devraj Singh Tomar associated with?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Devraj is the Founder and Technology Lead at Tecxontechnology, Head of Technology at M/S Career Avsar, and Co-Founder at Lotus Loop Media Solution in Noida.",
       },
     },
   ],

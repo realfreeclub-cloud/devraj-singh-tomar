@@ -17,13 +17,14 @@ const KNOWN_ROUTES = new Set([
   "/blog/building-frictionless-lead-funnels",
 ]);
 
-const HOMEPAGE_MARKDOWN = `# Devraj Singh Tomar — IT Professional, Project Manager & Next.js Developer India
+const HOMEPAGE_MARKDOWN = `# Devraj Singh Tomar — Technology Strategist & Entrepreneur
 
-> Devraj Singh Tomar is an experienced IT professional, project manager, and entrepreneur with a proven track record of building and managing digital platforms since 2018.
+> "I turn business ideas into practical technology solutions and scalable digital products."
+> Devraj Singh Tomar is an experienced technology strategist, project manager, and entrepreneur with a proven track record of building and managing mission-critical digital platforms since 2018.
 
 ## Profile Summary
 - **Name:** Devraj Singh Tomar (also known as Devraj Tomar, Devraj Singh)
-- **Role:** IT Project Manager & Next.js Web Developer
+- **Role:** Technology Strategist & Entrepreneur
 - **Location:** chokhani square, 309, Sector 18, Noida, Uttar Pradesh 201301, India
 - **Email:** [hello@devrajsinghtomar.com](mailto:hello@devrajsinghtomar.com)
 - **Phone:** [+91 9140946121](tel:+919140946121)
@@ -31,10 +32,11 @@ const HOMEPAGE_MARKDOWN = `# Devraj Singh Tomar — IT Professional, Project Man
 - **LLMs Guide:** https://devrajsinghtomar.com/llms.txt
 
 ## Key Specializations
-- Full-Stack Web Development (Next.js 16, React 19, TypeScript, Tailwind CSS, SSR, ISR, Edge Performance)
-- IT Project Management & Agile Architecture
+- Enterprise Full-Stack Architecture (Next.js 16, React 19, TypeScript, Tailwind CSS, SSR, ISR, Edge Performance)
+- Strategic IT Project Management & Agile Architecture
 - Advanced Technical SEO, Google Knowledge Panel & Google Maps 3-Pack Authority
 - Enterprise Digital Platforms (Delivered portals for 7 Government Medical Colleges & 60+ client projects)
+- High-Concurrency Examination Engines & Spiritual Tech Platforms
 
 ## Core Ventures
 1. **Tecxontechnology** ([https://tecxontech.com/](https://tecxontech.com/)): Technology solutions and IT services.
