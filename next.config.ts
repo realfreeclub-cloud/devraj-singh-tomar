@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  experimental: {
+    cpus: 2,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 1080, 1200, 1920],
