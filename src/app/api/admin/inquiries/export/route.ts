@@ -1,20 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAdminAuth } from "@/lib/cms/auth";
+import { requireAdminAuth, sanitizeCsvCell } from "@/lib/cms/auth";
 import { getCmsStore } from "@/lib/cms/store";
-
-/**
- * Sanitize cell content against CSV Formula Injection (CWE-1236).
- * Prepend a single quote if the field starts with =, +, -, @, tab, or carriage return.
- */
-function sanitizeCsvCell(value: string | undefined | null): string {
-  if (!value) return '""';
-  let clean = String(value).trim();
-  if (/^[=+\-@\t\r]/.test(clean)) {
-    clean = `'${clean}`;
-  }
-  // Escape double quotes
-  return `"${clean.replace(/"/g, '""')}"`;
-}
 
 export async function GET(req: NextRequest) {
   const auth = await requireAdminAuth(req);

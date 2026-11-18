@@ -167,6 +167,7 @@ export async function getAdminSession(): Promise<AdminUser | null> {
 
 /**
  * CSRF & Origin Validation for state-modifying requests (POST, PUT, DELETE, PATCH)
+ * Robust against reverse-proxy environments (Hostinger, Cloudflare, Nginx)
  */
 export function validateCsrf(req: NextRequest): boolean {
   const method = req.method.toUpperCase();
@@ -176,14 +177,32 @@ export function validateCsrf(req: NextRequest): boolean {
 
   const origin = req.headers.get("origin");
   const referer = req.headers.get("referer");
-  const host = req.headers.get("host");
 
-  if (!host) return true;
+  // Extract all valid host candidates across direct and proxy headers
+  const forwardedHost = req.headers.get("x-forwarded-host")?.split(",")[0].trim();
+  const rawHost = req.headers.get("host")?.split(",")[0].trim();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+    ? (() => {
+        try {
+          return new URL(process.env.NEXT_PUBLIC_SITE_URL).host;
+        } catch {
+          return null;
+        }
+      })()
+    : null;
+
+  const normalize = (h: string) => h.toLowerCase().replace(/^www\./, "");
+
+  const validHosts = new Set(
+    [forwardedHost, rawHost, siteUrl, "devrajsinghtomar.com", "www.devrajsinghtomar.com", "localhost", "127.0.0.1"]
+      .filter((h): h is string => Boolean(h))
+      .map(normalize)
+  );
 
   if (origin) {
     try {
-      const originHost = new URL(origin).host;
-      if (originHost === host) return true;
+      const originHost = normalize(new URL(origin).host);
+      if (validHosts.has(originHost)) return true;
     } catch {
       return false;
     }
@@ -191,8 +210,8 @@ export function validateCsrf(req: NextRequest): boolean {
 
   if (referer) {
     try {
-      const refererHost = new URL(referer).host;
-      if (refererHost === host) return true;
+      const refererHost = normalize(new URL(referer).host);
+      if (validHosts.has(refererHost)) return true;
     } catch {
       return false;
     }
@@ -202,8 +221,8 @@ export function validateCsrf(req: NextRequest): boolean {
   const requestedWith = req.headers.get("x-requested-with");
   if (requestedWith === "XMLHttpRequest") return true;
 
-  // In production, reject if origin/referer does not match host
-  if (process.env.NODE_ENV === "production" && (origin || referer)) {
+  // If both origin and referer are provided and neither matched
+  if (origin || referer) {
     return false;
   }
 
@@ -243,3 +262,17 @@ export async function requireAdminAuth(
 }
 
 export { SESSION_COOKIE_NAME, PBKDF2_ITERATIONS };
+
+/**
+ * Sanitize cell content against CSV Formula Injection (CWE-1236).
+ * Prepend a single quote if the field starts with =, +, -, @, tab, or carriage return.
+ */
+export function sanitizeCsvCell(value: string | undefined | null): string {
+  if (!value) return '""';
+  let clean = String(value).trim();
+  if (/^[=+\-@\t\r]/.test(clean)) {
+    clean = `'${clean}`;
+  }
+  // Escape double quotes
+  return `"${clean.replace(/"/g, '""')}"`;
+}
